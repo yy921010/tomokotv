@@ -26,7 +26,7 @@ jobs:
           METHOD: sftp
           LOCAL_DIR: dist
           REMOTE_DIR: /home/www/root
-          PORT: 7280
+          PORT: 22
           ARGS: --delete
 
 
