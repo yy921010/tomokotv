@@ -20,8 +20,8 @@ jobs:
       - name: Sftp-Deploy-Action
         uses: SamKirkland/FTP-Deploy-Action@2.0.0
         env:
-          FTP_SERVER: 114.67.110.90
-          FTP_USERNAME: root
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           METHOD: sftp
           LOCAL_DIR: dist
