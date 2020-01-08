@@ -26,14 +26,14 @@ module.exports = {
     }
   },
 
-  // css: {
-  //   loaderOptions: {
-  //     sass: {
-  //       data: `
-  //       `
-  //     }
-  //   }
-  // },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "~@/assets/styles/_custom.scss";
+        `
+      }
+    }
+  },
 
   chainWebpack: config => {
     config.plugins.delete('preload') // TODO: need test

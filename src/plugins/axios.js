@@ -3,10 +3,7 @@ import axios from 'axios'
 export default {
   install (Vue, opt = {}) {
     console.log(opt.baseURL)
-    const service = axios.create({
-      baseURL: opt.baseURL, // api 的 base_url
-      timeout: opt.timeout //
-    })
+    const service = axios.create(opt)
     // request interceptor
     service.interceptors.request.use(
       config => {

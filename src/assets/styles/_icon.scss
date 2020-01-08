@@ -1,0 +1,5 @@
+// size 12,14,16,18,20,24,32,36,56,72
+@mixin icon($size) {
+  height: unit($size);
+  width: unit($size);
+}
