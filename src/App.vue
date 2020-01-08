@@ -3,7 +3,9 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      {{$t("hello")}}
     </div>
+    <button @click="$i18n.locale = 'en'">button</button>
     <router-view/>
   </div>
 </template>

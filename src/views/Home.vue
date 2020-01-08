@@ -13,6 +13,19 @@ export default {
   name: 'home',
   components: {
     HelloWorld
+  },
+  mounted () {
+    this.$session.put('demo', {
+      username: '1'
+    })
+    this.$session.put('demo1', {
+      username: '1'
+    })
+    this.$session.put('demo2', {
+      username: '1'
+    })
+
+    this.$session.remove('demo')
   }
 }
 </script>
