@@ -16,7 +16,7 @@ module.exports = {
       [process.env.VUE_APP_BASE_API]: {
         target: process.env.VUE_APP_SERVICE_MODE === 'mock'
           ? `http://127.0.0.1:${port}/mock`
-          : `https://api.tomokotv.com`,
+          : `https://api.tomokotv.com/v1`,
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -47,7 +47,7 @@ module.exports = {
       .set('@styles', resolve('src/assets/styles'))
       .set('@store', resolve('src/store/'))
       .set('@components', resolve('src/components/'))
-      .set('@services', resolve('src/services'))
+      .set('@api', resolve('src/api'))
       .set('@assets', resolve('src/assets'))
       .set('@utils', resolve('src/utils'))
 

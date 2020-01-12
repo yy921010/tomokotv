@@ -2,6 +2,8 @@ import Vue from 'vue'
 import axios from './axios'
 import dayjs from './dayjs'
 import session from './session'
+import lodash from './lodash'
+import components from '@components'
 
 Vue
   .use(axios,
@@ -11,3 +13,5 @@ Vue
     })
   .use(dayjs)
   .use(session)
+  .use(components)
+  .use(lodash)

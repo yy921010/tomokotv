@@ -1,3 +1,15 @@
 {
-  "hello": "你好"
+  "hello": "你好",
+  "header":{
+    "login_btn":"登陆"
+  },
+  "tvguide":{
+    "sun":"周日",
+    "mon":"周一",
+    "twe":"周二",
+    "wed":"周三",
+    "thu":"周四",
+    "fri":"周五",
+    "sat":"周六"
+  }
 }

@@ -1,15 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      {{$t("hello")}}
+    <nav>
+      <header-wrap/>
+    </nav>
+    <main>
+      <router-view/>
+    </main>
+    <footer>
+      <footer-wrap/>
+    </footer>
+    <!-- 此区域，描述项目整体背景图 -->
+    <div id="frosted" :style="{'background-image':'url('+bgUrl+')'}">
     </div>
-    <button @click="$i18n.locale = 'en'">button</button>
-    <router-view/>
   </div>
 </template>
-
+<script>
+import headerWrap from './views/header/header'
+import footerWrap from './views/footer/footer'
+export default {
+  name: 'tomokotv',
+  components: {
+    headerWrap,
+    footerWrap
+  },
+  data () {
+    return {
+      bgUrl: ''
+    }
+  }
+}
+</script>
 <style lang="scss">
   body{
     margin: 0;
@@ -46,7 +66,7 @@
         padding: 0 unit(10);
         display: block;
         position: relative;
-        width: unit(1380);
+        width: unit(1366);
         flex: 1;
         min-height: calc(100% - 100px);
       }
