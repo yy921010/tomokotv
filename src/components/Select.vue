@@ -2,7 +2,7 @@
   <div class="tmk-select" @click.stop="openOptions">
     <div class="tmk-select__result">
       <span class="tmk-select__text">{{getFinalResult}}</span>
-      <t-icon class="icon" :name="iconName" :size="24"></t-icon>
+      <t-icon class="icon" :name="iconName" :size="24"/>
     </div>
     <div class="tmk-select__options" v-if="isVisibleOption">
       <div
@@ -65,21 +65,36 @@ export default {
 </script>
 <style lang="scss">
 @include b(select) {
-  min-width: unit(203-50);
+  min-width: unit(203);
   height: unit(40);
-  padding: 0 unit(25);
   text-align: center;
   background-color: $C15;
-  border-top: unit(1) solid $C21;
-  border-bottom: unit(1) solid $C21;
   cursor: pointer;
   @include e(result) {
     height: unit(40);
     line-height: unit(40);
+    @include e(text) {
+      @include text(29);
+      margin-right: unit(10);
+      width: unit(100);
+      display: inline-block;
+    }
   }
-  @include e(text) {
-    @include text(29);
-    margin-right: unit(10);
+  @include e(options){
+    width: 100%;
+    background-color: $C17;
+    border-radius: unit(3);
+    padding-top:unit(10);
+    box-shadow: map_get($mask,5);
+    @include e(option){
+      height: unit(32);
+      line-height: unit(32) !important;
+      @include text(32,$C35);
+      &:hover{
+        @include text(32,$C31);
+        background-color: $C03;
+      }
+    }
   }
   .icon{
       line-height: unit(24);

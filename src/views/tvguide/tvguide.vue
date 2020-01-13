@@ -1,43 +1,50 @@
 <template>
-    <div class="tmk-tvguide">
-        <section class="tmk-tvguide--time">
-            <date-pannel></date-pannel>
+    <div class="tmk-guide">
+        <section class="tmk-guide__week-time">
+          <date-panel/>
+          <t-select :options="catalogs" class="tmk-guide__select"/>
+          <time-line/>
         </section>
-        <t-select :options="catalogs" class="tmk-tvguide__select"></t-select>
-        <channel-pannel :channels="channels"></channel-pannel>
-        <time-line></time-line>
+        <section class="tmk-guide__programs">
+            <vue-scroll>
+              <channel-panel :channels="channels"/>
+              <guide-program/>
+            </vue-scroll>
+        </section>
     </div>
 </template>
 
 <script>
-import DatePannel from './components/date-pannel'
-import ChannelPannel from './components/channel-pannel'
+import DatePanel from './components/date-panel'
+import ChannelPanel from './components/channel-panel'
+import GuideProgram from './components/program-item'
 import TimeLine from './components/time-line'
 import ChannelService from '@api/channel'
 export default {
   name: 'tvguide',
   components: {
-    DatePannel,
-    ChannelPannel,
-    TimeLine
+    DatePanel,
+    ChannelPanel,
+    TimeLine,
+    GuideProgram
   },
   data () {
     return {
       catalogs: [
         {
-          text: 'all',
+          text: '所有频道',
           value: 1
         },
         {
-          text: 'ott',
+          text: '央视频道',
           value: 1
         },
         {
-          text: 'sport',
+          text: '地方卫视',
           value: 1
         },
         {
-          text: 'music',
+          text: '海外频道',
           value: 1
         }
       ],
@@ -56,9 +63,18 @@ export default {
 </script>
 
 <style lang="scss">
-@include b(tvguide){
-  @include e(select){
+@include b(guide){
+  @include e(week-time){
+      overflow: hidden;
+    @include e(select){
       width: unit(203-50);
+      position: absolute;
+      z-index: 1;
+    }
   }
+  @include e(programs){
+      height: unit(12*70);
+  }
+
 }
 </style>

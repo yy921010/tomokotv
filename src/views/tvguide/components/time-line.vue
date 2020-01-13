@@ -46,7 +46,7 @@ export default {
   }
   @include e(container) {
     display: flex;
-
+    height: 100%;
     @include e(time) {
       margin-left: unit(190);
       .upbar {
@@ -57,13 +57,13 @@ export default {
       .time-text {
         @include text(32, $C35);
         position: relative;
-        left: unit(-14);
-        top:unit(8);
+        left: unit(-17);
+        top:unit(4);
       }
       .downbar {
         height: 13%;
         position: relative;
-        top: unit(15);
+        top: unit(10);
         border-left: solid unit(1) $C35;
       }
     }

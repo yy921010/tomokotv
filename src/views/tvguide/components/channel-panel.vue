@@ -16,10 +16,11 @@
 
 <script>
 export default {
-  name: 'ChannelPannel',
+  name: 'ChannelPanel',
   props: {
     channels: {
-      type: Array
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -38,6 +39,7 @@ export default {
 @include b(guide-channel) {
   background-color: $C15;
   width: unit(203);
+  box-shadow: 4px 0 4px $C10;
   @include e(lists) {
     .list-item {
       cursor: pointer;
