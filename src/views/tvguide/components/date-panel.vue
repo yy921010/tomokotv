@@ -6,8 +6,8 @@
       </div>
       <ul class="container">
         <li class="item" v-for="(td,index) in timeDates" :key="index">
-          <div class="week-text">{{$t(td.week)}}</div>
           <div class="date-text">{{td.timeDate}}</div>
+          <div class="week-text">{{$t(td.week)}}</div>
         </li>
       </ul>
       <div class="arrows">
@@ -85,21 +85,22 @@ export default {
         text-align: center;
         justify-content: center;
         .week-text {
-          @include text(28, $C35);
-        }
-        .date-text {
           @include text(34, $C34);
           margin-top: unit(5);
+        }
+        .date-text {
+         @include text(28, $C35);
         }
         @include when(is-checked) {
         }
         &:hover {
           background-color: $C04;
           > .week-text {
-            @include text(28, $C31);
+           @include text(34, $C31);
           }
           > .date-text {
-            @include text(34, $C31);
+           @include text(28, $C31);
+           
           }
         }
       }
