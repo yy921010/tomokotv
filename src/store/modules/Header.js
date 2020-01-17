@@ -10,7 +10,7 @@ const mutations = {
 
 const actions = {
   setNavTitle ({ commit }, data) {
-    commit('SET_NAV_TITLE', '电视节目单')
+    commit('SET_NAV_TITLE', data)
   }
 }
 

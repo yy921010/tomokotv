@@ -5,10 +5,8 @@
     </nav>
     <main>
       <router-view/>
-    </main>
-    <footer>
       <footer-wrap/>
-    </footer>
+    </main>
     <!-- 此区域，描述项目整体背景图 -->
     <div id="frosted" :style="{'background-image':'url('+bgUrl+')'}">
     </div>
@@ -51,30 +49,25 @@ export default {
     }
 
     #app {
-      min-height: 100%;
       display: flex;
       flex-direction: column;
-      header {
+      position: absolute;
+      top: 64px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      nav {
         position: fixed;
-        z-index: 999;
         top: 0;
-        width: 100%;
+        left: 0;
+        right: 0;
+        z-index: 2;
       }
-
       main {
-        margin: 0 auto;
-        padding: 0 unit(10);
-        display: block;
-        position: relative;
-        width: unit(1366);
-        flex: 1;
-        min-height: calc(100% - 100px);
-      }
-
-      footer {
-        bottom: 0;
-        width: 100%;
-        margin-top: unit(60);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       #frosted{
         height: unit(2000);

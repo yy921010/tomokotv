@@ -1,17 +1,17 @@
 <template>
-    <div class="tmk-guide">
-        <section class="tmk-guide__week-time">
-          <date-panel/>
-          <t-select :options="catalogs" class="tmk-guide__select"/>
-          <time-line/>
-        </section>
-        <section class="tmk-guide__programs">
-            <vue-scroll>
-              <channel-panel :channels="channels"/>
-              <guide-program/>
-            </vue-scroll>
-        </section>
-    </div>
+  <div class="tmk-guide">
+    <section class="tmk-guide__week-time">
+      <date-panel />
+      <t-select :options="catalogs" class="tmk-guide__select" />
+      <time-line />
+    </section>
+    <section class="tmk-guide__programs">
+      <vue-scroll>
+        <channel-panel :channels="channels" />
+        <guide-program />
+      </vue-scroll>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -56,25 +56,26 @@ export default {
   },
   methods: {
     async getChannel () {
-      this.channels = await ChannelService.getAllChannel()
+      const { items } = await ChannelService.getAllChannel()
+      this.channels = items
     }
   }
 }
 </script>
 
 <style lang="scss">
-@include b(guide){
-  @include e(week-time){
-      overflow: hidden;
-    @include e(select){
+@include b(guide) {
+  width: unit(1380);
+  @include e(week-time) {
+    overflow: hidden;
+    @include e(select) {
       width: unit(203-50);
       position: absolute;
       z-index: 1;
     }
   }
-  @include e(programs){
-      height: unit(12*70);
+  @include e(programs) {
+    height: unit(12 * 70);
   }
-
 }
 </style>

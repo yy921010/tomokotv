@@ -1,7 +1,7 @@
 <template>
   <div class="tmk-header">
     <div class="tmk-header__normal-mode">
-      <div class="logo">
+      <div class="logo" @click="backToHome">
         <img :src="logoUrl" alt="logo">
       </div>
       <div class="title">{{title}}</div>
@@ -25,6 +25,13 @@ export default {
     ...mapState('Header', {
       title: s => s.title
     })
+  },
+  methods: {
+    backToHome () {
+      this.$router.push({
+        name: 'home'
+      })
+    }
   }
 }
 </script>
@@ -45,6 +52,7 @@ export default {
     .logo{
       width: 70px;
       height: 35px;
+      cursor: pointer;
       img{
         max-width: 70px;
         max-height: 35px;

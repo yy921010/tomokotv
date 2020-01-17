@@ -2,7 +2,7 @@
   <div class="tmk-time-date">
     <div class="tmk-time-date__views">
       <div class="arrows">
-        <t-icon name="arrow-left-s" :size="24"></t-icon>
+        <t-icon name="arrow-left-s" :size="24"/>
       </div>
       <ul class="container">
         <li class="item" v-for="(td,index) in timeDates" :key="index">
@@ -11,7 +11,7 @@
         </li>
       </ul>
       <div class="arrows">
-        <t-icon name="arrow-right-s" :size="24"></t-icon>
+        <t-icon name="arrow-right-s" :size="24"/>
       </div>
     </div>
   </div>
@@ -100,7 +100,6 @@ export default {
           }
           > .date-text {
            @include text(28, $C31);
-           
           }
         }
       }

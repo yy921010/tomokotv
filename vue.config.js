@@ -3,6 +3,9 @@ const path = require('path')
 function resolve (dir) {
   return path.join(__dirname, dir)
 }
+
+function noop () {}
+
 const port = 3000
 
 module.exports = {
@@ -12,6 +15,11 @@ module.exports = {
     port,
     publicPath: '/',
     open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+    before: process.env.VUE_APP_SERVICE_MODE === 'mock' ? require('./mock/mock-server.js') : noop,
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         target: process.env.VUE_APP_SERVICE_MODE === 'mock'
@@ -36,8 +44,8 @@ module.exports = {
   },
 
   chainWebpack: config => {
-    config.plugins.delete('preload') // TODO: need test
-    config.plugins.delete('prefetch') // TODO: need test
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
 
     // babel-polyfill 加入 entry
     config.resolve.alias
@@ -54,6 +62,6 @@ module.exports = {
     config.when(process.env.VUE_APP_SERVICE_MODE === 'dev',
       config => config.devtool('cheap-source-map')
     )
-    console.log('VUE_APP_SERVICE_MODE= ', process.env.VUE_APP_SERVICE_MODE)
+    console.log('[vue.config.js] [chainWebpack] VUE_APP_SERVICE_MODE =', process.env.VUE_APP_SERVICE_MODE)
   }
 }

@@ -22,7 +22,10 @@ export default {
     )
 
     service.interceptors.response.use(
-      res => res.data.data,
+      res => {
+        console.log(res.data)
+        return res.data.data
+      },
       err => {
         console.log('err' + err)
         return Promise.reject(err)
