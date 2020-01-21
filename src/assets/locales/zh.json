@@ -1,7 +1,13 @@
 {
   "hello": "你好",
   "header":{
-    "login_btn":"登陆"
+    "login_btn":"登录"
+  },
+  "loginDialog": {
+    "title": "登录",
+    "button": "登录",
+    "usernamePlaceholder": "请输入用户名",
+    "passwordPlaceholder": "请输入密码"
   },
   "tvguide":{
     "sun":"周日",

@@ -5,7 +5,10 @@
         <img :src="logoUrl" alt="logo">
       </div>
       <div class="title">{{title}}</div>
-      <div class="buttons">
+      <div class="actions">
+        <t-button class="login-btn" size="mini" @click="openLoginDialog">{{$t("header.login_btn")}}</t-button>
+        <t-icon class="search-btn" name="search" :size="20"></t-icon>
+        <t-icon class="menu-btn" name="menu" :size="20"></t-icon>
       </div>
     </div>
     <div class="tmk-header__search-mode"></div>
@@ -31,7 +34,8 @@ export default {
       this.$router.push({
         name: 'home'
       })
-    }
+    },
+    openLoginDialog () {}
   }
 }
 </script>
@@ -62,6 +66,19 @@ export default {
       flex: 1;
       text-align: center;
       @include text(29);
+    }
+    .actions{
+      .login-btn{
+
+      }
+      .search-btn{
+        cursor: pointer;
+        margin-left: unit(20);
+      }
+      .menu-btn{
+        cursor: pointer;
+        margin-left: unit(20);
+      }
     }
   }
 }

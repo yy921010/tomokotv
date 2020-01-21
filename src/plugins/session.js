@@ -1,4 +1,5 @@
-import { AES, enc } from 'crypto-js'
+import AES from 'crypto-js/aes'
+import enc from 'crypto-js/enc-utf8'
 
 export default {
   install (Vue, opt = {}) {

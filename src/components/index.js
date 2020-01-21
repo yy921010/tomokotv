@@ -3,11 +3,13 @@ import 'remixicon/fonts/remixicon.css'
 import Icon from './Icon'
 import Button from './Button'
 import Select from './Select'
+import Input from './Input'
 
 const Components = [
   Icon,
   Button,
-  Select
+  Select,
+  Input
 ]
 
 export default {

@@ -1,5 +1,5 @@
 <template>
-  <div class="de"></div>
+  <div class="tmk-footer"></div>
 </template>
 
 <script>

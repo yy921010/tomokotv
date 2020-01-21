@@ -9,7 +9,7 @@
   size !==''? 'tmk-button--'+size:''
    ]"
   >
-    <vi-icon v-if="icon !== ''" :name="icon" :type="iconType" :size="20" class="tmk-button--icon"></vi-icon>
+    <t-icon v-if="icon !== ''" :name="icon" :type="iconType" :size="20" class="tmk-button--icon"/>
     <span>
       <slot></slot>
     </span>

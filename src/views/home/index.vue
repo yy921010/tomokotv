@@ -1,12 +1,17 @@
 <template>
   <div class="tmk-home">
     here is home
+    <loginDailog></loginDailog>
   </div>
 </template>
 
 <script>
+import loginDailog from '../dialog/login'
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    loginDailog
+  }
 }
 </script>
 
