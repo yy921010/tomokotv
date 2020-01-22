@@ -2,7 +2,7 @@
   <div class="tmk-login-dialog">
     <div class="tmk-login-dialog__header">
       <div class="title">{{ $t("loginDialog.title") }}</div>
-      <div class="close">
+      <div class="close" @click="closeDialog">
         <t-icon name="close" :size="32"></t-icon>
       </div>
     </div>
@@ -12,27 +12,56 @@
           class="username"
           :placeholder="$t('loginDialog.usernamePlaceholder')"
           v-model="loginId"
+          :isError="isError"
         ></t-input>
         <t-input
           :placeholder="$t('loginDialog.passwordPlaceholder')"
           nativeType="password"
           v-model="password"
+          :isError="isError"
         ></t-input>
       </form>
     </div>
+    <div class="tmk-login-dialog__checkbox">
+      <div class="checkbox-container">
+        <div class="checkbox-icon">
+          <t-checkbox v-model="isAutoLogin"></t-checkbox>
+          <span class="checkbox-text">{{ $t("loginDialog.reminder") }}</span>
+        </div>
+        <div class="checkbox-forget">
+          {{ $t("loginDialog.forget") }}
+        </div>
+      </div>
+    </div>
     <div class="tmk-login-dialog__button">
-      <t-button type="primary">{{ $t("loginDialog.button") }}</t-button>
+      <t-button type="primary" @click="beginLogin">{{
+        $t("loginDialog.button")
+      }}</t-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'login',
   data () {
     return {
       loginId: '',
-      password: ''
+      password: '',
+      isAutoLogin: true,
+      isError: false
+    }
+  },
+  methods: {
+    ...mapActions('Dialog', {
+      close: 'close'
+    }),
+    beginLogin () {},
+    closeDialog () {
+      this.close({
+        name: 'login'
+      })
     }
   }
 }
@@ -49,34 +78,56 @@ export default {
     border-bottom: unit(1) solid $C19;
     display: flex;
     align-items: center;
-    .title{
+    .title {
       text-align: center;
       flex: 1;
       margin-left: unit(30);
-      @include text(14,$C35);
+      @include text(14, $C35);
     }
-    .close{
+    .close {
       margin-right: unit(30);
       color: $C35;
       cursor: pointer;
-      &:hover{
+      &:hover {
         color: $C31;
       }
     }
   }
-  @include e(content){
+  @include e(content) {
     margin-top: unit(40);
-    >form{
+    > form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      .username{
+      .username {
         margin-bottom: unit(20);
       }
     }
   }
-  @include e(button){
-    margin-top: unit(70);
+  @include e(checkbox) {
+    display: flex;
+    justify-content: center;
+    .checkbox-container{
+      display: flex;
+      justify-content: space-between;
+      width: unit(300);
+      margin-top: unit(20);
+    }
+    .checkbox-icon {
+      display: flex;
+      align-items: center;
+      @include text(32);
+      .checkbox-text {
+        margin-left: unit(10);
+      }
+    }
+    .checkbox-forget {
+      @include text(32, $C36);
+      cursor: pointer;
+    }
+  }
+  @include e(button) {
+    margin-top: unit(40);
     text-align: center;
   }
 }

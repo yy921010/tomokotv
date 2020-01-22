@@ -10,16 +10,19 @@
     <!-- 此区域，描述项目整体背景图 -->
     <div id="frosted" :style="{'background-image':'url('+bgUrl+')'}">
     </div>
+    <normalDialog/>
   </div>
 </template>
 <script>
 import headerWrap from './views/header/header'
 import footerWrap from './views/footer/footer'
+import normalDialog from './views/dialog'
 export default {
   name: 'tomokotv',
   components: {
     headerWrap,
-    footerWrap
+    footerWrap,
+    normalDialog
   },
   data () {
     return {

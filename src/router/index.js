@@ -4,11 +4,13 @@ import Store from '../store'
 
 import TVGuideModule from './Guide'
 import HOME_MODULE from './Home'
+import MY_MODULE from './My'
 Vue.use(VueRouter)
 
 const routes = [
   ...TVGuideModule,
-  ...HOME_MODULE
+  ...HOME_MODULE,
+  ...MY_MODULE
 ]
 
 const router = new VueRouter({

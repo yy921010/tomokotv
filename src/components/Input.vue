@@ -10,6 +10,7 @@
       @input="handleInput"
       @click="handleClick"
       :class="[isError?'is-error':'', type?'tmk-input__'+type:'']"
+      autocomplete
     >
     <t-icon class="tmk-input--clear" name="close" :size="14" v-if="showClear" @click="clearWord"/>
     <t-icon class="tmk-input--search-icon" name="search" :size="14" v-if="showSearchIcon"/>

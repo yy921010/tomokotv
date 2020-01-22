@@ -1,9 +1,11 @@
 import Mock from 'mockjs'
 
 import Channel from './channel'
+import User from './user'
 
 const mocks = [
-  ...Channel
+  ...Channel,
+  ...User
 ]
 
 /**

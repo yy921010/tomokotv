@@ -7,7 +7,30 @@
     "title": "登录",
     "button": "登录",
     "usernamePlaceholder": "请输入用户名",
-    "passwordPlaceholder": "请输入密码"
+    "passwordPlaceholder": "请输入密码",
+    "reminder": "自动登录",
+    "forget": "忘记密码？"
+  },
+  "menu":{
+    "channelManager": "我的频道",
+    "home":"主页",
+    "broadcast":"直播",
+    "onDemand":"点播",
+    "history":"历史记录",
+    "contentManager":"我的点播",
+    "favoriteVideo":"收藏视频",
+    "historyVideo":"历史记录",
+    "favoriteChannel":"收藏频道",
+    "lockedChannel":"已锁定频道",
+    "reminders":"提醒",
+    "purchases":"订购",
+    "recording":"录制",
+    "profiles":"子账号管理",
+    "deviceName":"设备信息",
+    "setting":"设置",
+    "logout":"注销",
+    "loginButtonText": "登录",
+    "userId": "用户ID:"
   },
   "tvguide":{
     "sun":"周日",

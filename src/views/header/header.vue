@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TmkHeader',
   data () {
@@ -30,12 +30,19 @@ export default {
     })
   },
   methods: {
+    ...mapActions('Dialog', {
+      open: 'open'
+    }),
     backToHome () {
       this.$router.push({
         name: 'home'
       })
     },
-    openLoginDialog () {}
+    openLoginDialog () {
+      this.open({
+        name: 'login'
+      })
+    }
   }
 }
 </script>
