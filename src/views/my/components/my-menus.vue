@@ -47,12 +47,12 @@ export default {
           {
             id: 'HistoryVideo',
             name: 'menu.historyVideo',
-            iconName: 'tv'
+            iconName: 'time'
           },
           {
             id: 'FavoriteVideo',
             name: 'menu.favoriteVideo',
-            iconName: 'video'
+            iconName: 'star'
           }
         ] },
       { firstMenu: 'menu.channelManager',
@@ -60,7 +60,7 @@ export default {
           {
             id: 'FavoriteChannel',
             name: 'menu.favoriteChannel',
-            iconName: 'tv'
+            iconName: 'heart-2'
           },
           {
             id: 'LockedChannel',
@@ -88,7 +88,7 @@ export default {
           {
             id: 'Profiles',
             name: 'menu.profiles',
-            iconName: 'profile'
+            iconName: 'user-settings'
           },
           {
             id: 'DeviceName',

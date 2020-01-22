@@ -22,6 +22,10 @@ export default {
 @include b(user){
   @include e(switch-tab){
     @include text(14,$C35);
+    display: flex;
+    @include m(modify){
+      margin-right: unit(60);
+    }
   }
 }
 </style>
