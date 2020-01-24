@@ -11,6 +11,21 @@
     "reminder": "自动登录",
     "forget": "忘记密码？"
   },
+  "user": {
+    "modifyTab": "修改信息",
+    "passwordTab": "修改密码",
+    "username": "用户名",
+    "ageLevel": "年龄级别",
+    "userPin": "PIN 码",
+    "newPassword": "新密码",
+    "oldPassword": "旧密码",
+    "reNewPassword": "确认新密码",
+    "description": "修改密码",
+    "descriptionTips": "密码需要的注意点"
+  },
+  "subProfile": {
+    "addBtn": "添加子账号"
+  },
   "menu":{
     "channelManager": "我的频道",
     "home":"主页",

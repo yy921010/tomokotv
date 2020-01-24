@@ -1,6 +1,6 @@
 <template>
   <div class="tmk-my">
-    <myMenu :user-info="userInfo"/>
+    <myMenu :user-info="userInfo" @onMenu="switchMenu"/>
     <div class="tmk-my__content">
       <router-view></router-view>
     </div>
@@ -23,6 +23,11 @@ export default {
         ageLevel: 'PG-13'
       }
     }
+  },
+  methods: {
+    switchMenu () {
+
+    }
   }
 }
 </script>
@@ -33,6 +38,7 @@ export default {
     display: flex;
     @include e(content){
       flex: 1;
+      margin-left: unit(20);
     }
   }
 </style>

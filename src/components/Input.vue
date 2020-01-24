@@ -12,8 +12,8 @@
       :class="[isError?'is-error':'', type?'tmk-input__'+type:'']"
       autocomplete
     >
-    <t-icon class="tmk-input--clear" name="close" :size="14" v-if="showClear" @click="clearWord"/>
-    <t-icon class="tmk-input--search-icon" name="search" :size="14" v-if="showSearchIcon"/>
+    <t-icon class="tmk-input--clear" name="close" :size="iconSize" v-if="showClear" @click="clearWord"/>
+    <t-icon class="tmk-input--search-icon" name="search" :size="iconSize" v-if="showSearchIcon"/>
   </div>
 </template>
 <script>
@@ -37,7 +37,7 @@ export default {
     type: {
       type: String,
       default: 'default',
-      validator: value => ['default', 'search'].includes(value)
+      validator: value => ['default', 'search', 'center'].includes(value)
     },
     placeholder: {
       type: String,
@@ -54,6 +54,9 @@ export default {
     },
     showSearchIcon () {
       return !this.readonly && this.type === 'search' && this.value === ''
+    },
+    iconSize () {
+      return this.type === 'center' ? 21 : 14
     }
   },
   methods: {
@@ -94,6 +97,23 @@ export default {
         border: unit(1) solid transparent;
         background-color: $C03;
         padding: 0 unit(34) 0 unit(10);
+        &:focus,
+        &:hover {
+          border: unit(1) solid $C21;
+          outline: none;
+        }
+        @include when(error) {
+          border: unit(1) solid $C04;
+        }
+      }
+      @include e(center){
+        @include input-basic;
+        width: unit(460-44-2);
+        height: unit(46-2);
+        border: unit(1) solid transparent;
+        background-color: $C03;
+        padding: 0 unit(34) 0 unit(10);
+        text-align: center;
         &:focus,
         &:hover {
           border: unit(1) solid $C21;
