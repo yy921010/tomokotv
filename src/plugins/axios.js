@@ -20,11 +20,20 @@ export default {
         Promise.reject(error)
       }
     )
+    function dealWithTokenResp (res) {
+      const { config } = res
+      if (/token/.test(config.url)) {
+        if (res.data.error) {
+          return Promise.reject(res.data.error)
+        }
+        return res.data
+      }
+      return res.data.data
+    }
 
     service.interceptors.response.use(
       res => {
-        console.log(res.data)
-        return res.data.data
+        return dealWithTokenResp(res)
       },
       err => {
         console.log('err' + err)

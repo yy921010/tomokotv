@@ -57,7 +57,22 @@ export default {
     ...mapActions('Dialog', {
       close: 'close'
     }),
-    beginLogin () {},
+    ...mapActions('Login', {
+      login: 'login',
+      beginFreshByTime: 'beginFreshByTime'
+    }),
+    async beginLogin () {
+      await this.login({
+        username: this.loginId,
+        password: this.password,
+        isAutoLogin: this.isAutoLogin,
+        $vm: this
+      })
+      await this.beginFreshByTime({
+        $vm: this
+      })
+      this.closeDialog()
+    },
     closeDialog () {
       this.close({
         name: 'login'
