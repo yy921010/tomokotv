@@ -7,9 +7,12 @@ import HOME_MODULE from './Home'
 import MY_MODULE from './My'
 import NOT_FOUND_MODULE from './NotFound'
 
+// to fixed: https://blog.csdn.net/weixin_43202608/article/details/98884620
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push (location, onResolve, onReject) {
-  if (onResolve || onReject) { return originalPush.call(this, location, onResolve, onReject) }
+  if (onResolve || onReject) {
+    return originalPush.call(this, location, onResolve, onReject)
+  }
   return originalPush.call(this, location).catch(err => err)
 }
 
@@ -32,7 +35,16 @@ router.beforeEach((to, from, next) => {
   if (meta.type && meta.type === 'sync') {
     Store.dispatch('Header/setNavTitle', meta.title)
   }
-  next()
+  let accessToken = Store.state.Login.accessToken
+  if (meta.isNeedLogin) {
+    if (accessToken) {
+      next()
+    } else {
+      process.env.VUE_APP_SERVICE_MODE === 'prod' ? next('/') : next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

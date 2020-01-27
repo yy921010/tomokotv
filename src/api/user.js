@@ -22,6 +22,15 @@ class User extends Vue {
       }
     })
   }
+  revokeToken (token) {
+    return this.$http({
+      url: '/token',
+      method: 'post',
+      data: {
+        token
+      }
+    })
+  }
 }
 
 export default new User()

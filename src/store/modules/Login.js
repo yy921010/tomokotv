@@ -57,35 +57,44 @@ const actions = {
    * @param $vm
    * @returns {Promise<void>}
    */
-  async beginFreshByTime ({ commit, state }, { $vm }) {
-    console.log(session)
+  async beginFreshByTime ({ commit, state }) {
     const refreshToken = session.get('refreshToken')
     timeDownId = setTimeout(async () => {
-      if (!$vm.$_.isEmpty(refreshToken)) {
+      clearTimeout(timeDownId)
+      if (refreshToken) {
         const newToken = await User.refreshToken(refreshToken)
         commit('SAVE_TOKEN', {
           access_token: newToken.access_token,
           refresh_token: newToken.refresh_token,
           expires_in: newToken.expires_in,
-          isAutoLogin: state.isAutoLogin,
-          $vm
+          isAutoLogin: state.isAutoLogin
         })
         commit('CHANGE_LOGIN_STATUS', true)
-        clearTimeout(timeDownId)
-        this.dispatch('Login/beginFreshByTime', { $vm })
+        this.dispatch('Login/beginFreshByTime')
       } else {
         commit('SAVE_TOKEN', {
           access_token: '',
-          refresh_token: '',
-          $vm
+          refresh_token: ''
         })
         commit('CHANGE_LOGIN_STATUS', false)
-        clearTimeout(timeDownId)
       }
     }, state.expireTime * 1000)
   },
 
-  async reconnectToken () {}
+  async reconnectToken ({ commit }, reconnected) {
+    clearTimeout(timeDownId)
+    await this.dispatch('Login/beginFreshByTime')
+  },
+
+  async revokeLogin ({ commit, state }) {
+    await User.revokeToken(state.accessToken)
+    commit('SAVE_TOKEN', {
+      access_token: '',
+      refresh_token: '',
+      isAutoLogin: state.isAutoLogin
+    })
+    commit('CHANGE_LOGIN_STATUS', false)
+  }
 }
 
 export default {

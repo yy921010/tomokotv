@@ -1,4 +1,5 @@
 import MyLayout from '../views/my'
+const isNeedLogin = true
 const MY_MODULE = [
   {
     path: '/',
@@ -6,7 +7,8 @@ const MY_MODULE = [
     component: MyLayout,
     meta: {
       type: 'sync',
-      title: '设置'
+      title: '设置',
+      isNeedLogin
     },
     children: [
       {
@@ -14,20 +16,22 @@ const MY_MODULE = [
         name: 'MyUser',
         meta: {
           type: 'sync',
-          title: '用户信息'
+          title: '用户信息',
+          isNeedLogin
         },
         component: () =>
-          import(/* webpackChunkName: "userInfo" */ '../views/my/user')
+          import('../views/my/user')
       },
       {
         path: '/sub-profile',
         name: 'Profiles',
         meta: {
           type: 'sync',
-          title: '子用户设置'
+          title: '子用户设置',
+          isNeedLogin
         },
         component: () =>
-          import(/* webpackChunkName: "userInfo" */ '../views/my/sub-profile')
+          import('../views/my/sub-profile')
       }
     ]
   }

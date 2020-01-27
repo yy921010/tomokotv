@@ -27,5 +27,12 @@ export default [
         refresh_token: Random.guid()
       }
     }
+  },
+  {
+    url: '/token/revoke',
+    type: 'post',
+    response: config => {
+      return {}
+    }
   }
 ]

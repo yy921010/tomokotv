@@ -6,7 +6,7 @@ const TV_GUIDE_MODULE = [
       type: 'sync',
       title: '电视节目单'
     },
-    component: () => import(/* webpackChunkName:"guide" */'../views/tvguide/tvguide')
+    component: () => import('../views/tvguide/tvguide')
   }
 ]
 

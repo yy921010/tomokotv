@@ -2,7 +2,6 @@ import axios from 'axios'
 
 export default {
   install (Vue, opt = {}) {
-    console.log(opt.baseURL)
     const service = axios.create(opt)
     // request interceptor
     service.interceptors.request.use(

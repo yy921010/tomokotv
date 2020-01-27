@@ -13,6 +13,6 @@ new Vue({
   render: h => h(App),
   mounted () {
     // 刷新浏览器
-    store.dispatch('Login/beginFreshByTime', { $vm: this })
+    store.dispatch('Login/beginFreshByTime')
   }
 }).$mount('#app')
