@@ -34,5 +34,22 @@ export default [
     response: config => {
       return {}
     }
+  },
+  {
+    // eslint-disable-next-line no-useless-escape
+    url: '/user?\.*',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 0,
+        data: {
+          nickName: Random.ctitle(),
+          username: Random.email(),
+          avatarUrl: Random.image('35x35'),
+          ageLevel: Random.range(10),
+          userType: 1
+        }
+      }
+    }
   }
 ]

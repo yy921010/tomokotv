@@ -43,8 +43,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import Login from '../../mixin/Login'
 export default {
   name: 'login',
+  mixins: [Login],
   data () {
     return {
       loginId: '',
@@ -58,19 +60,17 @@ export default {
       close: 'close'
     }),
     ...mapActions('Login', {
-      login: 'login',
-      beginFreshByTime: 'beginFreshByTime'
+      login: 'getToken',
+      getUserInfo: 'getUserInfo'
     }),
     async beginLogin () {
       await this.login({
         username: this.loginId,
         password: this.password,
-        isAutoLogin: this.isAutoLogin,
-        $vm: this
+        isAutoLogin: this.isAutoLogin
       })
-      await this.beginFreshByTime({
-        $vm: this
-      })
+      await this.getUserInfo()
+      this.timeToRefresh()
       this.closeDialog()
     },
     closeDialog () {

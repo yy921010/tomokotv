@@ -6,7 +6,7 @@
       </div>
       <div class="title">{{title}}</div>
       <div class="actions">
-        <t-button class="login-btn" size="mini" @click="openLoginDialog">{{$t("header.login_btn")}}</t-button>
+        <user-header></user-header>
         <t-icon class="search-btn" name="search" :size="20"></t-icon>
         <t-icon class="menu-btn" name="menu" :size="20"></t-icon>
       </div>
@@ -17,6 +17,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import userHeader from './user-header'
 export default {
   name: 'TmkHeader',
   data () {
@@ -24,9 +25,15 @@ export default {
       logoUrl: require('@assets/logo.png')
     }
   },
+  components: {
+    userHeader
+  },
   computed: {
     ...mapState('Header', {
       title: s => s.title
+    }),
+    ...mapState('Login', {
+      isLogin: s => s.isLogin
     })
   },
   methods: {
@@ -75,6 +82,9 @@ export default {
       @include text(29);
     }
     .actions{
+      display: flex;
+      align-items: center;
+      cursor: pointer;
       .login-btn{
 
       }

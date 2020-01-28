@@ -27,7 +27,6 @@ const SessionManger = {
       try {
         let value = SESSION_STORAGE.getItem(key) || LOCAL_STORAGE.getItem(key)
         if (value) {
-          console.log(aes)
           json[key] = JSON.parse(aes.decrypt(value, key)
             .toString(encUTF8))
         }

@@ -1,36 +1,44 @@
-import Vue from 'vue'
-class User extends Vue {
-  login ({ username, password }) {
-    return this.$http({
-      url: '/token',
-      method: 'post',
-      data: {
-        username,
-        password,
-        grant_type: 'password'
-      }
-    })
-  }
+import HttpClient from '../plugins/axios'
 
-  refreshToken (refreshToken) {
-    return this.$http({
-      url: '/token',
-      method: 'post',
-      data: {
-        refreshToken,
-        grant_type: 'refresh_token'
-      }
-    })
-  }
-  revokeToken (token) {
-    return this.$http({
-      url: '/token',
-      method: 'post',
-      data: {
-        token
-      }
-    })
-  }
+export function login ({ username, password }) {
+  return HttpClient({
+    url: '/token',
+    method: 'post',
+    data: {
+      username,
+      password,
+      grant_type: 'password'
+    }
+  })
 }
 
-export default new User()
+export function refreshToken (refreshToken) {
+  return HttpClient({
+    url: '/token',
+    method: 'post',
+    data: {
+      refreshToken,
+      grant_type: 'refresh_token'
+    }
+  })
+}
+
+export function revokeToken (token) {
+  return HttpClient({
+    url: '/token/revoke',
+    method: 'post',
+    data: {
+      token
+    }
+  })
+}
+
+export function getUserInfo (username) {
+  return HttpClient({
+    url: '/user',
+    method: 'get',
+    params: {
+      username
+    }
+  })
+}

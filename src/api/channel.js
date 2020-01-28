@@ -1,11 +1,8 @@
-import Vue from 'vue'
-class Channel extends Vue {
-  getAllChannel () {
-    return this.$http({
-      url: '/channel',
-      method: 'get'
-    })
-  }
-}
+import HttpClient from '../plugins/axios'
 
-export default new Channel()
+export function getAllChannel () {
+  return HttpClient({
+    url: '/channel',
+    method: 'get'
+  })
+}

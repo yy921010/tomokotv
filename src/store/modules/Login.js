@@ -1,4 +1,4 @@
-import User from '@api/user'
+import { login, refreshToken, revokeToken, getUserInfo } from '@api/user'
 import session from '@plugins/session'
 let timeDownId = null
 
@@ -6,23 +6,42 @@ const state = {
   isLogin: false,
   accessToken: '',
   expireTime: null,
-  isAutoLogin: false
+  username: null,
+  userInfo: {}
 }
 
 const mutations = {
   SAVE_TOKEN (state, tokenData) {
     state.accessToken = tokenData.access_token
     state.expireTime = tokenData.expires_in
-    session.put(
-      'refreshToken',
-      tokenData.refresh_token,
-      tokenData.isAutoLogin
-    )
-    state.isAutoLogin = tokenData.isAutoLogin
+    const isAutoLogin = session.get('isAutoLogin')
+    session.put('refreshToken', tokenData.refresh_token, isAutoLogin)
   },
+
+  CLEAR_TOKEN (state) {
+    state.accessToken = ''
+    state.expireTime = null
+    session.remove('refreshToken')
+  },
+
   CHANGE_LOGIN_STATUS (state, isLogin) {
     state.isLogin = isLogin
+  },
+
+  SAVE_USER_NAME (state, username) {
+    state.username = username
+  },
+
+  SAVE_USER_INFO (state, { nickName, username, avatarUrl, ageLevel, userType }) {
+    state.userInfo = {
+      nickName,
+      username,
+      avatarUrl,
+      ageLevel,
+      userType
+    }
   }
+
 }
 
 const actions = {
@@ -31,69 +50,57 @@ const actions = {
    * @param commit
    * @param username
    * @param password
-   * @param $vm
    * @param isAutoLogin
    * @returns {Promise<void>}
    */
-  async login ({ commit }, { username, password, isAutoLogin }) {
+  async getToken ({ commit }, { username, password, isAutoLogin }) {
     if (username && password) {
-      const result = await User.login({ username, password })
+      const result = await login({ username, password })
       if (result) {
         commit('SAVE_TOKEN', {
           access_token: result.access_token,
           refresh_token: result.refresh_token,
-          expires_in: result.expires_in,
-          isAutoLogin
+          expires_in: result.expires_in
         })
+        commit('SAVE_USER_NAME', username)
+        session.put('isAutoLogin', isAutoLogin) // check autoLogin
         commit('CHANGE_LOGIN_STATUS', true)
       }
       return result
     }
   },
-  /**
-   * 刷新token
-   * @param commit
-   * @param state
-   * @param $vm
-   * @returns {Promise<void>}
-   */
-  async beginFreshByTime ({ commit, state }) {
-    const refreshToken = session.get('refreshToken')
-    timeDownId = setTimeout(async () => {
-      clearTimeout(timeDownId)
-      if (refreshToken) {
-        const newToken = await User.refreshToken(refreshToken)
-        commit('SAVE_TOKEN', {
-          access_token: newToken.access_token,
-          refresh_token: newToken.refresh_token,
-          expires_in: newToken.expires_in,
-          isAutoLogin: state.isAutoLogin
-        })
-        commit('CHANGE_LOGIN_STATUS', true)
-        this.dispatch('Login/beginFreshByTime')
-      } else {
-        commit('SAVE_TOKEN', {
-          access_token: '',
-          refresh_token: ''
-        })
-        commit('CHANGE_LOGIN_STATUS', false)
-      }
-    }, state.expireTime * 1000)
+
+  async startRefreshToken ({ commit }) {
+    const refreshTokenStr = session.get('refreshToken')
+    if (refreshTokenStr) {
+      const newToken = await refreshToken(refreshTokenStr)
+      commit('SAVE_TOKEN', {
+        access_token: newToken.access_token,
+        refresh_token: newToken.refresh_token,
+        expires_in: newToken.expires_in
+      })
+      commit('CHANGE_LOGIN_STATUS', true)
+    } else {
+      commit('CLEAR_TOKEN')
+      commit('CHANGE_LOGIN_STATUS', false)
+      Error('refresh token is empty')
+    }
   },
 
-  async reconnectToken ({ commit }, reconnected) {
+  async reconnectToken ({ commit }, { url, option, method }) {
     clearTimeout(timeDownId)
     await this.dispatch('Login/beginFreshByTime')
   },
 
   async revokeLogin ({ commit, state }) {
-    await User.revokeToken(state.accessToken)
-    commit('SAVE_TOKEN', {
-      access_token: '',
-      refresh_token: '',
-      isAutoLogin: state.isAutoLogin
-    })
+    await revokeToken(state.accessToken)
+    commit('CLEAR_TOKEN')
     commit('CHANGE_LOGIN_STATUS', false)
+  },
+
+  async getUserInfo ({ commit, state }) {
+    const result = await getUserInfo(state.username)
+    commit('SAVE_USER_INFO', result)
   }
 }
 
