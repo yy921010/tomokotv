@@ -58,6 +58,7 @@ module.exports = {
       .set('@api', resolve('src/api'))
       .set('@assets', resolve('src/assets'))
       .set('@utils', resolve('src/utils'))
+      .set('@mixin', resolve('src/mixin'))
 
     config.when(process.env.VUE_APP_SERVICE_MODE === 'dev',
       config => config.devtool('cheap-source-map')

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '../store'
 
-// todo: 需要更改axios处理流程
 function dealWithTokenResp (res) {
   const { config } = res
   if (/token/.test(config.url)) {

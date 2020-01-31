@@ -21,7 +21,9 @@
     "oldPassword": "旧密码",
     "reNewPassword": "确认新密码",
     "description": "修改密码",
-    "descriptionTips": "密码需要的注意点"
+    "descriptionTips": "密码需要的注意点",
+    "undo": "撤销",
+    "confirm": "好"
   },
   "subProfile": {
     "addBtn": "添加子账号"

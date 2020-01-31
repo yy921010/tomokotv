@@ -10,8 +10,14 @@ export default {
   methods: {
     ...mapActions('Login', {
       getToken: 'getToken',
-      refreshToken: 'startRefreshToken'
+      refreshToken: 'startRefreshToken',
+      logout: 'logout'
     }),
+
+    async userLogout () {
+      clearTimeout(refreshTokenTimeDown)
+      this.logout()
+    },
 
     async timeToRefresh () {
       refreshTokenTimeDown = setTimeout(async () => {

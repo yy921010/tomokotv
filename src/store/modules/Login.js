@@ -92,7 +92,7 @@ const actions = {
     await this.dispatch('Login/beginFreshByTime')
   },
 
-  async revokeLogin ({ commit, state }) {
+  async logout ({ commit, state }) {
     await revokeToken(state.accessToken)
     commit('CLEAR_TOKEN')
     commit('CHANGE_LOGIN_STATUS', false)

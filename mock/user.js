@@ -1,4 +1,12 @@
-import { Random } from 'mockjs'
+import Mock, { Random } from 'mockjs'
+
+const userInfo = Mock.mock({
+  nickName: '@ctitle',
+  username: '@email',
+  avatarUrl: Random.image('35x35'),
+  'ageLevel|1': [0, 6, 12, 15, 18],
+  userType: 1
+})
 
 export default [
   {
@@ -42,11 +50,22 @@ export default [
     response: _ => {
       return {
         code: 0,
+        data: userInfo
+      }
+    }
+  },
+  {
+    // eslint-disable-next-line no-useless-escape
+    url: '/customConfig?\.*',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 0,
         data: {
           nickName: Random.ctitle(),
           username: Random.email(),
           avatarUrl: Random.image('35x35'),
-          ageLevel: Random.range(10),
+          ageLevel: '[1,10]',
           userType: 1
         }
       }

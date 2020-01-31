@@ -7,7 +7,7 @@
           <t-icon name="vip-crown"></t-icon>
         </div>
       </div>
-      <span class="username">{{userInfo.username}}</span>
+      <span class="username" :title="userInfo.username">{{userInfo.username}}</span>
       <span class="rating-level">{{userInfo.ageLevel}}</span>
     </div>
     <div class="tmk-my-menu__list">
@@ -73,11 +73,9 @@ export default {
       this.chosenMenu = this.$route.name
     },
     handleChosen (chosenId) {
-      console.log(chosenId)
       this.$router.push({
         name: chosenId
       })
-      this.$emit('onMenu', chosenId)
     }
   }
 }
@@ -130,6 +128,7 @@ export default {
         line-height: unit(30);
         text-align: center;
         margin-bottom: unit(42);
+        @include text-overflow;
       }
       .rating-level {
         @extend .username;
