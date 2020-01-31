@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Store from '../store'
 
-import TVGuideModule from './Guide'
-import HOME_MODULE from './Home'
-import MY_MODULE from './My'
-import NOT_FOUND_MODULE from './NotFound'
+import TVGuideModule from './modules/Guide'
+import HOME_MODULE from './modules/Home'
+import MY_MODULE from './modules/My'
+import NOT_FOUND_MODULE from './modules/NotFound'
 
 // to fixed: https://blog.csdn.net/weixin_43202608/article/details/98884620
 const originalPush = VueRouter.prototype.push

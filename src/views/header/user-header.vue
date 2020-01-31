@@ -7,11 +7,7 @@
     </template>
     <template v-else>
       <div class="tmk-user-header__dropdown" @click.stop="isShowSubMenu = true">
-        <img
-          class="user-avatar"
-          :src="userInfo.avatarUrl"
-          :alt="userInfo.username"
-        />
+        <t-avatar user-avatar :src="userInfo.avatarUrl"></t-avatar>
         <div class="user-name" :title="userInfo.nickName">
           {{ userInfo.nickName }}
         </div>

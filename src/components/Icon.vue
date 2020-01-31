@@ -31,7 +31,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(icon){
     font-weight: normal;
     font-style: normal;

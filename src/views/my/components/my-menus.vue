@@ -1,12 +1,13 @@
 <template>
   <div class="tmk-my-menu">
     <div class="tmk-my-menu__user" :class="[{ 'is-active': 'MyUser' === chosenMenu }]">
-      <div class="avatar" @click="handleChosen('MyUser')">
-        <img :src="userInfo.avatarUrl" alt="">
-        <div class="is-admin-crow">
-          <t-icon name="vip-crown"></t-icon>
-        </div>
-      </div>
+      <t-avatar
+        class="avatar"
+        :size="76"
+        mask-icon="vip-crown"
+        :src="userInfo.avatarUrl"
+        @click="handleChosen('MyUser')"
+      ></t-avatar>
       <span class="username" :title="userInfo.username">{{userInfo.username}}</span>
       <span class="rating-level">{{userInfo.ageLevel}}</span>
     </div>

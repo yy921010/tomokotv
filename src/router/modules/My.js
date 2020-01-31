@@ -1,4 +1,4 @@
-import MyLayout from '../views/my'
+import MyLayout from '../../views/my/index'
 const isNeedLogin = true
 const MY_MODULE = [
   {
@@ -20,7 +20,7 @@ const MY_MODULE = [
           isNeedLogin
         },
         component: () =>
-          import('../views/my/user')
+          import('../../views/my/user')
       },
       {
         path: '/sub-profile',
@@ -31,7 +31,7 @@ const MY_MODULE = [
           isNeedLogin
         },
         component: () =>
-          import('../views/my/sub-profile')
+          import('../../views/my/sub-profile')
       }
     ]
   }

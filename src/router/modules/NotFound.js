@@ -6,7 +6,7 @@ const NOT_FOUND_MODULE = [
       type: 'sync',
       title: '页面未找到'
     },
-    component: () => import('../views/notFound')
+    component: () => import('../../views/notFound/index')
   }
 ]
 

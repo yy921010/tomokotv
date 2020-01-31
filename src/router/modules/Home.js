@@ -6,7 +6,7 @@ const HOME_MODULE = [
       type: 'sync',
       title: '主页'
     },
-    component: () => import('../views/home')
+    component: () => import('../../views/home/index')
   }
 ]
 
