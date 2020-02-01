@@ -36,25 +36,7 @@ export default {
   data () {
     return {
       loginId: '',
-      tabId: '',
-      ageLevels: [
-        {
-          text: 'PG-18',
-          value: 1
-        },
-        {
-          text: '央视频道',
-          value: 1
-        },
-        {
-          text: '地方卫视',
-          value: 1
-        },
-        {
-          text: '海外频道',
-          value: 1
-        }
-      ]
+      tabId: ''
     }
   },
   mounted () {

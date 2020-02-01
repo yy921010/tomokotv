@@ -1,6 +1,20 @@
 // bem for block
 @mixin b($block) {
-  $B: $namespace+'-'+$block !global;
+  $B: $namespace + "-" + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+// bem for component
+@mixin c($block) {
+  $B: "c-" + $block !global;
+  .#{$B} {
+    @content;
+  }
+}
+// bem fro unity
+@mixin u($block){
+  $B: "u-" + $block !global;
   .#{$B} {
     @content;
   }
@@ -32,13 +46,16 @@
   }
 }
 
-
 // bem for modifier
 @mixin m($modifier) {
   $selector: &;
   $currentSelector: "";
   @each $unit in $modifier {
-    $currentSelector: #{$currentSelector + & + $modifier-separator + $unit + ","};
+    $currentSelector: #{$currentSelector +
+      & +
+      $modifier-separator +
+      $unit +
+      ","};
   }
   @at-root {
     #{$currentSelector} {
@@ -57,10 +74,9 @@
 }
 
 @mixin select-none {
-
 }
 
-@mixin text-overflow{
+@mixin text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

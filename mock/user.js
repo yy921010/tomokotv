@@ -31,7 +31,7 @@ export default [
       return {
         access_token: Random.guid(),
         token_type: 'Bearer',
-        expires_in: 10,
+        expires_in: 400,
         refresh_token: Random.guid()
       }
     }
@@ -56,18 +56,50 @@ export default [
   },
   {
     // eslint-disable-next-line no-useless-escape
-    url: '/customConfig?\.*',
+    url: '/customConfig\?key\=AVATAR_LIST',
     type: 'get',
     response: _ => {
       return {
         code: 0,
-        data: {
-          nickName: Random.ctitle(),
-          username: Random.email(),
-          avatarUrl: Random.image('35x35'),
-          ageLevel: '[1,10]',
-          userType: 1
-        }
+        data: [
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75'),
+          Random.image('75x75')]
+      }
+    }
+  },
+  {
+    url: '/customConfig',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 0,
+        data: [{
+          key: 'AVATAR_LIST',
+          value: [
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75'),
+            Random.image('75x75')
+          ]
+        }]
       }
     }
   }

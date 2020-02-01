@@ -1,9 +1,9 @@
 <template>
-  <div class="tmk-checkbox">
-    <t-icon class="tmk-checkbox__icon" :name="iconName" :size="18"></t-icon>
-    <input  class="tmk-checkbox__original" type="checkbox"
-            v-bind:checked="checked"
-            v-on:change="$emit('change', $event.target.checked)">
+  <div class="c-checkbox">
+    <t-icon class="c-checkbox__icon" :name="iconName" :size="18"></t-icon>
+    <input  class="c-checkbox__original" type="checkbox"
+            :checked="checked"
+            @change="$emit('change', $event.target.checked)">
   </div>
 </template>
 
@@ -28,8 +28,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@include b(checkbox){
+<style lang="scss">
+@include c(checkbox){
   display: inline-block;
   white-space: nowrap;
   cursor: pointer;

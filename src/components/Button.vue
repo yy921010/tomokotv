@@ -1,15 +1,15 @@
 <template>
   <button
-    class="tmk-button"
+    class="c-button"
     @click="handleClick"
     :type="nativeType"
     :class="[
   buttonClass,
   disable?'is-disable':'',
-  size !==''? 'tmk-button--'+size:''
+  size !==''? 'c-button--'+size:''
    ]"
   >
-    <t-icon v-if="icon !== ''" :name="icon" :type="iconType" :size="20" class="tmk-button--icon"/>
+    <t-icon v-if="icon !== ''" :name="icon" :type="iconType" :size="20" class="c-button--icon"/>
     <span>
       <slot></slot>
     </span>
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     buttonClass () {
-      return `tmk-button__${this.type}`
+      return `c-button__${this.type}`
     }
   },
   methods: {
@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 $vi-theme-button: (
   text: $C01,
   background: (
@@ -155,7 +155,7 @@ $vi-theme-button: (
   }
 }
 
-@include b(button) {
+@include c(button) {
   @include button-base;
   @include select-none;
   padding: 0 unit(10);

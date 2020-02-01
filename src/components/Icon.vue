@@ -1,5 +1,5 @@
 <template>
-    <i class="tmk-icon" @click="handleClick"
+    <i class="c-icon" @click="handleClick"
      :class="iconClass"
      :style="[{'font-size':size+'px','width':size+'px','height':size+'px'}]"
   ></i>
@@ -31,7 +31,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   @include b(icon){
     font-weight: normal;
     font-style: normal;

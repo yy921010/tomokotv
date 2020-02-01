@@ -4,11 +4,12 @@
       <t-avatar
         :size="130"
         mask-icon="edit"
-        :src="require('@assets/logo.png')"
+        :src="avatarUrl"
         @click="showReadyAvatars"
       ></t-avatar>
     </div>
-    <div class="avatar-ready-list">
+    <div class="avatar-ready-list" v-if="isShowAvatars">
+      <avatarList :avatars="avatarList" @onAvatars="changeAvatar"/>
     </div>
     <div class="form-content">
       <form action="">
@@ -16,7 +17,7 @@
           <span class="form-item__label">{{ $t("user.username") }}</span>
           <t-input
             class="form-item__value"
-            v-model="username"
+            v-model="nickName"
             type="center"
           ></t-input>
         </div>
@@ -26,11 +27,10 @@
             class="form-item__value"
             :options="ageLevels"
             type="center"
-            :value="ageLevel"
-            @onSelect="changeSelect"
+            v-model="ageLevel"
           ></t-select>
         </div>
-        <div class="form-item form-button" v-if="isShowButtonGroup">
+        <div class="form-item form-button" v-if="!equalInputAndMeta()">
           <t-button @click="cancel">{{ $t("user.undo") }}</t-button>
           <t-button @click="confirm" type="primary">{{
             $t("user.confirm")
@@ -42,51 +42,80 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
+import { mapActions, mapState } from 'vuex'
+import avatarList from './avatar-list'
 export default {
   name: 'modify-user-info',
+  components: {
+    avatarList
+  },
   data () {
     return {
       tabId: null,
-      username: '',
+      nickName: '',
       ageLevel: '',
-      isShowButtonGroup: false
+      avatarUrl: '',
+      isShowButtonGroup: false,
+      avatarList: [],
+      isShowAvatars: false
     }
   },
   computed: {
     ...mapState('Login', {
-      userInfo: s => s.userInfo
+      user: s => s.userInfo
     }),
     ...mapState('My', {
       ageLevels: s => s.ageLevels
     })
+
   },
   watch: {
-    username (newVal) {
-      this.isShowButtonGroup = newVal !== this.userInfo.username
+    nickName () {
+      this.equalInputAndMeta()
+    },
+    ageLevel () {
+      this.equalInputAndMeta()
     }
   },
-  mounted () {
+  async mounted () {
     this.tabId = 'modify-user-info'
-    this.username = this.userInfo.username
-    this.ageLevel = this.userInfo.ageLevel
+    this.setInitUserInfo()
+    this.avatarList = await this.getCustomConfig('AVATAR_LIST')
   },
   methods: {
+    ...mapActions('CustomConfig', {
+      getCustomConfig: 'getCustomConfig'
+    }),
+    setInitUserInfo () {
+      this.avatarUrl = this.user.avatarUrl
+      this.nickName = this.user.nickName
+      this.ageLevel = this.user.ageLevel
+    },
+    equalInputAndMeta () {
+      return this.avatarUrl === this.user.avatarUrl &&
+        this.nickName === this.user.nickName &&
+        this.ageLevel === this.user.ageLevel
+    },
+    changeAvatar (url) {
+      this.avatarUrl = url
+      this.equalInputAndMeta()
+    },
     cancel () {
-      this.username = this.userInfo.username
+      this.setInitUserInfo()
     },
-    changeSelect (value) {
-      this.isShowButtonGroup = value !== this.userInfo.ageLevel
+    showReadyAvatars () {
+      this.isShowAvatars = !this.isShowAvatars
     },
-    showReadyAvatars () {},
-    confirm () {}
+    confirm () {
+
+    }
   }
 }
 </script>
 
 <style lang="scss">
 @include b(modify-user-info) {
+  width: unit(766);
   .avatar-content {
     height: unit(130);
     width: unit(130);
@@ -96,8 +125,13 @@ export default {
     margin: 0 auto;
     cursor: pointer;
   }
+  .avatar-ready-list{
+    margin-top: unit(80);
+  }
   .form-content {
-    margin-top: unit(20);
+    margin-top: unit(80);
+    display: flex;
+    justify-content: center;
     .form-item {
       display: flex;
       margin-bottom: unit(50);

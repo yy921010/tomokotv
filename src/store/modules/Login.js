@@ -22,6 +22,7 @@ const mutations = {
     state.accessToken = ''
     state.expireTime = null
     session.remove('refreshToken')
+    session.remove('username')
   },
 
   CHANGE_LOGIN_STATUS (state, isLogin) {
@@ -30,6 +31,7 @@ const mutations = {
 
   SAVE_USER_NAME (state, username) {
     state.username = username
+    session.put('username', username, true)
   },
 
   SAVE_USER_INFO (state, { nickName, username, avatarUrl, ageLevel, userType }) {
@@ -72,19 +74,22 @@ const actions = {
 
   async startRefreshToken ({ commit }) {
     const refreshTokenStr = session.get('refreshToken')
-    if (refreshTokenStr) {
-      const newToken = await refreshToken(refreshTokenStr)
-      commit('SAVE_TOKEN', {
-        access_token: newToken.access_token,
-        refresh_token: newToken.refresh_token,
-        expires_in: newToken.expires_in
-      })
-      commit('CHANGE_LOGIN_STATUS', true)
-    } else {
-      commit('CLEAR_TOKEN')
-      commit('CHANGE_LOGIN_STATUS', false)
-      Error('refresh token is empty')
-    }
+    return new Promise(async (resolve, reject) => {
+      if (refreshTokenStr) {
+        const newToken = await refreshToken(refreshTokenStr)
+        commit('SAVE_TOKEN', {
+          access_token: newToken.access_token,
+          refresh_token: newToken.refresh_token,
+          expires_in: newToken.expires_in
+        })
+        commit('CHANGE_LOGIN_STATUS', true)
+        resolve()
+      } else {
+        commit('CLEAR_TOKEN')
+        commit('CHANGE_LOGIN_STATUS', false)
+        reject(new Error('Refresh Token Storage is Empty'))
+      }
+    })
   },
 
   async reconnectToken ({ commit }, { url, option, method }) {
@@ -99,7 +104,8 @@ const actions = {
   },
 
   async getUserInfo ({ commit, state }) {
-    const result = await getUserInfo(state.username)
+    const username = state.username || session.get('username')
+    const result = await getUserInfo(username)
     commit('SAVE_USER_INFO', result)
   }
 }

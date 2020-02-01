@@ -1,15 +1,25 @@
 <template>
-  <div class="tmk-avatar" :style="{ width: size + 'px', height: size + 'px' }" @click="handleClick">
+  <div
+    class="c-avatar"
+    :style="{ width: size + 'px', height: size + 'px' }"
+    @click="handleClick"
+    :class="[{ 'is-selected': isSelected }]"
+  >
     <img
-      class="tmk-avatar__image"
+      class="c-avatar__image"
       :src="src"
-      alt="tmk-avatar"
+      alt="c-avatar"
       @error="setErrorImg"
     />
-    <div class="tmk-avatar__default">
-      <t-icon class="avatar_default" name="user" type="line" :size="24"></t-icon>
+    <div class="c-avatar__default">
+      <t-icon
+        class="c-avatar__default--main"
+        name="user"
+        type="line"
+        :size="24"
+      ></t-icon>
     </div>
-    <div class="tmk-avatar__master" v-if="maskIcon !== ''">
+    <div class="c-avatar__master" v-if="maskIcon !== ''">
       <t-icon :name="maskIcon"></t-icon>
     </div>
   </div>
@@ -35,7 +45,6 @@ export default {
   },
   methods: {
     setErrorImg () {
-      console.log(11111)
       this.src = require('@assets/images/dot.gif')
     },
     handleClick () {
@@ -45,13 +54,17 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-@include b(avatar) {
+<style lang="scss">
+@include c(avatar) {
   position: relative;
   border-radius: 50%;
   cursor: pointer;
-  overflow:hidden;
+  overflow: hidden;
   background-color: $C09;
+  @include when(selected){
+    box-sizing: border-box;
+    border:unit(3) solid white;
+  }
   @include e(image) {
     width: 100%;
     height: 100%;
@@ -61,16 +74,16 @@ export default {
     z-index: -1;
     width: 100%;
     height: 100%;
-    top:0;
+    top: 0;
     left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    .avatar_default{
+    @include m(main) {
       color: $C35;
     }
   }
-  @include e(master){
+  @include e(master) {
     height: unit(30);
     width: 100%;
     position: absolute;

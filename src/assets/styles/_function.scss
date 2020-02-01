@@ -1,11 +1,10 @@
-
-$separator: '__';
-$modifier-separator: '--';
-$state-prefix: 'is-';
+$separator: "__";
+$modifier-separator: "--";
+$state-prefix: "is-";
 $transition-time: 0.35s !default;
 
 @function unit($number) {
-  @return $number+px
+  @return $number + px;
 }
 
 @function selectorToString($selector) {
@@ -25,23 +24,22 @@ $transition-time: 0.35s !default;
 
 @function containWhenFlag($selector) {
   $selector: selectorToString($selector);
-  @if str-index($selector, '.' + $state-prefix) {
-    @return true
+  @if str-index($selector, "." + $state-prefix) {
+    @return true;
   } @else {
-    @return false
+    @return false;
   }
 }
 
 @function containPseudoClass($selector) {
   $selector: selectorToString($selector);
-  @if str-index($selector, ':') {
-    @return true
+  @if str-index($selector, ":") {
+    @return true;
   } @else {
-    @return false
+    @return false;
   }
 }
 @function hitAllSpecialNestRule($selector) {
-  @return containsModifier($selector) or containWhenFlag($selector) or containPseudoClass($selector);
+  @return containsModifier($selector) or containWhenFlag($selector) or
+    containPseudoClass($selector);
 }
-
-

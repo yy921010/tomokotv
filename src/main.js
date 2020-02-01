@@ -12,12 +12,13 @@ new Vue({
   i18n,
   render: h => h(App),
   mixins: [Login],
-  mounted () {
+  async mounted () {
     // 刷新浏览器
-    store.dispatch('Login/startRefreshToken')
-      .then(async () => {
-        await this.timeToRefresh()
-        await store.dispatch('Login/getUserInfo')
-      })
+    try {
+      await store.dispatch('Login/startRefreshToken')
+      await this.timeToRefresh()
+      await store.dispatch('Login/getUserInfo')
+    } catch (e) {
+    }
   }
 }).$mount('#app')

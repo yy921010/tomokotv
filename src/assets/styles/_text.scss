@@ -1,86 +1,63 @@
-
-@mixin text-base($font-size, $font-color, $is-bold:false) {
+@mixin text-base($font-size, $font-color, $is-bold: false) {
   font-size: unit($font-size);
   color: $font-color;
   @if $is-bold {
     font-weight: bold;
   }
 }
-@mixin text($textNumber,$color:$C31){
+@mixin text($textNumber, $color: $C31) {
   @if $textNumber==11 {
-  @include text-base(32, $color, true);
-  }
-  @else if $textNumber==12 {
-  @include text-base(32, $color);
-  }
-  @else if $textNumber==13 {
-  @include text-base(24, $color);
-  }
-  @else if $textNumber==14 {
-  @include text-base(20, $color);
-  }
-  @else if $textNumber==15 {
-  @include text-base(20, $color, true);
-  }
-  @else if $textNumber==16 {
-  @include text-base(18, $color, true);
-  }
-  @else if $textNumber==17 {
-  @include text-base(16, $color, true);
-  }
-  @else if $textNumber==18 {
-  @include text-base(14, $color);
-  }
-  @else if $textNumber==20 {
-  @include text-base(48, $color, true);
-  }
-  @else if $textNumber==21 {
-  @include text-base(36, $C22, true);
-  }
-  @else if $textNumber==22 {
-  @include text-base(32, $color, true);
-  }
-  @else if $textNumber==23 {
-  @include text-base(24, $color, true);
-  }
-  @else if $textNumber==24 {
-  @include text-base(24, $C22);
-  }
-  @else if $textNumber==25 {
-  @include text-base(20, $color, true);
-  }
-  @else if $textNumber==26 {
-  @include text-base(20, $color);
-  }
-  @else if $textNumber==27 {
-  @include text-base(18, $color);
-  }
-  @else if $textNumber==28 {
-  @include text-base(16, $color, true);
-  }
-  @else if $textNumber==29 {
-  @include text-base(16, $color);
+    @include text-base(32, $color, true);
+  } @else if $textNumber==12 {
+    @include text-base(32, $color);
+  } @else if $textNumber==13 {
+    @include text-base(24, $color);
+  } @else if $textNumber==14 {
+    @include text-base(20, $color);
+  } @else if $textNumber==15 {
+    @include text-base(20, $color, true);
+  } @else if $textNumber==16 {
+    @include text-base(18, $color, true);
+  } @else if $textNumber==17 {
+    @include text-base(16, $color, true);
+  } @else if $textNumber==18 {
+    @include text-base(14, $color);
+  } @else if $textNumber==20 {
+    @include text-base(48, $color, true);
+  } @else if $textNumber==21 {
+    @include text-base(36, $C22, true);
+  } @else if $textNumber==22 {
+    @include text-base(32, $color, true);
+  } @else if $textNumber==23 {
+    @include text-base(24, $color, true);
+  } @else if $textNumber==24 {
+    @include text-base(24, $C22);
+  } @else if $textNumber==25 {
+    @include text-base(20, $color, true);
+  } @else if $textNumber==26 {
+    @include text-base(20, $color);
+  } @else if $textNumber==27 {
+    @include text-base(18, $color);
+  } @else if $textNumber==28 {
+    @include text-base(16, $color, true);
+  } @else if $textNumber==29 {
+    @include text-base(16, $color);
     line-height: unit(24);
-  }
-  @else if $textNumber==30 {
-  @include text-base(16, $color);
+  } @else if $textNumber==30 {
+    @include text-base(16, $color);
     line-height: unit(20);
     font-style: italic;
-  }
-  @else if $textNumber==31 {
-  @include text-base(14, $color, true);
-  }
-  @else if $textNumber==32 {
-  @include text-base(14, $color);
+  } @else if $textNumber==31 {
+    @include text-base(14, $color, true);
+  } @else if $textNumber==32 {
+    @include text-base(14, $color);
     line-height: unit(20);
-  }
-  @else if $textNumber==33 {
-  @include text-base(14, $color);
+  } @else if $textNumber==33 {
+    @include text-base(14, $color);
     line-height: unit(20);
     font-style: italic;
-  }
-  @else if $textNumber==34 {
-  @include text-base(14, $color);
+  } @else if $textNumber==34 {
+    @include text-base(14, $color);
     line-height: unit(12);
   }
 }

@@ -1,22 +1,27 @@
 <template>
-  <div class="tmk-select"
-       :class="[type?'tmk-select--'+type:'']"
-       @click.stop="openOptions">
-    <div class="tmk-select__result">
-      <span class="tmk-select__text">{{getFinalResult}}</span>
-      <t-icon class="icon" :name="iconName" :size="24"/>
+  <div
+    class="c-select"
+    :class="[type ? 'c-select--' + type : '']"
+    @click.stop="openOptions"
+  >
+    <div class="c-select__result">
+      <input type="text" class="c-select__text" readonly :value="convertText">
+      <t-icon class="icon" :name="iconName" :size="24" />
     </div>
-    <div class="tmk-select__options" v-if="isVisibleOption">
+    <div class="c-select__options" v-if="isVisibleOption">
       <div
-        class="tmk-select__option"
-        v-for="(option,index) in options"
+        class="c-select__option"
+        v-for="(option, index) in options"
         :key="index"
         @click.stop="chosen(option)"
-      >{{option.text}}</div>
+      >
+        {{ option.text }}
+      </div>
     </div>
   </div>
 </template>
 <script>
+
 const selectListenerFunc = function () {
   this.isVisibleOption = false
   this.iconName = 'arrow-down-s'
@@ -24,18 +29,22 @@ const selectListenerFunc = function () {
 
 export default {
   name: 'tSelect',
+  model: {
+    prop: 'value',
+    event: 'change'
+  },
   props: {
     type: {
       type: String,
       default: 'default',
-      validate: (value) => ['default', 'center'].includes(value)
+      validate: value => ['default', 'center'].includes(value)
     },
     options: {
       type: Array
     },
     value: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -46,8 +55,9 @@ export default {
     }
   },
   computed: {
-    getFinalResult () {
-      return this.value || this.result || this.options[0].text
+    convertText () {
+      const currentOption = this.options.find(item => item.value === this.value)
+      return currentOption.text || ''
     }
   },
   mounted () {
@@ -56,8 +66,7 @@ export default {
   methods: {
     chosen ({ text, value }) {
       this.isVisibleOption = false
-      this.result = text
-      this.$emit('onSelect', value)
+      this.$emit('change', value)
       this.iconName = 'arrow-down-s'
     },
     openOptions () {
@@ -70,12 +79,12 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@include b(select) {
+<style lang="scss">
+@include c(select) {
   min-width: unit(203);
   text-align: center;
   cursor: pointer;
-  @include m(default){
+  @include m(default) {
     background-color: $C15;
     height: unit(40);
     @include e(result) {
@@ -88,28 +97,28 @@ export default {
         display: inline-block;
       }
     }
-    @include e(options){
+    @include e(options) {
       width: 100%;
       background-color: $C17;
       border-radius: unit(3);
-      padding-top:unit(10);
-      box-shadow: map_get($mask,5);
-      @include e(option){
+      padding-top: unit(10);
+      box-shadow: map_get($mask, 5);
+      @include e(option) {
         height: unit(32);
         line-height: unit(32) !important;
-        @include text(32,$C35);
-        &:hover{
-          @include text(32,$C31);
+        @include text(32, $C35);
+        &:hover {
+          @include text(32, $C31);
           background-color: $C03;
         }
       }
     }
-    .icon{
+    .icon {
       line-height: unit(24);
     }
   }
 
-  @include m(center){
+  @include m(center) {
     background-color: $C03;
     height: unit(46);
     position: relative;
@@ -117,29 +126,42 @@ export default {
       height: unit(46);
       line-height: unit(46);
       @include e(text) {
+        outline: none;
         @include text(29);
         margin-right: unit(10);
-        width: unit(100);
+        height: unit(46-2);
+        width: 100%;
+        text-align: center;
+        background-color: transparent;
+        border: transparent;
         display: inline-block;
       }
+      .icon {
+        line-height: unit(24);
+        position: absolute;
+        top:0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
-    @include e(options){
+    @include e(options) {
       width: 100%;
       background-color: $C17;
       border-radius: unit(3);
-      padding-top:unit(10);
-      box-shadow: map_get($mask,5);
-      @include e(option){
+      padding-top: unit(10);
+      box-shadow: map_get($mask, 5);
+      @include e(option) {
         height: unit(46);
         line-height: unit(46) !important;
-        @include text(29,$C35);
-        &:hover{
-          @include text(29,$C31);
+        @include text(29, $C35);
+        &:hover {
+          @include text(29, $C31);
           background-color: $C03;
         }
       }
     }
-    .icon{
+    .icon {
       position: absolute;
       right: 0;
       line-height: unit(46);
@@ -148,6 +170,5 @@ export default {
       width: unit(46) !important;
     }
   }
-
 }
 </style>

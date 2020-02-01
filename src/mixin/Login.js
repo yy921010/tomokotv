@@ -20,16 +20,18 @@ export default {
     },
 
     async timeToRefresh () {
-      refreshTokenTimeDown = setTimeout(async () => {
-        clearTimeout(refreshTokenTimeDown)
-        try {
-          await this.refreshToken()
-          await this.timeToRefresh()
-        } catch (e) {
-          console.error('error:', e)
+      if (this.expireTime) {
+        refreshTokenTimeDown = setTimeout(async () => {
           clearTimeout(refreshTokenTimeDown)
-        }
-      }, this.expireTime * 1000)
+          try {
+            await this.refreshToken()
+            await this.timeToRefresh()
+          } catch (e) {
+            console.error('error:', e)
+            clearTimeout(refreshTokenTimeDown)
+          }
+        }, this.expireTime * 1000)
+      }
     }
   }
 }
