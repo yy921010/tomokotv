@@ -4,7 +4,7 @@
   </div>
   </template>
 <script>
-import LoginComponent from './login'
+import LoginComponent from './modules/login'
 import { mapGetters } from 'vuex'
 export default {
   components: {

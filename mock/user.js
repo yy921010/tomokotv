@@ -102,5 +102,15 @@ export default [
         }]
       }
     }
+  },
+  {
+    url: '/changePassword',
+    type: 'post',
+    response: _ => {
+      return {
+        code: 0,
+        data: {}
+      }
+    }
   }
 ]

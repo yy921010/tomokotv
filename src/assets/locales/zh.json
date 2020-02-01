@@ -1,7 +1,7 @@
 {
   "hello": "你好",
-  "header":{
-    "login_btn":"登录"
+  "header": {
+    "login_btn": "登录"
   },
   "loginDialog": {
     "title": "登录",
@@ -20,42 +20,49 @@
     "newPassword": "新密码",
     "oldPassword": "旧密码",
     "reNewPassword": "确认新密码",
-    "description": "修改密码",
-    "descriptionTips": "密码需要的注意点",
+    "description": "重新设置您的密码，您的密码应具有以下作用：保护您的个人資訊；保护您的电子邮件；档案和其他内容；防止他人盗用您的账号",
+    "descriptionTips": "密码必须包含8个字符，可以混合使用英文字母、数字和符号（仅限ASCLL标准字符）；您不能使用强度低的密码，例如「password123」，先前使用过密码，开头和结尾是空格的密码",
     "undo": "撤销",
-    "confirm": "好"
+    "confirm": "好",
+    "cancel": "取消",
+    "error": "两次密码不一致，请重新输入",
+    "errorOldPass": "用户密码错误",
+    "errorOldPassEmpty": "旧密码不能为空",
+    "errorNewPassEmpty": "密码不能为空",
+    "errorReNewPassEmpty": "确认密码不能为空",
+    "errorWeakPass": "密码强度较弱"
   },
   "subProfile": {
     "addBtn": "添加子账号"
   },
-  "menu":{
+  "menu": {
     "channelManager": "我的频道",
-    "home":"主页",
-    "broadcast":"直播",
-    "onDemand":"点播",
-    "history":"历史记录",
-    "contentManager":"我的点播",
-    "favoriteVideo":"收藏视频",
-    "historyVideo":"历史记录",
-    "favoriteChannel":"收藏频道",
-    "lockedChannel":"已锁定频道",
-    "reminders":"提醒",
-    "purchases":"订购",
-    "recording":"录制",
-    "profiles":"子账号管理",
-    "deviceName":"设备信息",
-    "setting":"设置",
-    "logout":"注销",
+    "home": "主页",
+    "broadcast": "直播",
+    "onDemand": "点播",
+    "history": "历史记录",
+    "contentManager": "我的点播",
+    "favoriteVideo": "收藏视频",
+    "historyVideo": "历史记录",
+    "favoriteChannel": "收藏频道",
+    "lockedChannel": "已锁定频道",
+    "reminders": "提醒",
+    "purchases": "订购",
+    "recording": "录制",
+    "profiles": "子账号管理",
+    "deviceName": "设备信息",
+    "setting": "设置",
+    "logout": "注销",
     "loginButtonText": "登录",
     "userId": "用户ID:"
   },
-  "tvguide":{
-    "sun":"周日",
-    "mon":"周一",
-    "twe":"周二",
-    "wed":"周三",
-    "thu":"周四",
-    "fri":"周五",
-    "sat":"周六"
+  "tvguide": {
+    "sun": "周日",
+    "mon": "周一",
+    "twe": "周二",
+    "wed": "周三",
+    "thu": "周四",
+    "fri": "周五",
+    "sat": "周六"
   }
 }

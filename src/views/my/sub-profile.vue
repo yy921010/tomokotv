@@ -1,12 +1,12 @@
 <template>
-  <div class="tmk-sub-profile">
-    <div class="tmk-sub-profile__add-profile">
+  <div class="tmk-profile">
+    <div class="tmk-profile__add">
       <t-button icon="add" type="link">{{ $t("subProfile.addBtn") }}</t-button>
     </div>
-    <div class="tmk-sub-profile__list">
-      <div class="tmk-sub-profile__item">
-        <div class="profile-avatar">
-          <img :src="require('@assets/logo.png')" alt="" />
+    <div class="tmk-profile__list">
+      <div class="tmk-profile__list--item">
+        <div class="avatar">
+          <t-avatar :src="require('@assets/logo.png')" :size="80"></t-avatar>
         </div>
         <div class="info">
           <div class="title">ds</div>
@@ -20,31 +20,22 @@
 </template>
 
 <script>
+
 export default {
   name: 'sub-profile'
 }
 </script>
 
 <style lang="scss">
-@include b(sub-profile) {
-  @include e(add-profile) {
+@include b(profile) {
+  @include e(add) {
   }
   @include e(list) {
-    @include e(item) {
+    @include m(item) {
       height: unit(140);
       cursor: pointer;
       &:hover {
         background-color: $C03;
-      }
-      .profile-avatar {
-        height: unit(80);
-        width: unit(80);
-        overflow: hidden;
-        border-radius: 50%;
-        >img{
-          width: 100%;
-          height: 100%;
-        }
       }
       .info {
         .title{

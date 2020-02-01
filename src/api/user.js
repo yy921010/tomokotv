@@ -42,3 +42,13 @@ export function getUserInfo (username) {
     }
   })
 }
+
+export function getProfiles (masterUserId) {
+  return HttpClient({
+    url: '/profile',
+    method: 'get',
+    params: {
+      masterUserId
+    }
+  })
+}

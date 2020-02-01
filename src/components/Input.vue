@@ -9,6 +9,7 @@
       :value="value"
       @input="handleInput"
       @click="handleClick"
+      @blur="handleBlur"
       :class="[isError ? 'is-error' : '', type ? 'c-input__' + type : '']"
       autocomplete
     />
@@ -79,6 +80,9 @@ export default {
     },
     handleClick (event) {
       this.$emit('click', event)
+    },
+    handleBlur (event) {
+      this.$emit('blur', event)
     }
   }
 }

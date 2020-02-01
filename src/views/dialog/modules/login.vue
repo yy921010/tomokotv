@@ -43,7 +43,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import Login from '../../mixin/Login'
+import Login from '../../../mixin/Login'
 export default {
   name: 'login',
   mixins: [Login],

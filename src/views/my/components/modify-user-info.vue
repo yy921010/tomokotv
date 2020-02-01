@@ -1,6 +1,6 @@
 <template>
-  <div class="tmk-modify-user-info" v-if="tabId === 'modify-user-info'">
-    <div class="avatar-content">
+  <div class="u-modify-info">
+    <div class="u-modify-info__avatar">
       <t-avatar
         :size="130"
         mask-icon="edit"
@@ -8,33 +8,36 @@
         @click="showReadyAvatars"
       ></t-avatar>
     </div>
-    <div class="avatar-ready-list" v-if="isShowAvatars">
+    <div class="u-modify-info__avatar-list" v-if="isShowAvatars">
       <avatarList :avatars="avatarList" @onAvatars="changeAvatar"/>
     </div>
-    <div class="form-content">
-      <form action="">
-        <div class="form-item">
-          <span class="form-item__label">{{ $t("user.username") }}</span>
+    <div class="u-modify-info__form">
+      <form>
+        <div class="u-modify-info__form--item">
+          <span class="label">{{ $t("user.username") }}</span>
           <t-input
-            class="form-item__value"
+            class="input"
             v-model="nickName"
             type="center"
           ></t-input>
         </div>
-        <div class="form-item">
-          <span class="form-item__label">{{ $t("user.ageLevel") }}</span>
+        <div class="u-modify-info__form--item">
+          <span class="label">{{ $t("user.ageLevel") }}</span>
           <t-select
-            class="form-item__value"
+            class="input"
             :options="ageLevels"
             type="center"
             v-model="ageLevel"
           ></t-select>
         </div>
-        <div class="form-item form-button" v-if="!equalInputAndMeta()">
-          <t-button @click="cancel">{{ $t("user.undo") }}</t-button>
-          <t-button @click="confirm" type="primary">{{
-            $t("user.confirm")
-          }}</t-button>
+        <div class="u-modify-info__form--button u-modify-info__form--item" v-if="!equalInputAndMeta()">
+          <span class="label"></span>
+          <div class="input">
+            <t-button @click="cancel">{{ $t("user.undo") }}</t-button>
+            <t-button @click="confirm" type="primary">{{
+              $t("user.confirm")
+              }}</t-button>
+          </div>
         </div>
       </form>
     </div>
@@ -53,7 +56,7 @@ export default {
     return {
       tabId: null,
       nickName: '',
-      ageLevel: '',
+      ageLevel: 0,
       avatarUrl: '',
       isShowButtonGroup: false,
       avatarList: [],
@@ -114,9 +117,9 @@ export default {
 </script>
 
 <style lang="scss">
-@include b(modify-user-info) {
+@include u(modify-info) {
   width: unit(766);
-  .avatar-content {
+  @include e(avatar){
     height: unit(130);
     width: unit(130);
     overflow: hidden;
@@ -125,28 +128,30 @@ export default {
     margin: 0 auto;
     cursor: pointer;
   }
-  .avatar-ready-list{
+  @include e(avatar-list){
     margin-top: unit(80);
   }
-  .form-content {
+  @include e(form){
     margin-top: unit(80);
     display: flex;
     justify-content: center;
-    .form-item {
+    @include m(item){
       display: flex;
       margin-bottom: unit(50);
-      .form-item__label {
+      .label{
         @include text(29, $C35);
         margin-right: unit(20);
         width: unit(80);
         line-height: unit(46);
       }
-      .form-item__value {
+      .input{
         width: unit(460);
       }
     }
-    .form-button {
+    @include m(button){
       display: flex;
+      margin-bottom: unit(50);
+      margin-top: unit(60);
       justify-content: center;
     }
   }
