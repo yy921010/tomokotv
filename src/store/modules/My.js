@@ -1,3 +1,4 @@
+import { getProfiles } from '@api/user'
 const state = {
   menus: [
     { firstMenu: 'menu.contentManager',
@@ -78,7 +79,8 @@ const state = {
     }, {
       text: '18+',
       value: 18
-    }]
+    }],
+  profiles: []
 }
 
 const getters = {
@@ -91,8 +93,23 @@ const getters = {
   }
 }
 
+const mutations = {
+  SET_PROFILES (state, data) {
+    state.profiles = data
+  }
+}
+
+const actions = {
+  async getProfiles ({ commit, rootState }) {
+    const profiles = await getProfiles(rootState.Login.userInfo.userId)
+    commit('SET_PROFILES', profiles)
+  }
+}
+
 export default {
   namespaced: true,
   state,
-  getters
+  actions,
+  getters,
+  mutations
 }

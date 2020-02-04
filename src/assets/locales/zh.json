@@ -11,6 +11,9 @@
     "reminder": "自动登录",
     "forget": "忘记密码？"
   },
+  "confirmDialog": {
+    "title": "确认"
+  },
   "user": {
     "modifyTab": "修改信息",
     "passwordTab": "修改密码",
@@ -33,7 +36,10 @@
     "errorWeakPass": "密码强度较弱"
   },
   "subProfile": {
-    "addBtn": "添加子账号"
+    "addBtn": "添加子账号",
+    "editInfo": "编辑信息",
+    "delProfile": "删除账号",
+    "agelevel": "年龄级别"
   },
   "menu": {
     "channelManager": "我的频道",
@@ -64,5 +70,10 @@
     "thu": "周四",
     "fri": "周五",
     "sat": "周六"
+  },
+  "footer":{
+    "logoTitle":"Tomokotv",
+    "description":"免责声明：本网站所有内容都是靠程序在互联网上自动搜集而来，仅供测试和学习交流。若侵犯了您的权益，请发邮件通知站长，收到邮件后24小时内删除。",
+    "moreLink":"更多链接"
   }
 }

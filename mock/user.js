@@ -5,7 +5,8 @@ const userInfo = Mock.mock({
   username: '@email',
   avatarUrl: Random.image('35x35'),
   'ageLevel|1': [0, 6, 12, 15, 18],
-  userType: 1
+  userType: 1,
+  userId: 2
 })
 
 export default [
@@ -110,6 +111,16 @@ export default [
       return {
         code: 0,
         data: {}
+      }
+    }
+  },
+  {
+    url: '/profile',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 0,
+        data: [userInfo, userInfo, userInfo, userInfo, userInfo, userInfo]
       }
     }
   }

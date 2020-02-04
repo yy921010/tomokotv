@@ -1,6 +1,6 @@
 const state = {
   visibleLogin: false,
-  dialogTitle: ''
+  title: ''
 }
 const getters = {
   normalVisible: state => state.visibleLogin
@@ -9,7 +9,7 @@ const getters = {
 const mutations = {
   login (state, { title, isOpen }) {
     state.visibleLogin = isOpen
-    state.dialogTitle = title
+    state.title = title
   }
 }
 

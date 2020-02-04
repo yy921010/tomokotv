@@ -20,7 +20,7 @@ const MY_MODULE = [
           isNeedLogin
         },
         component: () =>
-          import('../../views/my/user')
+          import('@/views/my/user')
       },
       {
         path: '/sub-profile',
@@ -31,7 +31,7 @@ const MY_MODULE = [
           isNeedLogin
         },
         component: () =>
-          import('../../views/my/sub-profile')
+          import('@/views/my/profile')
       }
     ]
   }

@@ -18,7 +18,7 @@ import headerWrap from './views/header/header'
 import footerWrap from './views/footer/footer'
 import normalDialog from './views/dialog'
 export default {
-  name: 'tomokotv',
+  name: 'app',
   components: {
     headerWrap,
     footerWrap,

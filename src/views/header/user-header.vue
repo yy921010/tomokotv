@@ -100,7 +100,7 @@ export default {
     .user-name {
       @include text(29, $C35);
       margin-left: unit(10);
-      max-width: unit(100);
+      width: unit(100);
       @include text-overflow;
       &:hover {
         @include text(29, $C31);

@@ -34,13 +34,14 @@ const mutations = {
     session.put('username', username, true)
   },
 
-  SAVE_USER_INFO (state, { nickName, username, avatarUrl, ageLevel, userType }) {
+  SAVE_USER_INFO (state, { nickName, username, avatarUrl, ageLevel, userType, userId }) {
     state.userInfo = {
       nickName,
       username,
       avatarUrl,
       ageLevel,
-      userType
+      userType,
+      userId
     }
   }
 
