@@ -1,16 +1,23 @@
 <template>
   <div class="tmk-dialog" v-if="normalVisible">
-    <LoginComponent />
+    <LoginComponent v-if="visibleLogin"/>
+    <ConfirmComponent v-if="visibleConfirm"/>
   </div>
 </template>
 <script>
 import LoginComponent from './modules/login'
-import { mapGetters } from 'vuex'
+import ConfirmComponent from './modules/confirm'
+import { mapGetters, mapState } from 'vuex'
 export default {
   components: {
-    LoginComponent
+    LoginComponent,
+    ConfirmComponent
   },
   computed: {
+    ...mapState('Dialog', {
+      visibleLogin: s => s.visibleLogin,
+      visibleConfirm: s => s.visibleConfirm
+    }),
     ...mapGetters('Dialog', {
       normalVisible: 'normalVisible'
     })
@@ -25,7 +32,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: $C09;
+  background-color: $C10;
   display: flex;
   justify-content: center;
   align-items: center;

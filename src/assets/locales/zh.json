@@ -75,5 +75,11 @@
     "logoTitle":"Tomokotv",
     "description":"免责声明：本网站所有内容都是靠程序在互联网上自动搜集而来，仅供测试和学习交流。若侵犯了您的权益，请发邮件通知站长，收到邮件后24小时内删除。",
     "moreLink":"更多链接"
+  },
+  "confirm": {
+    "title": "提示",
+    "cancel": "取消",
+    "yes": "好",
+    "delContent": "是否删除 {user} ?"
   }
 }

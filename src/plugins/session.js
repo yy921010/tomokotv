@@ -7,7 +7,10 @@ const SESSION_STORAGE = window.sessionStorage
 let json = {}
 let tobeLocalSavedJson = {}
 let tobeSessionSavedJson = {}
-
+/**
+ * todo：后期着手发不到npm
+ * @type {{saveStorage(): void, get(*=): (null|*), clear(*=): void, saveToStorage(*=, *): void, put(*=, *=, *=): (undefined), remove(*=): void}}
+ */
 const SessionManger = {
   put (key, value, isPersist = false) {
     if (!value) {

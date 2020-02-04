@@ -4,6 +4,8 @@ import session from './session'
 import lodash from './lodash'
 import components from '@components'
 import vuescroll from 'vuescroll'
+import VueLogger from 'vuejs-logger'
+const isProduction = process.env.VUE_APP_SERVICE_MODE === 'prod'
 
 Vue
   .use(dayjs)
@@ -23,4 +25,13 @@ Vue
         keepShow: true
       }
     }
+  })
+  .use(VueLogger, {
+    isEnabled: true,
+    logLevel: isProduction ? 'error' : 'debug',
+    stringifyArguments: false,
+    showLogLevel: true,
+    showMethodName: true,
+    separator: '-',
+    showConsoleColors: true
   })

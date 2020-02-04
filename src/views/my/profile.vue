@@ -10,7 +10,7 @@
         </div>
         <div class="info">
           <div class="title">
-            {{profile.username}}}
+            {{profile.username}}
           </div>
           <div class="subtitle">
             <span>{{$t('subProfile.agelevel')}} :</span>
@@ -19,7 +19,7 @@
         </div>
         <div class="buttons">
           <t-button size="small">{{ $t("subProfile.editInfo") }}</t-button>
-          <t-button type="primary" size="small">{{
+          <t-button type="primary" size="small" @click="delProfile(profile)">{{
             $t("subProfile.delProfile")
           }}</t-button>
         </div>
@@ -53,8 +53,21 @@ export default {
     ...mapMutations('My', {
       setProfiles: 'SET_PROFILES'
     }),
+    ...mapActions('Dialog', {
+      confirm: 'confirm'
+    }),
     addProfile () {
 
+    },
+    delProfile ({ username }) {
+      this.confirm({
+        content: this.$t('confirm.delContent', {
+          user: username
+        }),
+        yesCallback: () => {
+          console.log(23123)
+        }
+      })
     }
   },
   destroyed () {

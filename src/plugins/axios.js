@@ -23,7 +23,6 @@ const service = axios.create({
 
 service.interceptors.request.use(
   config => {
-    console.log(store.state.Login.accessToken)
     if (store.state.Login.accessToken) {
       config.headers['Authorization'] = 'Bearer ' + store.state.Login.accessToken
     }
