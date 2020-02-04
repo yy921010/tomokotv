@@ -34,6 +34,7 @@ router.beforeEach((to, from, next) => {
   const { meta } = to
   if (meta.type && meta.type === 'sync') {
     Store.dispatch('Header/setNavTitle', meta.title)
+    document.title = `${meta.title} | tomokotv`
   }
   let accessToken = Store.state.Login.accessToken
   if (meta.isNeedLogin) {

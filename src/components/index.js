@@ -1,11 +1,12 @@
 import 'remixicon/fonts/remixicon.css'
 
-import Icon from './Icon'
-import Button from './Button'
-import Select from './Select'
-import Input from './Input'
-import Checkbox from './Checkbox'
-import Avatar from './Avatar'
+import Icon from './icon/Icon'
+import Button from './button/Button'
+import Select from './select/Select'
+import Input from './input/Input'
+import Checkbox from './checkbox/Checkbox'
+import Avatar from './avatar/Avatar'
+import AvatarSelected from './avatar-select'
 
 const Components = [
   Icon,
@@ -13,11 +14,13 @@ const Components = [
   Select,
   Input,
   Checkbox,
-  Avatar
+  Avatar,
+  AvatarSelected
 ]
 
 export default {
   name: 'tmk',
+  ...Components,
   install (Vue, options = {}) {
     Components.forEach(c => {
       Vue.component(c.name, c)

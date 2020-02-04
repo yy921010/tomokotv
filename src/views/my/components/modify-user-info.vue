@@ -1,25 +1,16 @@
 <template>
   <div class="u-modify-info">
-    <div class="u-modify-info__avatar">
-      <t-avatar
-        :size="130"
-        mask-icon="edit"
-        :src="avatarUrl"
-        @click="showReadyAvatars"
-      ></t-avatar>
-    </div>
-    <div class="u-modify-info__avatar-list" v-if="isShowAvatars">
-      <avatarList :avatars="avatarList" @onAvatars="changeAvatar"/>
-    </div>
+    <avatar-selected
+      :showSize="6"
+      :avatars="avatarList"
+      @click="changeAvatar"
+      :main-avatar="avatarUrl"
+    ></avatar-selected>
     <div class="u-modify-info__form">
       <form>
         <div class="u-modify-info__form--item">
           <span class="label">{{ $t("user.username") }}</span>
-          <t-input
-            class="input"
-            v-model="nickName"
-            type="center"
-          ></t-input>
+          <t-input class="input" v-model="nickName" type="center"></t-input>
         </div>
         <div class="u-modify-info__form--item">
           <span class="label">{{ $t("user.ageLevel") }}</span>
@@ -30,13 +21,16 @@
             v-model="ageLevel"
           ></t-select>
         </div>
-        <div class="u-modify-info__form--button u-modify-info__form--item" v-if="!equalInputAndMeta()">
+        <div
+          class="u-modify-info__form--button u-modify-info__form--item"
+          v-if="!equalInputAndMeta()"
+        >
           <span class="label"></span>
           <div class="input">
             <t-button @click="cancel">{{ $t("user.undo") }}</t-button>
             <t-button @click="confirm" type="primary">{{
               $t("user.confirm")
-              }}</t-button>
+            }}</t-button>
           </div>
         </div>
       </form>
@@ -46,12 +40,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import avatarList from './avatar-list'
 export default {
   name: 'modify-user-info',
-  components: {
-    avatarList
-  },
   data () {
     return {
       tabId: null,
@@ -70,7 +60,6 @@ export default {
     ...mapState('My', {
       ageLevels: s => s.ageLevels
     })
-
   },
   watch: {
     nickName () {
@@ -95,9 +84,11 @@ export default {
       this.ageLevel = this.user.ageLevel
     },
     equalInputAndMeta () {
-      return this.avatarUrl === this.user.avatarUrl &&
+      return (
+        this.avatarUrl === this.user.avatarUrl &&
         this.nickName === this.user.nickName &&
         this.ageLevel === this.user.ageLevel
+      )
     },
     changeAvatar (url) {
       this.avatarUrl = url
@@ -109,9 +100,7 @@ export default {
     showReadyAvatars () {
       this.isShowAvatars = !this.isShowAvatars
     },
-    confirm () {
-
-    }
+    confirm () {}
   }
 }
 </script>
@@ -119,36 +108,24 @@ export default {
 <style lang="scss">
 @include u(modify-info) {
   width: unit(766);
-  @include e(avatar){
-    height: unit(130);
-    width: unit(130);
-    overflow: hidden;
-    border-radius: 50%;
-    position: relative;
-    margin: 0 auto;
-    cursor: pointer;
-  }
-  @include e(avatar-list){
-    margin-top: unit(80);
-  }
-  @include e(form){
+  @include e(form) {
     margin-top: unit(80);
     display: flex;
     justify-content: center;
-    @include m(item){
+    @include m(item) {
       display: flex;
       margin-bottom: unit(50);
-      .label{
+      .label {
         @include text(29, $C35);
         margin-right: unit(20);
         width: unit(80);
         line-height: unit(46);
       }
-      .input{
+      .input {
         width: unit(460);
       }
     }
-    @include m(button){
+    @include m(button) {
       display: flex;
       margin-bottom: unit(50);
       margin-top: unit(60);

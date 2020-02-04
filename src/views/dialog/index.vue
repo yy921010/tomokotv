@@ -1,8 +1,8 @@
 <template>
-  <div class="tmk-dialog" v-if="normalVisible">
+  <section class="tmk-dialog" v-if="normalVisible">
     <LoginComponent v-if="visibleLogin"/>
     <ConfirmComponent v-if="visibleConfirm"/>
-  </div>
+  </section>
 </template>
 <script>
 import LoginComponent from './modules/login'
