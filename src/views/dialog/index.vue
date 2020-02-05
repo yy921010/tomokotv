@@ -2,21 +2,25 @@
   <section class="tmk-dialog" v-if="normalVisible">
     <LoginComponent v-if="visibleLogin"/>
     <ConfirmComponent v-if="visibleConfirm"/>
+    <ProfileComponent v-if="visibleProfile"/>
   </section>
 </template>
 <script>
 import LoginComponent from './modules/login'
 import ConfirmComponent from './modules/confirm'
+import ProfileComponent from './modules/profile'
 import { mapGetters, mapState } from 'vuex'
 export default {
   components: {
     LoginComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ProfileComponent
   },
   computed: {
     ...mapState('Dialog', {
       visibleLogin: s => s.visibleLogin,
-      visibleConfirm: s => s.visibleConfirm
+      visibleConfirm: s => s.visibleConfirm,
+      visibleProfile: s => s.visibleProfile
     }),
     ...mapGetters('Dialog', {
       normalVisible: 'normalVisible'

@@ -6,7 +6,7 @@
     <div class="tmk-profile__list">
       <div class="tmk-profile__list--item" v-for="(profile,index) in profiles" :key="index">
         <div class="avatar">
-          <t-avatar :src="profile.avatarUrl" :size="80"/>
+          <t-avatar :avatar-url="profile.avatarUrl" :size="80"/>
         </div>
         <div class="info">
           <div class="title">
@@ -54,10 +54,16 @@ export default {
       setProfiles: 'SET_PROFILES'
     }),
     ...mapActions('Dialog', {
-      confirm: 'confirm'
+      confirm: 'confirm',
+      profile: 'profile'
     }),
     addProfile () {
+      this.profile({
+        dialogTitle: this.$t('subProfile.dialogTitle'),
+        yesCallback: () => {
 
+        }
+      })
     },
     delProfile ({ username }) {
       this.confirm({

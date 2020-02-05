@@ -5,7 +5,7 @@
         class="avatar"
         :size="76"
         mask-icon="vip-crown"
-        :src="userInfo.avatarUrl"
+        :avatar-url="userInfo.avatarUrl"
         @click="handleChosen('MyUser')"
       ></t-avatar>
       <span class="username" :title="userInfo.username">{{userInfo.username}}</span>

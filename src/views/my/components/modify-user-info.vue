@@ -2,7 +2,7 @@
   <div class="u-modify-info">
     <avatar-selected
       :showSize="6"
-      :avatars="avatarList"
+      :avatars="getCustomConfig('AVATAR_LIST')"
       @click="changeAvatar"
       :main-avatar="avatarUrl"
     ></avatar-selected>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'modify-user-info',
   data () {
@@ -59,6 +59,9 @@ export default {
     }),
     ...mapState('My', {
       ageLevels: s => s.ageLevels
+    }),
+    ...mapGetters('CustomConfig', {
+      getCustomConfig: 'getCustomConfig'
     })
   },
   watch: {
@@ -72,12 +75,8 @@ export default {
   async mounted () {
     this.tabId = 'modify-user-info'
     this.setInitUserInfo()
-    this.avatarList = await this.getCustomConfig('AVATAR_LIST')
   },
   methods: {
-    ...mapActions('CustomConfig', {
-      getCustomConfig: 'getCustomConfig'
-    }),
     setInitUserInfo () {
       this.avatarUrl = this.user.avatarUrl
       this.nickName = this.user.nickName
@@ -96,9 +95,6 @@ export default {
     },
     cancel () {
       this.setInitUserInfo()
-    },
-    showReadyAvatars () {
-      this.isShowAvatars = !this.isShowAvatars
     },
     confirm () {}
   }

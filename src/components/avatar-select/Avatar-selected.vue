@@ -4,7 +4,7 @@
       <t-avatar
         :size="130"
         mask-icon="edit"
-        :src="mainAvatar"
+        :avatarUrl="mainAvatar"
         @click="showList"
       />
     </div>
@@ -26,7 +26,7 @@
           >
             <t-avatar
               :size="75"
-              :src="avatar"
+              :avatarUrl="avatar"
               @click="handleClick(avatar, index)"
               :is-selected="currentIndex === index"
             />
@@ -47,7 +47,7 @@ export default {
   props: {
     avatars: {
       type: Array,
-      default: () => []
+      default: () => ([])
     },
     showSize: {
       type: Number,

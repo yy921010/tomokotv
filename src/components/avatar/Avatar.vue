@@ -7,7 +7,7 @@
   >
     <img
       class="c-avatar__image"
-      :src="src"
+      :src="avatarUrl"
       alt="c-avatar"
       @error="setErrorImg"
     />
@@ -29,7 +29,7 @@
 export default {
   name: 'TAvatar',
   props: {
-    src: String,
+    avatarUrl: String,
     size: {
       type: Number,
       default: 35

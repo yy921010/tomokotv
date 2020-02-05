@@ -6,36 +6,43 @@ const state = {
 const mutations = {
   SET_CONFIGS (s, configs) {
     if (configs.length > 0) {
-      s.customConfig = configs.map(item => ({ [item.key]: item.value }))
-    }
-  },
-  SET_CONFIG_SINGLE (state, curConfig) {
-    if (state.customConfig[curConfig.key]) {
-      state.customConfig[curConfig.key] = curConfig.value
+      let _object = {}
+      configs.forEach(item => {
+        _object[item.key] = item.value
+      })
+      s.customConfig = _object
     }
   }
 }
-const actions = {
-  async getCustomConfig ({ commit, state }, configKey) {
-    if (configKey) {
-      if (state.customConfig[configKey]) {
-        return state.customConfig[configKey]
+
+const getters = {
+  getCustomConfig (state) {
+    return function (key) {
+      let _obj = {}
+      if (key) {
+        try {
+          _obj = JSON.parse(state.customConfig[key])
+        } catch (e) {
+          console.error('json parse is error')
+          _obj = {}
+        }
       }
-      const result = await getCustomConfig({
-        key: configKey
-      })
-      commit('SET_CONFIG_SINGLE', result[0])
-      return result[0].value
-    } else {
-      const result = await getCustomConfig({})
-      commit('SET_CONFIGS', result)
+      return _obj
     }
+  }
+
+}
+const actions = {
+  async customConfig ({ commit }) {
+    const result = await getCustomConfig({})
+    commit('SET_CONFIGS', result)
   }
 }
 
 export default {
   namespaced: true,
   mutations,
+  getters,
   state,
   actions
 }

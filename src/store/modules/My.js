@@ -79,7 +79,8 @@ const state = {
     }, {
       text: '18+',
       value: 18
-    }],
+    }
+  ],
   profiles: []
 }
 

@@ -56,51 +56,51 @@ export default [
     }
   },
   {
-    // eslint-disable-next-line no-useless-escape
-    url: '/customConfig\?key\=AVATAR_LIST',
-    type: 'get',
-    response: _ => {
-      return {
-        code: 0,
-        data: [
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75'),
-          Random.image('75x75')]
-      }
-    }
-  },
-  {
     url: '/customConfig',
     type: 'get',
     response: _ => {
       return {
         code: 0,
-        data: [{
-          key: 'AVATAR_LIST',
-          value: [
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75'),
-            Random.image('75x75')
-          ]
-        }]
+        data: [
+          {
+            key: 'AVATAR_LIST',
+            value: JSON.stringify([
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75'),
+              Random.image('75x75')
+            ])
+          },
+          {
+            key: 'AGE_LEVEL',
+            value: JSON.stringify(
+              [{
+                text: '0+',
+                value: 0
+              }, {
+                text: '6+',
+                value: 6
+              },
+              {
+                text: '12+',
+                value: 12
+              }, {
+                text: '15+',
+                value: 15
+              }, {
+                text: '18+',
+                value: 18
+              }])
+          }
+        ]
       }
     }
   },

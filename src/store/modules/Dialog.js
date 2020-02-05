@@ -1,14 +1,18 @@
-
 let confirmCallback = () => {}
 let cancelCallback = () => {}
+
 const state = {
   visibleLogin: false,
   title: '',
   visibleConfirm: false,
-  contentConfirm: ''
+  contentConfirm: '',
+  visibleProfile: false,
+  profile: {},
+  profileDialogTitle: ''
 }
 const getters = {
-  normalVisible: state => state.visibleLogin || state.visibleConfirm
+  normalVisible: state =>
+    state.visibleLogin || state.visibleConfirm || state.visibleProfile
 }
 
 const mutations = {
@@ -22,13 +26,30 @@ const mutations = {
   },
   confirmCallback (state) {
     state.visibleConfirm = false
+    state.visibleProfile = false
     state.contentConfirm = ''
-    confirmCallback()
+    confirmCallback(state.profile)
+    confirmCallback = () => {}
   },
   cancelCallback (state) {
     state.visibleConfirm = false
+    state.visibleProfile = false
     state.contentConfirm = ''
+    state.profile = {}
     cancelCallback()
+    cancelCallback = () => {}
+  },
+  setProfile (state, { avatarUrl, nickname, password, ageLevel }) {
+    state.profile.avatarUrl = avatarUrl
+    state.profile.nickname = nickname
+    state.profile.password = password
+    state.profile.ageLevel = ageLevel
+  },
+  setProfileOpen (state) {
+    state.visibleProfile = true
+  },
+  setProfileDialog (state, title) {
+    state.profileDialogTitle = title
   }
 }
 
@@ -61,7 +82,32 @@ const actions = {
       cancelCallback = abortCallback
     }
   },
-  closeAll () {}
+  profile (
+    { commit },
+    { avatarUrl,
+      nickname,
+      password,
+      ageLevel,
+      yesCallback,
+      abortCallback,
+      dialogTitle
+    }
+  ) {
+    commit('setProfileDialog', dialogTitle)
+    commit('setProfileOpen')
+    commit('setProfile', {
+      avatarUrl,
+      nickname,
+      password,
+      ageLevel
+    })
+    if (yesCallback) {
+      confirmCallback = yesCallback
+    }
+    if (abortCallback) {
+      cancelCallback = abortCallback
+    }
+  }
 }
 
 export default {

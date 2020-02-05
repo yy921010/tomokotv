@@ -39,7 +39,9 @@
     "addBtn": "添加子账号",
     "editInfo": "编辑信息",
     "delProfile": "删除账号",
-    "agelevel": "年龄级别"
+    "agelevel": "年龄级别",
+    "dialogTitle": "添加用户",
+    "dialogEditTitle": "编辑用户"
   },
   "menu": {
     "channelManager": "我的频道",
