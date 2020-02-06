@@ -1,8 +1,8 @@
 <template>
   <section class="tmk-dialog" v-if="normalVisible">
-    <LoginComponent v-if="visibleLogin"/>
-    <ConfirmComponent v-if="visibleConfirm"/>
-    <ProfileComponent v-if="visibleProfile"/>
+    <LoginComponent v-if="loginShow"/>
+    <ConfirmComponent v-if="confirmShow"/>
+    <ProfileComponent v-if="profileShow"/>
   </section>
 </template>
 <script>
@@ -18,9 +18,9 @@ export default {
   },
   computed: {
     ...mapState('Dialog', {
-      visibleLogin: s => s.visibleLogin,
-      visibleConfirm: s => s.visibleConfirm,
-      visibleProfile: s => s.visibleProfile
+      loginShow: s => s.loginShow,
+      confirmShow: s => s.confirmShow,
+      profileShow: s => s.profileShow
     }),
     ...mapGetters('Dialog', {
       normalVisible: 'normalVisible'

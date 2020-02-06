@@ -5,7 +5,7 @@
         {{ title }}
       </div>
       <div class="tmk-dialog-profile__top--close">
-        <t-icon name="close" :size="32" @click="close"></t-icon>
+        <t-icon name="close" :size="32" @click="cancel('profile')"></t-icon>
       </div>
     </div>
     <div class="tmk-dialog-profile__content">
@@ -14,7 +14,7 @@
         :showSize="5"
         :avatars="getCustomConfig('AVATAR_LIST')"
         @click="changeAvatar"
-        :main-avatar="profile.avatarUrl"
+        :main-avatar="content.avatarUrl"
       ></avatar-selected>
       </div>
       <div class="tmk-dialog-profile__form">
@@ -32,16 +32,22 @@
               v-model="ageLevel"
             ></t-select>
           </div>
-
           <div class="tmk-dialog-profile__form--item">
+            <span class="label">{{ $t("user.password") }}</span>
+            <t-input class="input" v-model="password" type="center"></t-input>
+          </div>
+          <div class="tmk-dialog-profile__form--item">
+            <span class="label">{{ $t("user.reNewPassword") }}</span>
+            <t-input class="input" v-model="reNewPassword" type="center"></t-input>
+          </div>
+          <div class="tmk-dialog-profile__form--item tmk-dialog-profile__form--button">
             <span class="label"></span>
-            <t-button>dsadsa</t-button>
-            <t-button>dsds</t-button>
+            <t-button @click="cancel('profile')">{{$t('confirm.cancel')}}</t-button>
+            <t-button type="primary" @click="confirm('profile')">{{$t('confirm.yes')}}</t-button>
           </div>
         </form>
       </div>
     </div>
-    <div class="tmk-dialog-profile__bottom"></div>
   </div>
 </template>
 
@@ -49,60 +55,53 @@
 import { mapGetters, mapMutations, mapState } from 'vuex'
 export default {
   name: 'profile',
+  data () {
+    return {
+      reNewPassword: ''
+    }
+  },
   computed: {
+    ...mapState('Dialog', {
+      title: s => s.dialogTitle,
+      content: s => s.content
+    }),
     ...mapGetters('CustomConfig', {
       getCustomConfig: 'getCustomConfig'
     }),
-    ...mapState('Dialog', {
-      profile: s => s.profile,
-      title: s => s.profileDialogTitle
-    }),
     username: {
       set (username) {
-        this.setProfile({
-          username
-        })
+        this.transitData({ username })
       },
       get () {
-        return this.profile.username
+        return this.content.username
       }
     },
-    nickname: {
-      set (nickname) {
-        this.setProfile({
-          nickname
-        })
+    password: {
+      set (password) {
+        this.transitData({ password })
       },
       get () {
-        return this.profile.nickname
+        return this.content.password
       }
     },
     ageLevel: {
       set (ageLevel) {
-        this.setProfile({
-          ageLevel
-        })
+        this.transitData({ ageLevel })
       },
       get () {
-        return this.profile.ageLevel
+        return this.content.ageLevel || 0
       }
     }
   },
   methods: {
     ...mapMutations('Dialog', {
-      confirmCallback: 'confirmCallback',
-      cancelCallback: 'cancelCallback',
-      setProfile: 'setProfile'
+      cancel: 'cancel',
+      confirm: 'confirm',
+      transitData: 'transitData'
     }),
     changeAvatar (avatarUrl) {
-      this.setProfile({
-        avatarUrl
-      })
-    },
-    close () {
-      this.cancelCallback()
-    },
-    confirm () {}
+      this.transitData({ avatarUrl })
+    }
   }
 }
 </script>
@@ -112,6 +111,7 @@ export default {
   width: unit(720);
   background-color: $C14;
   border-radius: unit(4);
+  padding-bottom: unit(35);
   display: flex;
   flex-direction: column;
   @include e(top) {
@@ -154,15 +154,10 @@ export default {
             width: unit(460);
           }
       }
+      @include m(button){
+        margin-top: unit(35);
+      }
     }
-  }
-  @include e(bottom) {
-    width: unit(460-60);
-    margin-top: unit(35);
-    margin-bottom: unit(35);
-    align-self: center;
-    display: flex;
-    justify-content: space-between;
   }
 }
 </style>

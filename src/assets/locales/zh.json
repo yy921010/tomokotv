@@ -22,6 +22,7 @@
     "userPin": "PIN 码",
     "newPassword": "新密码",
     "oldPassword": "旧密码",
+    "password": "密码",
     "reNewPassword": "确认新密码",
     "description": "重新设置您的密码，您的密码应具有以下作用：保护您的个人資訊；保护您的电子邮件；档案和其他内容；防止他人盗用您的账号",
     "descriptionTips": "密码必须包含8个字符，可以混合使用英文字母、数字和符号（仅限ASCLL标准字符）；您不能使用强度低的密码，例如「password123」，先前使用过密码，开头和结尾是空格的密码",

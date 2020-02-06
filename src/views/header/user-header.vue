@@ -61,11 +61,15 @@ export default {
   },
   methods: {
     ...mapActions('Dialog', {
-      openDialog: 'open'
+      openDialog: 'openDialog'
     }),
     openLoginDialog () {
       this.openDialog({
-        name: 'login'
+        name: 'login',
+        title: '登陆',
+        content: {},
+        confirm () {
+        }
       })
     },
     targetHandle (menuId) {

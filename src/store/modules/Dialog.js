@@ -1,111 +1,81 @@
-let confirmCallback = () => {}
-let cancelCallback = () => {}
+import isObject from 'lodash/isObject'
+let callConfirm = () => {}
+let callCancel = () => {}
 
+let cacheObject = {}
 const state = {
-  visibleLogin: false,
-  title: '',
-  visibleConfirm: false,
-  contentConfirm: '',
-  visibleProfile: false,
-  profile: {},
-  profileDialogTitle: ''
+  dialogTitle: '',
+  loginShow: false,
+  confirmShow: false,
+  profileShow: false,
+  content: null
 }
 const getters = {
   normalVisible: state =>
-    state.visibleLogin || state.visibleConfirm || state.visibleProfile
+    state.loginShow || state.confirmShow || state.profileShow
 }
 
 const mutations = {
-  login (state, { title, isOpen }) {
-    state.visibleLogin = isOpen
-    state.title = title
+
+  confirm (state, name) {
+    let visibleStr = `${name}Show`
+    state[visibleStr] = false
+    console.log(state.content)
+    callConfirm(state.content)
+    cacheObject = {}
+    callConfirm = () => {}
   },
-  confirm (state, { isOpen, opts }) {
-    state.visibleConfirm = isOpen
-    state.contentConfirm = opts.content
+
+  cancel (state, name) {
+    let visibleStr = `${name}Show`
+    state[visibleStr] = false
+    state.content = null
+    cacheObject = {}
+    callCancel()
+    callCancel = () => {}
   },
-  confirmCallback (state) {
-    state.visibleConfirm = false
-    state.visibleProfile = false
-    state.contentConfirm = ''
-    confirmCallback(state.profile)
-    confirmCallback = () => {}
+
+  setDialogTitle (state, title) {
+    state.dialogTitle = title
   },
-  cancelCallback (state) {
-    state.visibleConfirm = false
-    state.visibleProfile = false
-    state.contentConfirm = ''
-    state.profile = {}
-    cancelCallback()
-    cancelCallback = () => {}
+
+  openDialog (state, name) {
+    let visibleStr = `${name}Show`
+    state[visibleStr] = true
   },
-  setProfile (state, { avatarUrl, nickname, password, ageLevel }) {
-    state.profile.avatarUrl = avatarUrl
-    state.profile.nickname = nickname
-    state.profile.password = password
-    state.profile.ageLevel = ageLevel
-  },
-  setProfileOpen (state) {
-    state.visibleProfile = true
-  },
-  setProfileDialog (state, title) {
-    state.profileDialogTitle = title
+
+  transitData (state, content) {
+    if (isObject(content)) {
+      content = { ...cacheObject, ...content }
+      cacheObject = content
+    }
+    state.content = content
   }
 }
 
 const actions = {
-  open ({ commit }, { name, title, opts }) {
+  /**
+   * 统一处理的dialog 逻辑
+   * @param commit
+   * @param name
+   * @param content
+   * @param title
+   * @param yesCallback
+   * @param abortCallback
+   */
+  openDialog ({ commit }, { name, title, content, confirm, cancel }) {
     if (name) {
-      const isOpen = true
-      const openDialogStr = `${name}`
-      commit(openDialogStr, { title, isOpen, opts })
-    }
-  },
-  async close ({ commit }, { name, closeType }) {
-    if (name) {
-      const isOpen = false
-      const openDialogStr = `${name}`
-      commit(openDialogStr, { isOpen })
-    }
-  },
-  confirm ({ commit }, { content, yesCallback, abortCallback }) {
-    commit('confirm', {
-      isOpen: true,
-      opts: {
-        content
+      commit('openDialog', name)
+      commit('transitData', content)
+      commit('setDialogTitle', title)
+      if (confirm) {
+        callConfirm = confirm
       }
-    })
-    if (yesCallback) {
-      confirmCallback = yesCallback
-    }
-    if (abortCallback) {
-      cancelCallback = abortCallback
-    }
-  },
-  profile (
-    { commit },
-    { avatarUrl,
-      nickname,
-      password,
-      ageLevel,
-      yesCallback,
-      abortCallback,
-      dialogTitle
-    }
-  ) {
-    commit('setProfileDialog', dialogTitle)
-    commit('setProfileOpen')
-    commit('setProfile', {
-      avatarUrl,
-      nickname,
-      password,
-      ageLevel
-    })
-    if (yesCallback) {
-      confirmCallback = yesCallback
-    }
-    if (abortCallback) {
-      cancelCallback = abortCallback
+      if (cancel) {
+        callCancel = cancel
+      }
+    } else {
+      console.error('[state] [dialog] name is empty')
     }
   }
 }

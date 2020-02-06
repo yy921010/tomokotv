@@ -2,14 +2,14 @@
   <div class="tmk-confirm">
       <div class="tmk-confirm__top">
         <div class="tmk-confirm__top--title">{{$t('confirm.title')}}</div>
-        <div class="tmk-confirm__top--close" @click="cancelCallback">
+        <div class="tmk-confirm__top--close" @click="cancel('confirm')">
           <t-icon name="close" :size="32"></t-icon>
         </div>
       </div>
       <div class="tmk-confirm__content">{{contentConfirm}}</div>
       <div class="tmk-confirm__bottom">
-        <t-button size="small" @click="cancelCallback">{{$t('confirm.cancel')}}</t-button>
-        <t-button type="primary" size="small" @click="confirmCallback">{{$t('confirm.yes')}}</t-button>
+        <t-button size="small" @click="cancel('confirm')">{{$t('confirm.cancel')}}</t-button>
+        <t-button type="primary" size="small" @click="confirm('confirm')">{{$t('confirm.yes')}}</t-button>
       </div>
   </div>
 </template>
@@ -20,14 +20,14 @@ export default {
   name: 'confirm',
   computed: {
     ...mapState('Dialog', {
-      title: s => s.title,
-      contentConfirm: s => s.contentConfirm
+      title: s => s.dialogTitle,
+      contentConfirm: s => s.content
     })
   },
   methods: {
     ...mapMutations('Dialog', {
-      confirmCallback: 'confirmCallback',
-      cancelCallback: 'cancelCallback'
+      cancel: 'cancel',
+      confirm: 'confirm'
     })
   }
 }

@@ -1,8 +1,8 @@
 <template>
   <div class="tmk-login-dialog">
     <div class="tmk-login-dialog__header">
-      <div class="title">{{ $t("loginDialog.title") }}</div>
-      <div class="close" @click="closeDialog">
+      <div class="title">{{ dialogTitle }}</div>
+      <div class="close" @click="cancel('login')">
         <t-icon name="close" :size="32"></t-icon>
       </div>
     </div>
@@ -34,7 +34,7 @@
       </div>
     </div>
     <div class="tmk-login-dialog__button">
-      <t-button type="primary" @click="beginLogin">{{
+      <t-button type="primary" @click="confirm('login')">{{
         $t("loginDialog.button")
       }}</t-button>
     </div>
@@ -42,11 +42,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import Login from '../../../mixin/Login'
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'login',
-  mixins: [Login],
   data () {
     return {
       loginId: '',
@@ -55,29 +53,16 @@ export default {
       isError: false
     }
   },
+  computed: {
+    ...mapState('Dialog', {
+      dialogTitle: s => s.dialogTitle
+    })
+  },
   methods: {
-    ...mapActions('Dialog', {
-      close: 'close'
-    }),
-    ...mapActions('Login', {
-      login: 'getToken',
-      getUserInfo: 'getUserInfo'
-    }),
-    async beginLogin () {
-      await this.login({
-        username: this.loginId,
-        password: this.password,
-        isAutoLogin: this.isAutoLogin
-      })
-      await this.getUserInfo()
-      this.timeToRefresh()
-      this.closeDialog()
-    },
-    closeDialog () {
-      this.close({
-        name: 'login'
-      })
-    }
+    ...mapMutations('Dialog', {
+      cancel: 'cancel',
+      confirm: 'confirm'
+    })
   }
 }
 </script>

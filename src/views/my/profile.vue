@@ -18,7 +18,7 @@
           </div>
         </div>
         <div class="buttons">
-          <t-button size="small">{{ $t("subProfile.editInfo") }}</t-button>
+          <t-button size="small" @click="editProfile(profile)">{{ $t("subProfile.editInfo") }}</t-button>
           <t-button type="primary" size="small" @click="delProfile(profile)">{{
             $t("subProfile.delProfile")
           }}</t-button>
@@ -54,24 +54,42 @@ export default {
       setProfiles: 'SET_PROFILES'
     }),
     ...mapActions('Dialog', {
-      confirm: 'confirm',
-      profile: 'profile'
+      openDialog: 'openDialog'
     }),
     addProfile () {
-      this.profile({
-        dialogTitle: this.$t('subProfile.dialogTitle'),
-        yesCallback: () => {
+      this.openDialog({
+        name: 'profile',
+        title: this.$t('subProfile.dialogTitle'),
+        content: {},
+        confirm: (profile) => {
+          console.log(profile)
+        }
+      })
+    },
+    editProfile ({ avatarUrl, username, password, ageLevel }) {
+      this.openDialog({
+        name: 'profile',
+        title: this.$t('subProfile.dialogTitle'),
+        content: {
+          avatarUrl,
+          username,
+          password,
+          ageLevel
+        },
+        confirm: () => {
 
         }
       })
     },
     delProfile ({ username }) {
-      this.confirm({
+      this.openDialog({
+        name: 'confirm',
+        title: this.$t('confirm.title'),
         content: this.$t('confirm.delContent', {
           user: username
         }),
-        yesCallback: () => {
-          console.log(23123)
+        confirm: () => {
+
         }
       })
     }

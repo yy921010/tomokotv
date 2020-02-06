@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   plugins: [
+    // todo 存在性能问题
     persistedState({
       storage: {
         getItem: key => sessionManager.get(key),

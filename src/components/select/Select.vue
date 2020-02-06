@@ -103,6 +103,8 @@ export default {
       border-radius: unit(3);
       padding-top: unit(10);
       box-shadow: map_get($mask, 5);
+      position: absolute;
+      z-index: 2;
       @include e(option) {
         height: unit(32);
         line-height: unit(32) !important;
@@ -151,6 +153,8 @@ export default {
       border-radius: unit(3);
       padding-top: unit(10);
       box-shadow: map_get($mask, 5);
+      position: absolute;
+      z-index: 2;
       @include e(option) {
         height: unit(46);
         line-height: unit(46) !important;
