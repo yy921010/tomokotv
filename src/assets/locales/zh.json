@@ -48,7 +48,8 @@
     "delProfile": "删除账号",
     "agelevel": "年龄级别",
     "dialogTitle": "添加用户",
-    "dialogEditTitle": "编辑用户"
+    "dialogEditTitle": "编辑用户",
+    "delSuccess": "删除成功"
   },
   "menu": {
     "channelManager": "我的频道",

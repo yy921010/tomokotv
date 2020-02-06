@@ -1,12 +1,13 @@
 import 'remixicon/fonts/remixicon.css'
 
-import Icon from './icon/Icon'
-import Button from './button/Button'
-import Select from './select/Select'
-import Input from './input/Input'
-import Checkbox from './checkbox/Checkbox'
-import Avatar from './avatar/Avatar'
+import Icon from './icon'
+import Button from './button'
+import Select from './select'
+import Input from './input'
+import Checkbox from './checkbox'
+import Avatar from './avatar'
 import AvatarSelected from './avatar-select'
+import SnackBar from './snack-bar'
 
 const Components = [
   Icon,
@@ -15,7 +16,8 @@ const Components = [
   Input,
   Checkbox,
   Avatar,
-  AvatarSelected
+  AvatarSelected,
+  SnackBar
 ]
 
 export default {

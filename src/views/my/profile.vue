@@ -3,6 +3,7 @@
     <div class="tmk-profile__add">
       <t-button icon="add" type="link" @click="addProfile">{{ $t("subProfile.addBtn") }}</t-button>
     </div>
+    <div class="tmk-profile__line"></div>
     <div class="tmk-profile__list">
       <div class="tmk-profile__list--item" v-for="(profile,index) in profiles" :key="index">
         <div class="avatar">
@@ -89,7 +90,7 @@ export default {
           user: username
         }),
         confirm: () => {
-
+          this.$store.commit('showMessage', this.$t('subProfile.delSuccess'))
         }
       })
     }
@@ -105,6 +106,11 @@ export default {
 @include b(profile) {
   @include e(add) {
     color: $C35;
+  }
+  @include e(line){
+    border-bottom: unit(1) solid $C35;
+    width: 100%;
+    margin-top: unit(20);
   }
   @include e(list) {
     margin-top: unit(60);

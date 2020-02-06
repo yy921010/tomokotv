@@ -65,10 +65,11 @@ export default {
     height: 100%;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    position: absolute;
+    z-index: 1;
   }
   @include e(default) {
     position: absolute;
-    z-index: -1;
     width: 100%;
     height: 100%;
     top: 0;
@@ -84,7 +85,7 @@ export default {
     height: unit(30);
     width: 100%;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     background-color: $C08;
     bottom: 0;
     text-align: center;

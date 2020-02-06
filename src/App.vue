@@ -13,12 +13,16 @@
       :style="{ 'background-image': 'url(' + bgUrl + ')' }"
     ></div>
     <normalDialog />
+    <transition name="fade">
+      <Snackbar :messages="message" v-if="isShowSnack" />
+    </transition>
   </div>
 </template>
 <script>
 import headerWrap from './views/header/header'
 import footerWrap from './views/footer/footer'
 import normalDialog from './views/dialog'
+import { mapState } from 'vuex'
 export default {
   name: 'app',
   components: {
@@ -30,6 +34,21 @@ export default {
     return {
       bgUrl: ''
     }
+  },
+  computed: {
+    ...mapState({
+      message: s => s.message,
+      isShowSnack: s => s.isShowSnack
+    })
+  },
+  created () {
+    let vuexStorage = this.$session.get('vuex')
+    if (vuexStorage) {
+      this.$store.replaceState(Object.assign({}, vuexStorage))
+    }
+    window.addEventListener('beforeunload', () => {
+      this.$session.put('vuex', this.$store.state)
+    })
   }
 }
 </script>

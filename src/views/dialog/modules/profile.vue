@@ -11,11 +11,11 @@
     <div class="tmk-dialog-profile__content">
       <div class="tmk-dialog-profile__avatar">
         <avatar-selected
-        :showSize="5"
-        :avatars="getCustomConfig('AVATAR_LIST')"
-        @click="changeAvatar"
-        :main-avatar="content.avatarUrl"
-      ></avatar-selected>
+          :showSize="5"
+          :avatars="getCustomConfig('AVATAR_LIST')"
+          @click="changeAvatar"
+          :main-avatar="content.avatarUrl"
+        ></avatar-selected>
       </div>
       <div class="tmk-dialog-profile__form">
         <form>
@@ -38,14 +38,21 @@
           </div>
           <div class="tmk-dialog-profile__form--item">
             <span class="label">{{ $t("user.reNewPassword") }}</span>
-            <t-input class="input" v-model="reNewPassword" type="center"></t-input>
-          </div>
-          <div class="tmk-dialog-profile__form--item tmk-dialog-profile__form--button">
-            <span class="label"></span>
-            <t-button @click="cancel('profile')">{{$t('confirm.cancel')}}</t-button>
-            <t-button type="primary" @click="confirm('profile')">{{$t('confirm.yes')}}</t-button>
+            <t-input
+              class="input"
+              v-model="reNewPassword"
+              type="center"
+            ></t-input>
           </div>
         </form>
+      </div>
+      <div class="tmk-dialog-profile__buttons">
+        <t-button @click="cancel('profile')">{{
+          $t("confirm.cancel")
+        }}</t-button>
+        <t-button type="primary" @click="confirm('profile')">{{
+          $t("confirm.yes")
+        }}</t-button>
       </div>
     </div>
   </div>
@@ -119,14 +126,15 @@ export default {
     border-bottom: unit(1) solid $C19;
     display: flex;
     align-items: center;
+    position: relative;
     @include m(title) {
       text-align: center;
-      flex: 1;
-      margin-left: unit(30);
+      width: 100%;
       @include text(14, $C35);
     }
     @include m(close) {
-      margin-right: unit(30);
+      position: absolute;
+      right: unit(30);
       color: $C35;
       cursor: pointer;
       &:hover {
@@ -138,25 +146,34 @@ export default {
     @include text(29, $C31);
     padding: 0 unit(30) 0 unit(30);
     margin-top: unit(35);
-    @include e(avatar){}
-    @include e(form){
+    @include e(avatar) {
+    }
+    @include e(form) {
       margin-top: unit(40);
-        @include m(item){
-          display: flex;
-          margin-bottom: unit(20);
-          .label{
-            @include text(29, $C35);
-            margin-right: unit(20);
-            width: unit(80);
-            line-height: unit(46);
-          }
-          .input{
-            width: unit(460);
-          }
+      > form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
-      @include m(button){
-        margin-top: unit(35);
+      @include m(item) {
+        display: flex;
+        margin-bottom: unit(20);
+        .label {
+          @include text(29, $C35);
+          margin-right: unit(20);
+          width: unit(80);
+          line-height: unit(46);
+        }
+        .input {
+          width: unit(460);
+        }
       }
+    }
+    @include e(buttons) {
+      margin-top: unit(35);
+      text-align: center;
+      display: flex;
+      justify-content: center;
     }
   }
 }

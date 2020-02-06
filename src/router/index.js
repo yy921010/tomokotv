@@ -26,6 +26,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: 'history',
   scrollBehavior: () => ({ y: 0 }), // switch page with scrollX ==>0
   routes
 })

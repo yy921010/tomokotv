@@ -16,7 +16,7 @@
           <span class="label">{{ $t("user.ageLevel") }}</span>
           <t-select
             class="input"
-            :options="ageLevels"
+            :options="getCustomConfig('AGE_LEVEL')"
             type="center"
             v-model="ageLevel"
           ></t-select>
@@ -56,9 +56,6 @@ export default {
   computed: {
     ...mapState('Login', {
       user: s => s.userInfo
-    }),
-    ...mapState('My', {
-      ageLevels: s => s.ageLevels
     }),
     ...mapGetters('CustomConfig', {
       getCustomConfig: 'getCustomConfig'

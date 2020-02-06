@@ -18,8 +18,12 @@
     </div>
     <div class="tmk-user__line"></div>
     <div class="tmk-user__content">
-      <ModifyUserInfo v-if="tabId === 'modify-user-info'"></ModifyUserInfo>
-      <ModifyPassword v-else></ModifyPassword>
+      <transition name="bounce">
+        <ModifyUserInfo v-if="tabId === 'modify-user-info'"></ModifyUserInfo>
+      </transition>
+      <transition name="bounce">
+        <ModifyPassword  v-if="tabId === 'modify-password'"></ModifyPassword>
+      </transition>
     </div>
   </div>
 </template>
@@ -51,6 +55,23 @@ export default {
 </script>
 
 <style lang="scss">
+@keyframes fadeInRight {
+   from {
+     opacity: 0;
+     -webkit-transform: translate3d(40px, 0, 0);
+     transform: translate3d(40px, 0, 0);
+   }
+
+   to {
+     opacity: 1;
+     -webkit-transform: translate3d(0, 0, 0);
+     transform: translate3d(0, 0, 0);
+   }
+ }
+
+.bounce-enter-active {
+  animation: fadeInRight .3s;
+}
 @include when(tab-active) {
   color: $C31;
 }
@@ -62,7 +83,7 @@ export default {
       margin-right: unit(60);
       cursor: pointer;
     }
-    @include m(modify-password){
+    @include m(modify-password) {
       cursor: pointer;
     }
   }

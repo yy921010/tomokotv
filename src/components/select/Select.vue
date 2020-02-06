@@ -56,7 +56,10 @@ export default {
   },
   computed: {
     convertText () {
-      const currentOption = this.options.find(item => item.value === this.value)
+      let currentOption = {}
+      if (this.options) {
+        currentOption = this.options.find(item => item.value === this.value)
+      }
       return currentOption.text || ''
     }
   },

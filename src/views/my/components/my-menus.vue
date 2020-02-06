@@ -9,7 +9,7 @@
         @click="handleChosen('MyUser')"
       ></t-avatar>
       <span class="username" :title="userInfo.username">{{userInfo.username}}</span>
-      <span class="rating-level">{{userInfo.ageLevel}}</span>
+      <span class="rating-level">{{userInfo.ageLevel}} +</span>
     </div>
     <div class="tmk-my-menu__list">
       <div

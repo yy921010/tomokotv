@@ -1,27 +1,26 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import persistedState from 'vuex-persistedstate'
-import sessionManager from '@plugins/session'
 import modules from './modules'
-
 Vue.use(Vuex)
 
+let messageTimer = null
+let DELAY_TIME = 3000
 const store = new Vuex.Store({
-  plugins: [
-    // todo 存在性能问题
-    persistedState({
-      storage: {
-        getItem: key => sessionManager.get(key),
-        setItem: (key, value) => sessionManager.put(key, value),
-        removeItem: key => sessionManager.remove(key)
-      }
-    })],
   modules,
   state: {
+    message: '',
+    isShowSnack: false
   },
   mutations: {
-  },
-  actions: {
+    showMessage (state, msg) {
+      state.message = msg
+      state.isShowSnack = true
+      clearTimeout(messageTimer)
+      messageTimer = setTimeout(() => {
+        state.isShowSnack = false
+        state.message = ''
+      }, DELAY_TIME)
+    }
   },
   strict: process.env.VUE_APP_SERVICE_MODE === 'dev'
 })

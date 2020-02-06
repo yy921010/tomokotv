@@ -1,7 +1,7 @@
 <template>
   <div class="tmk-confirm">
       <div class="tmk-confirm__top">
-        <div class="tmk-confirm__top--title">{{$t('confirm.title')}}</div>
+        <div class="tmk-confirm__top--title">{{ title }}</div>
         <div class="tmk-confirm__top--close" @click="cancel('confirm')">
           <t-icon name="close" :size="32"></t-icon>
         </div>
@@ -44,16 +44,18 @@ export default {
       border-bottom: unit(1) solid $C19;
       display: flex;
       align-items: center;
+      position: relative;
       @include m(title){
         text-align: center;
-        flex: 1;
-        margin-left: unit(30);
+        width: 100%;
         @include text(14, $C35);
       }
       @include m(close){
-        margin-right: unit(30);
         color: $C35;
         cursor: pointer;
+        position: absolute;
+        right: unit(30);
+        align-self: center;
         &:hover {
           color: $C31;
         }
@@ -63,14 +65,14 @@ export default {
       @include text(29,$C31);
       padding: 0 unit(30) 0 unit(30);
       margin-top: unit(35);
+      text-align: center;
     }
     @include e(bottom){
       width: unit(460-60);
       margin-top: unit(35);
       margin-bottom: unit(35);
       align-self: center;
-      display: flex;
-      justify-content: space-between;
+      text-align: center;
     }
   }
 </style>
