@@ -20,7 +20,6 @@ const mutations = {
   confirm (state, name) {
     let visibleStr = `${name}Show`
     state[visibleStr] = false
-    console.log(state.content)
     callConfirm(state.content)
     cacheObject = {}
     callConfirm = () => {}

@@ -1,9 +1,11 @@
 <template>
-  <section class="tmk-dialog" v-if="normalVisible">
-    <LoginComponent v-if="loginShow"/>
-    <ConfirmComponent v-if="confirmShow"/>
-    <ProfileComponent v-if="profileShow"/>
-  </section>
+  <transition name="fade">
+    <section class="tmk-dialog" v-if="normalVisible">
+      <LoginComponent v-if="loginShow" />
+      <ConfirmComponent v-if="confirmShow" />
+      <ProfileComponent v-if="profileShow" />
+    </section>
+  </transition>
 </template>
 <script>
 import LoginComponent from './modules/login'
@@ -29,6 +31,13 @@ export default {
 }
 </script>
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.35s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
 @include b(dialog) {
   position: fixed;
   z-index: 999;
