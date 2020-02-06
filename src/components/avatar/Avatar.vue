@@ -5,10 +5,9 @@
     @click="handleClick"
     :class="[{ 'is-selected': isSelected }]"
   >
-    <img
+    <div
       class="c-avatar__image"
-      :src="avatarUrl"
-      alt="c-avatar"
+      :style="{'background-image':'url('+avatarUrl+')'}"
       @error="setErrorImg"
     />
     <div class="c-avatar__default">
@@ -68,6 +67,8 @@ export default {
   @include e(image) {
     width: 100%;
     height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
   }
   @include e(default) {
     position: absolute;

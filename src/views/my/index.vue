@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
   @include b(my) {
-    width: unit(1380);
+    width: unit(1220);
     display: flex;
     @include e(content){
       flex: 1;

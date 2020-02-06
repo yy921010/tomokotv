@@ -49,9 +49,9 @@ export default {
     width: 100%;
     @include m(container) {
       position: relative;
-      width: unit(1380);
       margin: 0 auto;
       height: 100%;
+      width: unit(1220);
       @include e(main) {
         padding: unit(48) unit(48) unit(32);
         height: 62%;
