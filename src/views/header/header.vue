@@ -64,13 +64,16 @@ export default {
   flex-direction: column;
   @include e(normal-mode) {
     display: flex;
-    width: unit(1380);
+    width: unit(1220);
     align-items: center;
     height: 100%;
+    position: relative;
     .logo{
+      position: absolute;
       width: 70px;
       height: 35px;
       cursor: pointer;
+      left: 0;
       img{
         max-width: 70px;
         max-height: 35px;
@@ -82,6 +85,8 @@ export default {
       @include text(29);
     }
     .actions{
+      position: absolute;
+      right: 0;
       display: flex;
       align-items: center;
       cursor: pointer;

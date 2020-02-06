@@ -1,30 +1,27 @@
-import axios from 'axios'
-import store from '../store'
+import Axios from 'axios'
+import Store from '../store'
 
-function dealWithTokenResp (res) {
+let responseHandle = (res) => {
   const { config } = res
   if (/token/.test(config.url)) {
     if (res.data.error) {
       return Promise.reject(res.data.error)
     }
     return res.data
+  } else {
+    return res.data.data
   }
-  return res.data.data
 }
 
-function retryTimeout () {
-
-}
-
-const service = axios.create({
+const service = Axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 })
 
 service.interceptors.request.use(
   config => {
-    if (store.state.Login.accessToken) {
-      config.headers['Authorization'] = 'Bearer ' + store.state.Login.accessToken
+    if (Store.state.Login.accessToken) {
+      config.headers['Authorization'] = 'Bearer ' + Store.state.Login.accessToken
     }
     // Do something before request is sent
     // if (store.getters.token) {
@@ -40,11 +37,10 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   res => {
-    return dealWithTokenResp(res)
+    return responseHandle(res)
   },
   error => {
     console.log('err' + error)
-    retryTimeout()
   }
 )
 

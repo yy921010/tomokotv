@@ -8,7 +8,6 @@
     <div
       class="c-avatar__image"
       :style="{'background-image':'url('+avatarUrl+')'}"
-      @error="setErrorImg"
     />
     <div class="c-avatar__default">
       <t-icon
@@ -43,9 +42,6 @@ export default {
     }
   },
   methods: {
-    setErrorImg () {
-      this.src = require('@assets/images/dot.gif')
-    },
     handleClick () {
       this.$emit('click')
     }

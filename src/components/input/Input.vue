@@ -15,8 +15,9 @@
     />
     <t-icon
       class="c-input--clear"
-      name="close"
+      name="close-circle"
       :size="iconSize"
+      type="fill"
       v-if="showClear"
       @click="clearWord"
     />

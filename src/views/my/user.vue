@@ -40,7 +40,6 @@ export default {
     }
   },
   mounted () {
-    this.$log.info({ name: 'adsd' })
     this.tabId = 'modify-user-info'
   },
   methods: {

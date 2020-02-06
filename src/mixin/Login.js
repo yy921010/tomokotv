@@ -1,5 +1,4 @@
 import { mapActions, mapState } from 'vuex'
-let refreshTokenTimeDown = null
 
 export default {
   computed: {
@@ -9,29 +8,9 @@ export default {
   },
   methods: {
     ...mapActions('Login', {
-      getToken: 'getToken',
+      login: 'login',
       refreshToken: 'startRefreshToken',
       logout: 'logout'
-    }),
-
-    async userLogout () {
-      clearTimeout(refreshTokenTimeDown)
-      this.logout()
-    },
-
-    async timeToRefresh () {
-      if (this.expireTime) {
-        refreshTokenTimeDown = setTimeout(async () => {
-          clearTimeout(refreshTokenTimeDown)
-          try {
-            await this.refreshToken()
-            await this.timeToRefresh()
-          } catch (e) {
-            console.error('error:', e)
-            clearTimeout(refreshTokenTimeDown)
-          }
-        }, this.expireTime * 1000)
-      }
-    }
+    })
   }
 }

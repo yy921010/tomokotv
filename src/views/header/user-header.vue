@@ -33,14 +33,12 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-import Login from '@mixin/Login'
 const dropdownListenerFunc = function () {
   this.isShowSubMenu = false
 }
 
 export default {
   name: 'user-header',
-  mixins: [Login],
   data: () => ({
     isShowSubMenu: false
   }),
@@ -63,19 +61,37 @@ export default {
     ...mapActions('Dialog', {
       openDialog: 'openDialog'
     }),
+    ...mapActions('Login', {
+      login: 'login',
+      logout: 'logout'
+    }),
     openLoginDialog () {
       this.openDialog({
         name: 'login',
-        title: '登陆',
+        title: this.$t('loginDialog.title'),
         content: {},
-        confirm () {
+        confirm: ({ username, password, isAuto }) => {
+          if (username && password) {
+            this.login({
+              username,
+              password,
+              isAuto
+            })
+          }
         }
       })
     },
     targetHandle (menuId) {
       this.isShowSubMenu = false
       if (menuId === 'Logout') {
-        this.userLogout()
+        this.openDialog({
+          name: 'confirm',
+          title: this.$t('header.logout'),
+          content: this.$t('header.logoutContent'),
+          confirm: () => {
+            this.logout()
+          }
+        })
         return
       }
       this.$router.push({

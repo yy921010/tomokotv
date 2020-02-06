@@ -1,15 +1,21 @@
 {
   "hello": "你好",
   "header": {
-    "login_btn": "登录"
+    "login_btn": "登录",
+    "logout": "注销",
+    "logoutContent": "是否注销？"
   },
   "loginDialog": {
-    "title": "登录",
+    "title": "Tomoko 登录",
     "button": "登录",
     "usernamePlaceholder": "请输入用户名",
     "passwordPlaceholder": "请输入密码",
     "reminder": "自动登录",
-    "forget": "忘记密码？"
+    "forget": "忘记密码？",
+    "usernameErrorEmpty": "用户的登陆id不能为空",
+    "passwordErrorEmpty": "用户的密码不能为空",
+    "usernamePassWordError": "用户登陆id或者用户密码错误，请重新输入",
+    "userLock": "对不起，用户被锁定了，请发邮件 charlesmaxwellyoung@gmail.com 告知管理元"
   },
   "confirmDialog": {
     "title": "确认"

@@ -62,25 +62,6 @@ const state = {
       ]
     }
   ],
-  ageLevels: [
-    {
-      text: '0+',
-      value: 0
-    }, {
-      text: '6+',
-      value: 6
-    },
-    {
-      text: '12+',
-      value: 12
-    }, {
-      text: '15+',
-      value: 15
-    }, {
-      text: '18+',
-      value: 18
-    }
-  ],
   profiles: []
 }
 
