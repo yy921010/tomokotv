@@ -13,6 +13,7 @@
         </div>
       </div>
       <div class="tmk-user-header__arrow" v-show="isShowSubMenu"></div>
+      <transition name="fade">
       <ul class="tmk-user-header__menu" v-show="isShowSubMenu">
         <li class="user-id-item" @click="targetHandle('MyUser')">
           <span> {{ $t("menu.userId") }} {{ userInfo.username }}</span>
@@ -27,6 +28,7 @@
           <span class="item-name">{{ $t(menuInfo.name) }}</span>
         </li>
       </ul>
+      </transition>
     </template>
   </div>
 </template>

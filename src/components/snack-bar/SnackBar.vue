@@ -32,6 +32,7 @@ export default {
   transform: translateX(-50%);
   background-color: $C14;
   border-radius: unit(4);
+  z-index: 10;
   .messages {
     @include text(29);
   }

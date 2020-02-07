@@ -135,6 +135,7 @@ $vi-theme-button: (
 @mixin button-variant($button-type) {
   background-color: button-background-get($button-type);
   border: unit(1) solid button-border-get($button-type);
+  transition: all $transition-time;
   &:hover {
     border-color: button-background-get($button-type);
     background-color: button-hover-get($button-type);

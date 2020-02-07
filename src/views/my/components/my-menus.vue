@@ -85,7 +85,7 @@ export default {
 <style lang="scss">
   @include b(my-menu) {
     height: unit(980);
-    width: unit(264);
+    width: unit(204);
     background-color: $C18;
 
     @include e(user) {
