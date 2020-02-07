@@ -10,6 +10,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+@include b(not-found){
+  width: unit(1220);
+}
 </style>
