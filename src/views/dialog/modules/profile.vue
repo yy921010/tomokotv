@@ -12,7 +12,7 @@
       <div class="tmk-dialog-profile__avatar">
         <avatar-selected
           :showSize="5"
-          :avatars="getCustomConfig('AVATAR_LIST')"
+          :avatars="avatars"
           @click="changeAvatar"
           :main-avatar="content.avatarUrl"
         ></avatar-selected>
@@ -27,7 +27,7 @@
             <span class="label">{{ $t("user.ageLevel") }}</span>
             <t-select
               class="input"
-              :options="getCustomConfig('AGE_LEVEL')"
+              :options="ageLevels"
               type="center"
               v-model="ageLevel"
             ></t-select>
@@ -60,6 +60,7 @@
 
 <script>
 import { mapGetters, mapMutations, mapState } from 'vuex'
+import { jsonParse } from '@utils'
 export default {
   name: 'profile',
   data () {
@@ -75,6 +76,14 @@ export default {
     ...mapGetters('CustomConfig', {
       getCustomConfig: 'getCustomConfig'
     }),
+    avatars () {
+      let avatars = this.getCustomConfig('AVATAR_LIST')
+      return jsonParse(avatars)
+    },
+    ageLevels () {
+      let ageLevel = this.getCustomConfig('AGE_LEVEL')
+      return jsonParse(ageLevel)
+    },
     username: {
       set (username) {
         this.transitData({ username })
@@ -113,7 +122,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include b(dialog-profile) {
   width: unit(720);
   background-color: $C14;

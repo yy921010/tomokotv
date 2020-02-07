@@ -54,24 +54,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@keyframes fadeInRight {
-   from {
-     opacity: 0;
-     -webkit-transform: translate3d(40px, 0, 0);
-     transform: translate3d(40px, 0, 0);
-   }
-
-   to {
-     opacity: 1;
-     -webkit-transform: translate3d(0, 0, 0);
-     transform: translate3d(0, 0, 0);
-   }
- }
-
-.bounce-enter-active {
-  animation: fadeInRight .3s;
-}
+<style lang="scss" scoped>
 @include when(tab-active) {
   color: $C31;
 }

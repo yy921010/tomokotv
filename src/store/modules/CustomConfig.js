@@ -18,16 +18,10 @@ const mutations = {
 const getters = {
   getCustomConfig (state) {
     return function (key) {
-      let _obj = {}
-      if (key) {
-        try {
-          _obj = JSON.parse(state.customConfig[key])
-        } catch (e) {
-          console.error('json parse is error')
-          _obj = {}
-        }
+      if (!key) {
+        return ''
       }
-      return _obj
+      return state.customConfig[key]
     }
   }
 

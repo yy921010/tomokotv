@@ -208,7 +208,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include when(red) {
   color: $C33;
 }

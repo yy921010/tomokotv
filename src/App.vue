@@ -1,10 +1,13 @@
 <template>
   <div id="app">
     <nav>
+      <!-- 头部区域 -->
       <header-wrap />
     </nav>
     <main>
+      <!-- 主页面区域 -->
       <router-view />
+      <!-- 页脚区域 -->
       <footer-wrap />
     </main>
     <!-- 此区域，描述项目整体背景图 -->
@@ -12,14 +15,16 @@
       id="frosted"
       :style="{ 'background-image': 'url(' + bgUrl + ')' }"
     ></div>
+    <!-- 全局 module 弹窗 -->
     <normalDialog />
+    <!-- 全局 tips 弹窗 -->
     <transition name="fade">
       <Snackbar :messages="message" v-if="isShowSnack" />
     </transition>
   </div>
 </template>
 <script>
-import headerWrap from './views/header/header'
+import headerWrap from './views/header'
 import footerWrap from './views/footer/footer'
 import normalDialog from './views/dialog'
 import { mapState } from 'vuex'

@@ -104,25 +104,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include b(user-header) {
   position: relative;
-  .login-btn {
-  }
   @include e(dropdown) {
     display: flex;
     align-items: center;
-
-    .user-avatar {
-      background-color: #000;
-      width: unit(35);
-      height: unit(35);
-      border-radius: 50%;
-    }
     .user-name {
       @include text(29, $C35);
       margin-left: unit(10);
-      width: unit(100);
+      width: unit(50);
       @include text-overflow;
       &:hover {
         @include text(29, $C31);

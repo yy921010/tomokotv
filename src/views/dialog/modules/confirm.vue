@@ -32,7 +32,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(confirm){
     width: unit(460);
     background-color: $C14;

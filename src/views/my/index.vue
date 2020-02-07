@@ -27,10 +27,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(my) {
     width: unit(1220);
     display: flex;
+    min-height: unit(980);
     @include e(content){
       flex: 1;
       margin-left: unit(20);

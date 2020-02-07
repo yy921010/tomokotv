@@ -33,3 +33,13 @@ export function checkPwdStrong (obj) {
     return 3
   }
 }
+
+export function jsonParse (str) {
+  let s = {}
+  try {
+    s = JSON.parse(str)
+  } catch (e) {
+    console.error('json parse error')
+  }
+  return s
+}

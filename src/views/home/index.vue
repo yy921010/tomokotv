@@ -12,8 +12,8 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(home){
-    width: unit(1380);
+    width: unit(1220);
   }
 </style>

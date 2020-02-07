@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(footer) {
     border-top: unit(1) solid $C03;
     background-color: $C06;

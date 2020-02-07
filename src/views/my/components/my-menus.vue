@@ -82,7 +82,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @include b(my-menu) {
     height: unit(980);
     width: unit(204);
@@ -124,7 +124,7 @@ export default {
       }
       .username {
         @include text(23);
-        width: unit(204);
+        width: unit(104);
         height: unit(30);
         line-height: unit(30);
         text-align: center;
