@@ -45,15 +45,6 @@ export default {
       message: s => s.message,
       isShowSnack: s => s.isShowSnack
     })
-  },
-  created () {
-    let vuexStorage = this.$session.get('vuex')
-    if (vuexStorage) {
-      this.$store.replaceState(Object.assign({}, vuexStorage))
-    }
-    window.addEventListener('beforeunload', () => {
-      this.$session.put('vuex', this.$store.state)
-    })
   }
 }
 </script>

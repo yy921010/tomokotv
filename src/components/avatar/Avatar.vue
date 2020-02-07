@@ -49,13 +49,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include c(avatar) {
   position: relative;
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
   background-color: $C09;
+  border: unit(1) solid transparent;
   @include when(selected){
     box-sizing: border-box;
     border:unit(3) solid white;
@@ -85,7 +86,7 @@ export default {
     height: unit(30);
     width: 100%;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     background-color: $C08;
     bottom: 0;
     text-align: center;

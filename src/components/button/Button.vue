@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $vi-theme-button: (
   text: $C01,
   background: (

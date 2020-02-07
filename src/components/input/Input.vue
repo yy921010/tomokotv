@@ -88,7 +88,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 @mixin input-basic {
   @include text(32);
   outline: none;

@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import userHeader from './user-header'
 import subMenus from './sub-menus'
-import { getMenu } from '@api/menu'
 
 const selectListenerFunc = function () {
   this.isShowMenu = false
@@ -43,7 +42,6 @@ export default {
   data () {
     return {
       logoUrl: require('@assets/logo.png'),
-      menus: [],
       isShowMenu: false
     }
   },
@@ -55,18 +53,24 @@ export default {
     ...mapState('Header', {
       title: s => s.title
     }),
+    ...mapState('Menu', {
+      menus: s => s.menus
+    }),
     menuIconName () {
       return this.isShowMenu ? 'close' : 'menu'
     }
   },
   async mounted () {
-    this.menus = await getMenu()
+    this.getMenu()
     document.addEventListener('click', selectListenerFunc.bind(this))
   },
   destroyed () {
     document.removeEventListener('click', selectListenerFunc.bind(this))
   },
   methods: {
+    ...mapActions('Menu', {
+      getMenu: 'getMenu'
+    }),
     home () {
       this.$router.push({
         name: 'home'
@@ -75,8 +79,14 @@ export default {
     openMenu () {
       this.isShowMenu = !this.isShowMenu
     },
-    changeMenu () {
+    changeMenu ({ id, type, menuId }) {
       this.isShowMenu = false
+      if (type === 'dynamic') {
+        return
+      }
+      this.$router.push({
+        name: menuId
+      })
     }
   }
 }

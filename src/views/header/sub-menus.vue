@@ -8,8 +8,14 @@
           :key="index"
           @click="handleClick(menu)"
         >
-          <t-icon v-if="menu.iconName" :name="menu.iconName" :size="30"></t-icon>
-          <img class="tmk-sub-menus__item--img" v-else :src="menu.iconUrl"/>
+          <t-icon
+            class="tmk-sub-menus__item--icon"
+            v-if="menu.iconName"
+            :name="menu.iconName"
+            :size="30"
+            type="fill"
+          ></t-icon>
+          <img class="tmk-sub-menus__item--img" v-else :src="menu.iconUrl" />
           <span class="tmk-sub-menus__item--text">{{ menu.text }}</span>
         </li>
       </ul>
@@ -39,34 +45,37 @@ export default {
   position: fixed;
   left: 0;
   right: 0;
-  top:unit(60);
+  top: unit(60);
   background-color: $C06;
   z-index: 99;
-  @include e(views){
+  @include e(views) {
     margin: 0 auto;
     width: unit(1220);
     padding-top: unit(40);
     padding-bottom: unit(35);
-    @include e(container){
+    @include e(container) {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      @include e(item){
+      @include e(item) {
         cursor: pointer;
         display: flex;
         height: unit(40);
         padding: 0 unit(10) 0 unit(10);
+        margin-bottom: unit(20);
         align-items: center;
         color: $C32;
         transition: all $transition-time;
-        &:hover{
+        &:hover {
           background-color: $C03;
           color: $C31;
         }
-        @include m(img){
+        @include m(icon) {
           margin-right: unit(15);
         }
-        @include m(text){
+        @include m(img) {
+          margin-right: unit(15);
+        }
+        @include m(text) {
           width: unit(130);
           @include text-overflow;
         }

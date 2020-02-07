@@ -97,27 +97,6 @@ export default {
       .avatar {
         margin-top: unit(40);
         margin-bottom: unit(20);
-        width: unit(76);
-        height: unit(76);
-        border-radius: 50%;
-        cursor: pointer;
-        overflow:hidden;
-        position: relative;
-        >img{
-          width: 100%;
-          height: 100%;
-        }
-        .is-admin-crow{
-          position: absolute;
-          bottom: 0;
-          z-index: 1;
-          background-color: $C08;
-          width: 100%;
-          height: unit(20);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
         &:hover{
           opacity: 0.7;
         }

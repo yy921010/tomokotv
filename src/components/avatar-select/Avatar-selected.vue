@@ -93,7 +93,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include c(av-selected) {
   @include e(avatar) {
     display: flex;

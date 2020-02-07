@@ -1,9 +1,11 @@
 <template>
   <div class="c-checkbox">
     <t-icon class="c-checkbox__icon" :name="iconName" :size="18"></t-icon>
-    <input  class="c-checkbox__original" type="checkbox"
-            :checked="checked"
-            @change="$emit('change', $event.target.checked)">
+    <label>
+      <input  class="c-checkbox__original" type="checkbox"
+              :checked="checked"
+              @change="$emit('change', $event.target.checked)">
+    </label>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @include c(checkbox){
   display: inline-block;
   white-space: nowrap;

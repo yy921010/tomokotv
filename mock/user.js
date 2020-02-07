@@ -10,7 +10,7 @@ const userInfo = Mock.mock({
 })
 
 const menus = Mock.mock({
-  'data|20': [{
+  'data|10': [{
     menuId: '@id',
     id: '@id',
     text: '@cword(3,10)',
