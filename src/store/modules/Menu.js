@@ -9,7 +9,7 @@ const mutations = {
         menuId: 'home',
         id: 'static',
         text: '首页',
-        iconName: 'home',
+        iconName: 'home-3',
         iconUrl: '',
         type: 'static'
       },
@@ -17,7 +17,7 @@ const mutations = {
         menuId: 'tvProgram',
         id: 'static',
         text: '电视节目单',
-        iconName: 'home',
+        iconName: 'tv-2',
         iconUrl: '',
         type: 'static'
       }

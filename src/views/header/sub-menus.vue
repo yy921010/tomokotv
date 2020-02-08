@@ -47,7 +47,7 @@ export default {
   right: 0;
   top: unit(60);
   background-color: $C06;
-  z-index: 99;
+  z-index: 9;
   @include e(views) {
     margin: 0 auto;
     width: unit(1220);

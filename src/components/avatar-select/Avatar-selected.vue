@@ -65,7 +65,7 @@ export default {
   }),
   computed: {
     viewWidth () {
-      return (this.showSize * stepTranslateX - 40) + 'px'
+      return (this.showSize * stepTranslateX) + 'px'
     }
   },
   methods: {

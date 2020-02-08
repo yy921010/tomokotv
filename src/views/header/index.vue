@@ -6,12 +6,6 @@
       </div>
       <div class="title" :title="title">{{ title }}</div>
       <div class="actions">
-        <t-icon
-          class="search-btn"
-          name="search"
-          :size="20"
-          v-show="!isShowMenu"
-        ></t-icon>
         <user-header v-show="!isShowMenu" />
         <t-icon
           class="menu-btn"
@@ -120,7 +114,7 @@ export default {
     .title {
       flex: 1;
       text-align: center;
-      @include text(27);
+      @include text(14);
     }
     .actions {
       position: absolute;

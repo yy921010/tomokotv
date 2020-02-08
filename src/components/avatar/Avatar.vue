@@ -18,8 +18,8 @@
       ></t-icon>
     </div>
     <div class="c-avatar__master" v-if="maskIcon !== ''">
-      <t-icon :name="maskIcon"></t-icon>
-    </div>
+  <t-icon :name="maskIcon"></t-icon>
+  </div>
   </div>
 </template>
 
