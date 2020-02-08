@@ -117,6 +117,7 @@ export default {
       }
       &.is-active{
         background-color: $C03;
+        color: $C31;
         &::before{
           content: "";
           width: unit(4);
@@ -162,6 +163,7 @@ export default {
           }
           &.is-active{
             background-color: $C03;
+            color: $C31;
             &::before{
               content: "";
               width: unit(4);

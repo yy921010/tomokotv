@@ -8,6 +8,7 @@ import Checkbox from './checkbox'
 import Avatar from './avatar'
 import AvatarSelected from './avatar-select'
 import SnackBar from './snack-bar'
+import Poster from './poster'
 
 const Components = [
   Icon,
@@ -17,7 +18,8 @@ const Components = [
   Checkbox,
   Avatar,
   AvatarSelected,
-  SnackBar
+  SnackBar,
+  Poster
 ]
 
 export default {

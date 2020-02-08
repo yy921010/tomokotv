@@ -1,6 +1,7 @@
 <template>
   <div class="tmk-home">
-    here is home
+    <t-poster :height="164" :width="294" :src="''"></t-poster>
+    home
   </div>
 </template>
 

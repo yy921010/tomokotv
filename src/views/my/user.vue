@@ -72,7 +72,7 @@ export default {
   }
 
   @include e(line) {
-    border-bottom: unit(1) solid $C35;
+    border-bottom: unit(1) solid $C03;
     width: 100%;
     margin-top: unit(20);
   }

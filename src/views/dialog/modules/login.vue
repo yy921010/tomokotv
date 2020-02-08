@@ -141,39 +141,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-@keyframes zoomOut {
-  from {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-    -webkit-transform: scale3d(0.3, 0.3, 0.3);
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-.slide-stretch-enter-active {
-  animation: zoomIn 0.3s;
-}
-.slide-stretch-leave-active {
-  animation: zoomOut 0.3s;
-}
-
 @include b(login-dialog) {
   min-height: unit(364);
   width: unit(460);
