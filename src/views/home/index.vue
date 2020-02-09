@@ -53,7 +53,7 @@ export default {
             title: 'Lorem ipsum dolor sit amet, consectetur adipisicing',
             meta: 'Lorem ipsum dolor sit amet, consectetur adipisicing',
             background:
-              'https://ngiss.t-online.de/iss?client=ngtv&ar=keep&x=191&y=287&src=http://programm-manager.telekom.de/media/gracenote/p16943905_v_v12_ab.jpg'
+              'https://ngiss.t-online.de/iss?client=ngtv&ar=ignore&x=191&y=274&src=http://programm-manager.telekom.de/media/gracenote/p16080020_v_v12_ae.jpg'
           },
           {
             title: 'Lorem ipsum dolor sit amet, consectetur adipisicing',

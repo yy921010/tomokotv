@@ -26,6 +26,7 @@
           :style="{
             transform: 'translate(' + translateX + 'px,0) translateZ(0)'
           }"
+          @mousedown="eventMouseDown"
         >
           <li
             class="c-slide__item"
@@ -43,10 +44,10 @@
               class="c-slide__info"
               :style="{ width: posterSize.width + 'px' }"
             >
-              <span class="c-slide__info--title" :title="poster.title">{{
+              <span class="c-slide__info--title" :title="poster.title" v-if="poster.title">{{
                 poster.title
               }}</span>
-              <span class="c-slide__info--subtitle" :title="poster.meta">{{
+              <span class="c-slide__info--subtitle" :title="poster.meta" v-if="poster.meta">{{
                 poster.meta
               }}</span>
             </div>
@@ -167,6 +168,23 @@ export default {
           this.translateX -= readySize * fullPosterWidth
         }
       }
+    },
+    /**
+     * 处理拖拽事件
+     * @param e
+     */
+    eventMouseDown (e) {
+      let oldDiv = e.target
+      let disX = e.clientX - oldDiv.offsetLeft
+      document.onmousemove = (mouseMoveEvent) => {
+        let translateX = mouseMoveEvent.clientX - disX
+        console.log(translateX)
+        this.translateX = translateX
+      }
+      document.onmouseup = (mouseUpEvent) => {
+        document.onmousemove = null
+        document.onmouseup = null
+      }
     }
   }
 }
@@ -229,7 +247,7 @@ export default {
       overflow: hidden;
       @include e(ul) {
         display: flex;
-        transition: all $transition-time;
+        //transition: all $transition-time ease-in;
         @include e(item) {
           margin-right: unit(20);
           cursor: pointer;
