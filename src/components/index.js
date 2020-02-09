@@ -9,6 +9,7 @@ import Avatar from './avatar'
 import AvatarSelected from './avatar-select'
 import SnackBar from './snack-bar'
 import Poster from './poster'
+import PosterSlide from './poster-slide'
 
 const Components = [
   Icon,
@@ -19,7 +20,8 @@ const Components = [
   Avatar,
   AvatarSelected,
   SnackBar,
-  Poster
+  Poster,
+  PosterSlide
 ]
 
 export default {

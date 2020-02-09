@@ -2,7 +2,7 @@
     <div class="tmk-program-detail">
      <div class="tmk-program-detail__detail-main">
        <div class="tmk-program-detail__left">
-         <t-poster :width="610" :height="344"/>
+         <t-poster :width="610" :height="344" :src="'http://img5.mtime.cn/CMS/News/2019/05/04/140021.38161755_620X620.jpg'"/>
        </div>
        <div class="tmk-program-detail__right">
          <div class="tmk-program-detail__title">
