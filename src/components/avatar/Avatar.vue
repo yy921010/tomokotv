@@ -7,7 +7,7 @@
   >
     <div
       class="c-avatar__image"
-      :style="{'background-image':'url('+avatarUrl+')'}"
+      :style="{ 'background-image': 'url(' + avatarUrl + ')' }"
     />
     <div class="c-avatar__default">
       <t-icon
@@ -18,8 +18,8 @@
       ></t-icon>
     </div>
     <div class="c-avatar__master" v-if="maskIcon !== ''">
-  <t-icon :name="maskIcon"></t-icon>
-  </div>
+      <t-icon :name="maskIcon"></t-icon>
+    </div>
   </div>
 </template>
 
@@ -57,9 +57,9 @@ export default {
   overflow: hidden;
   background-color: $C09;
   border: unit(1) solid transparent;
-  @include when(selected){
+  @include when(selected) {
     box-sizing: border-box;
-    border:unit(3) solid white;
+    border: unit(3) solid white;
   }
   @include e(image) {
     width: 100%;

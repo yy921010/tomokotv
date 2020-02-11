@@ -172,7 +172,7 @@ export default {
       position: absolute;
       right: 0;
       line-height: unit(46);
-      background-color: $C35;
+      background-color: $C16;
       height: unit(46) !important;
       width: unit(46) !important;
     }

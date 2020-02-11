@@ -13,7 +13,7 @@
     <div
       class="c-poster--image"
       :style="{
-        'background-image': 'url(' + src + ')'
+        'background-image': 'url(' + url + ')'
       }"
     ></div>
     <slot></slot>
@@ -39,7 +39,7 @@ export default {
       type: Number,
       default: 80
     },
-    src: {
+    url: {
       type: String,
       default: ''
     }

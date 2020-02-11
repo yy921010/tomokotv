@@ -1,6 +1,5 @@
 <template>
   <div class="c-slide">
-    <div class="c-slide__background"></div>
     <div class="c-slide__top" @click="handleClick('title', link)">
       <div class="c-slide__top--title" :title="title">{{ title }}</div>
       <t-icon
@@ -10,7 +9,16 @@
         type="line"
       ></t-icon>
     </div>
-    <div class="c-slide__link"></div>
+    <div class="c-slide__background" v-if="themeBg">
+      <div
+        class="c-slide__img"
+        :style="{
+          'background-image': 'url(' + themeBg + ')'
+        }"
+      >
+        <div class="c-slide__mask"></div>
+      </div>
+    </div>
     <div class="c-slide__container">
       <div
         class="c-slide__container--left"
@@ -24,9 +32,9 @@
         <ul
           class="c-slide__ul"
           :style="{
-            transform: 'translate(' + translateX + 'px,0) translateZ(0)'
+            transform: 'translate(' + translateX + 'px,0) translateZ(0)',
+            width: viewWidth
           }"
-          @mousedown="eventMouseDown"
         >
           <li
             class="c-slide__item"
@@ -36,7 +44,7 @@
             :title="poster.title"
           >
             <t-poster
-              :src="poster.background"
+              :url="poster.background"
               :width="posterSize.width"
               :height="posterSize.height"
             ></t-poster>
@@ -44,12 +52,18 @@
               class="c-slide__info"
               :style="{ width: posterSize.width + 'px' }"
             >
-              <span class="c-slide__info--title" :title="poster.title" v-if="poster.title">{{
-                poster.title
-              }}</span>
-              <span class="c-slide__info--subtitle" :title="poster.meta" v-if="poster.meta">{{
-                poster.meta
-              }}</span>
+              <span
+                class="c-slide__info--title"
+                :title="poster.title"
+                v-if="poster.title"
+                >{{ poster.title }}</span
+              >
+              <span
+                class="c-slide__info--subtitle"
+                :title="poster.meta"
+                v-if="poster.meta"
+                >{{ poster.meta }}</span
+              >
             </div>
           </li>
         </ul>
@@ -67,7 +81,7 @@
 </template>
 
 <script>
-const EVER_MARGIN_RIGHT = 20
+const EVER_MARGIN_RIGHT = 15
 export default {
   name: 'TSlide',
   props: {
@@ -77,6 +91,7 @@ export default {
       // v: 竖版 h: 横版
       validate: val => ['v', 'h'].includes(val)
     },
+    // width 730, height 430
     themeBg: {
       type: String,
       default: ''
@@ -103,24 +118,27 @@ export default {
     // 屏幕最小尺寸为1220px
     posterSize () {
       const screenWith = 1220
-      const everyMarginLeft = 20
       if (this.type === 'v') {
         const fixSix = 2 / 3
-        const posterFullWidth = screenWith - everyMarginLeft * 5
+        const posterFullWidth = screenWith - EVER_MARGIN_RIGHT * 5
         return {
           height: posterFullWidth / 6 / fixSix,
           width: posterFullWidth / 6
         }
       }
       const fixSix = 16 / 9
-      const posterFullWidth = screenWith - everyMarginLeft * 3
+      const posterFullWidth = screenWith - EVER_MARGIN_RIGHT * 3
       return {
         height: posterFullWidth / 4 / fixSix,
         width: posterFullWidth / 4
       }
     },
     showViewNumber () {
-      return this.type === 'v' ? 6 : 4
+      return this.type === 'v' ? 4 : 4
+    },
+    viewWidth () {
+      let itemSize = this.items.length
+      return itemSize * (this.posterSize.width + EVER_MARGIN_RIGHT) + 'px'
     },
     showLeft () {
       return this.translateX < 0
@@ -130,7 +148,10 @@ export default {
       const itemSize = this.items.length
       let offsetXNum = itemSize - this.showViewNumber
       let defaultEnterNum = offsetXNum * fullPosterWidth
-      return this.items.length > this.showViewNumber && Math.abs(this.translateX) < defaultEnterNum
+      return (
+        this.items.length > this.showViewNumber &&
+        Math.abs(this.translateX) < defaultEnterNum
+      )
     }
   },
   methods: {
@@ -168,23 +189,6 @@ export default {
           this.translateX -= readySize * fullPosterWidth
         }
       }
-    },
-    /**
-     * 处理拖拽事件
-     * @param e
-     */
-    eventMouseDown (e) {
-      let oldDiv = e.target
-      let disX = e.clientX - oldDiv.offsetLeft
-      document.onmousemove = (mouseMoveEvent) => {
-        let translateX = mouseMoveEvent.clientX - disX
-        console.log(translateX)
-        this.translateX = translateX
-      }
-      document.onmouseup = (mouseUpEvent) => {
-        document.onmousemove = null
-        document.onmouseup = null
-      }
     }
   }
 }
@@ -192,15 +196,37 @@ export default {
 
 <style scoped lang="scss">
 @include c(slide) {
-  margin-bottom: unit(80);
+  position: relative;
   @include e(background) {
+    height: unit(418);
+    width: unit(1220);
+    margin-left: unit(30);
+    position: absolute;
+    background-color: $C16;
+    @include e(img) {
+      position: relative;
+      height: 100%;
+      width: unit(730);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      @include e(mask) {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        background-image: linear-gradient(to right, $C11, $C16);
+      }
+    }
   }
   @include e(top) {
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-bottom: unit(10);
+    margin-bottom: unit(20);
     transition: color $transition-time;
+    margin-left: unit(30);
     &:hover {
       color: $C35;
       > .c-slide__top--title {
@@ -208,20 +234,21 @@ export default {
       }
     }
     @include m(title) {
-      @include text(14);
+      @include text(13);
       transition: color $transition-time;
       margin-right: unit(10);
     }
-  }
-  @include e(link) {
-    border-top: unit(1) solid $C03;
-    margin-bottom: unit(20);
+    @include m(icon) {
+      color: $C03;
+    }
   }
   @include e(container) {
     position: relative;
+    width: unit(1220);
+    margin: 0 auto;
     @include m(left) {
       position: absolute;
-      left: unit(-50);
+      left: unit(-32);
       display: flex;
       top: 0;
       align-items: center;
@@ -233,7 +260,7 @@ export default {
     }
     @include m(right) {
       position: absolute;
-      right: unit(-50);
+      right: unit(-32);
       display: flex;
       top: 0;
       align-items: center;
@@ -247,9 +274,9 @@ export default {
       overflow: hidden;
       @include e(ul) {
         display: flex;
-        //transition: all $transition-time ease-in;
+        transition: all $transition-time ease-in;
         @include e(item) {
-          margin-right: unit(20);
+          margin-right: unit(15);
           cursor: pointer;
           @include e(info) {
             display: flex;

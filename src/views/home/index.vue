@@ -5,6 +5,7 @@
       type="v"
       :title="slidePoster.title"
       :items="slidePoster.items"
+      :theme-bg="'http://img5.mtime.cn/mg/2020/01/23/123536.83327622.jpg'"
     ></t-slide>
     <t-slide
       @click="slideClick"
@@ -157,6 +158,6 @@ export default {
 
 <style lang="scss" scoped>
 @include b(home) {
-  width: unit(1220);
+  width: unit(1280);
 }
 </style>
