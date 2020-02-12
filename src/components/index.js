@@ -10,6 +10,7 @@ import AvatarSelected from './avatar-select'
 import SnackBar from './snack-bar'
 import Poster from './poster'
 import PosterSlide from './poster-slide'
+import Carousel from './carousel'
 
 const Components = [
   Icon,
@@ -21,7 +22,8 @@ const Components = [
   AvatarSelected,
   SnackBar,
   Poster,
-  PosterSlide
+  PosterSlide,
+  Carousel
 ]
 
 export default {
