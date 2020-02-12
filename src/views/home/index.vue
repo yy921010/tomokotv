@@ -5,7 +5,18 @@
       type="v"
       :title="slidePoster.title"
       :items="slidePoster.items"
-      :theme-bg="'http://img5.mtime.cn/mg/2020/01/23/123536.83327622.jpg'"
+    ></t-slide>
+    <t-slide
+      @click="slideClick"
+      type="v"
+      :title="slidePoster.title"
+      :items="slidePoster.items"
+    ></t-slide>
+    <t-slide
+      @click="slideClick"
+      type="h"
+      :title="slidePoster2.title"
+      :items="slidePoster2.items"
     ></t-slide>
     <t-slide
       @click="slideClick"
@@ -151,7 +162,9 @@ export default {
     }
   },
   methods: {
-    slideClick () {}
+    slideClick () {
+      console.log('32131321')
+    }
   }
 }
 </script>

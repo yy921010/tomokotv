@@ -9,20 +9,10 @@
         type="line"
       ></t-icon>
     </div>
-    <div class="c-slide__background" v-if="themeBg">
-      <div
-        class="c-slide__img"
-        :style="{
-          'background-image': 'url(' + themeBg + ')'
-        }"
-      >
-        <div class="c-slide__mask"></div>
-      </div>
-    </div>
     <div class="c-slide__container">
       <div
         class="c-slide__container--left"
-        :style="{ height: posterSize.height + 'px' }"
+        :style="{ height: size.height + 'px' }"
         @click="prev"
         v-show="showLeft"
       >
@@ -33,24 +23,23 @@
           class="c-slide__ul"
           :style="{
             transform: 'translate(' + translateX + 'px,0) translateZ(0)',
-            width: viewWidth
           }"
         >
           <li
             class="c-slide__item"
-            v-for="(poster, index) in items"
+            v-for="(poster, index) in temps"
             :key="index"
             @click="handleClick('poster', poster)"
             :title="poster.title"
           >
             <t-poster
               :url="poster.background"
-              :width="posterSize.width"
-              :height="posterSize.height"
+              :width="size.width"
+              :height="size.height"
             ></t-poster>
             <div
               class="c-slide__info"
-              :style="{ width: posterSize.width + 'px' }"
+              :style="{ width: size.width + 'px' }"
             >
               <span
                 class="c-slide__info--title"
@@ -70,7 +59,7 @@
       </div>
       <div
         class="c-slide__container--right"
-        :style="{ height: posterSize.height + 'px' }"
+        :style="{ height: size.height + 'px' }"
         @click="next"
         v-show="showRight"
       >
@@ -82,6 +71,15 @@
 
 <script>
 const EVER_MARGIN_RIGHT = 15
+const VIEW_SCREEN = 1220
+const ADD_COUNT = {
+  v: 6,
+  h: 4
+}
+const FIXED = {
+  v: 2 / 3,
+  h: 16 / 9
+}
 export default {
   name: 'TSlide',
   props: {
@@ -111,50 +109,50 @@ export default {
   },
   data () {
     return {
-      translateX: 0
+      translateX: 0,
+      initLocation: 0,
+      temps: []
     }
   },
   computed: {
     // 屏幕最小尺寸为1220px
-    posterSize () {
-      const screenWith = 1220
-      if (this.type === 'v') {
-        const fixSix = 2 / 3
-        const posterFullWidth = screenWith - EVER_MARGIN_RIGHT * 5
-        return {
-          height: posterFullWidth / 6 / fixSix,
-          width: posterFullWidth / 6
-        }
-      }
-      const fixSix = 16 / 9
-      const posterFullWidth = screenWith - EVER_MARGIN_RIGHT * 3
+    size () {
       return {
-        height: posterFullWidth / 4 / fixSix,
-        width: posterFullWidth / 4
+        height: this.getAllMargin4Shown / ADD_COUNT[this.type] / FIXED[this.type],
+        width: this.getAllMargin4Shown / ADD_COUNT[this.type]
       }
     },
-    showViewNumber () {
-      return this.type === 'v' ? 4 : 4
+    fullSizeW () {
+      return this.size.width + EVER_MARGIN_RIGHT
     },
-    viewWidth () {
-      let itemSize = this.items.length
-      return itemSize * (this.posterSize.width + EVER_MARGIN_RIGHT) + 'px'
+    itemLen () {
+      return (this.items && this.items.length) || 0
+    },
+    getAllMargin4Shown () {
+      const allMarginShown = (ADD_COUNT[this.type] - 1) * EVER_MARGIN_RIGHT
+      return VIEW_SCREEN - allMarginShown
     },
     showLeft () {
-      return this.translateX < 0
+      return Math.abs(this.translateX) > 0
     },
     showRight () {
-      const fullPosterWidth = this.posterSize.width + EVER_MARGIN_RIGHT
-      const itemSize = this.items.length
-      let offsetXNum = itemSize - this.showViewNumber
-      let defaultEnterNum = offsetXNum * fullPosterWidth
+      const addCount = ADD_COUNT[this.type]
+      let offsetXNum = this.itemLen - addCount
+      let defaultEnterNum = offsetXNum * this.fullSizeW
       return (
-        this.items.length > this.showViewNumber &&
+        this.itemLen > addCount &&
         Math.abs(this.translateX) < defaultEnterNum
       )
     }
   },
+  mounted () {
+    this.initLocation = ADD_COUNT[this.type]
+    this.tempList(0, ADD_COUNT[this.type] + 2)
+  },
   methods: {
+    tempList (stIndex, etIndex) {
+      this.temps = this.items.slice(stIndex, etIndex)
+    },
     handleClick (type, value) {
       this.$emit('click', {
         type,
@@ -162,32 +160,38 @@ export default {
       })
     },
     prev () {
-      const transitionABS = Math.abs(this.translateX)
-      const fullPosterWidth = this.posterSize.width + EVER_MARGIN_RIGHT
-      const enterPosterNum = transitionABS / fullPosterWidth
-      if (enterPosterNum > 0) {
-        let offsetLeftX = enterPosterNum - this.showViewNumber
-        if (offsetLeftX >= 0) {
-          this.translateX += this.showViewNumber * fullPosterWidth
+      const addCount = ADD_COUNT[this.type]
+      if (Math.abs(this.translateX) > 0) {
+        let translateX = 0
+        if (this.initLocation - addCount > addCount) {
+          translateX = this.translateX + VIEW_SCREEN + EVER_MARGIN_RIGHT
+          this.initLocation -= addCount
         } else {
-          this.translateX += transitionABS
+          let diffValue = this.initLocation - addCount
+          if (diffValue > 0 && diffValue < addCount) {
+            translateX = this.translateX + diffValue * (this.fullSizeW)
+            this.initLocation -= diffValue
+          }
         }
+        this.translateX = translateX
       }
     },
     next () {
-      if (this.items && this.items.length > 0) {
-        const itemSize = this.items.length
-        const fullPosterWidth = this.posterSize.width + EVER_MARGIN_RIGHT
-        const enterPosterNum = Math.abs(this.translateX) / fullPosterWidth
-        let readySize = itemSize - this.showViewNumber - enterPosterNum
-        if (readySize <= 0) {
-          return
-        }
-        if (readySize >= this.showViewNumber) {
-          this.translateX -= this.showViewNumber * fullPosterWidth
+      const addCount = ADD_COUNT[this.type]
+      if (this.items && this.itemLen > addCount) {
+        let translateX = 0
+        if (this.initLocation + addCount < this.itemLen) {
+          translateX = this.translateX - (VIEW_SCREEN + EVER_MARGIN_RIGHT)
+          this.initLocation += addCount
         } else {
-          this.translateX -= readySize * fullPosterWidth
+          let diffValue = this.itemLen - this.initLocation
+          if (diffValue > 0 && diffValue < addCount) {
+            translateX = this.translateX - diffValue * (this.fullSizeW)
+            this.initLocation += diffValue
+          }
         }
+        this.tempList(0, this.initLocation + 2)
+        this.translateX = translateX
       }
     }
   }
@@ -197,6 +201,7 @@ export default {
 <style scoped lang="scss">
 @include c(slide) {
   position: relative;
+  margin-bottom: unit(30);
   @include e(background) {
     height: unit(418);
     width: unit(1220);
