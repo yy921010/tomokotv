@@ -1,26 +1,51 @@
 <template>
   <div class="c-teaser">
-    <div
-      class="c-teaser__content"
-      v-for="(item, index) in items"
-      :key="index"
-      @click="handleClick(item)"
-    >
-      <t-poster :url="item.background" :width="602" :height="339">
-        <div class="c-teaser__label" v-if="item.label">{{ item.label }}</div>
-        <div class="c-teaser__mask">
-          <div class="c-teaser__mask--genre" :title="item.genre">
-            {{ item.genre }}
+    <template v-if="type === 'single'">
+      <div
+        class="c-teaser__content--big"
+        v-for="(item, index) in items"
+        :key="index"
+        @click="handleClick(item)"
+      >
+        <t-poster :url="item.background" :width="1220" :height="339">
+          <div class="c-teaser__label" v-if="item.label">{{ item.label }}</div>
+          <div class="c-teaser__mask">
+            <div class="c-teaser__mask--genre" :title="item.genre">
+              {{ item.genre }}
+            </div>
+            <div class="c-teaser__mask--title is-big-title" :title="item.title">
+              {{ item.title }}
+            </div>
+            <div class="c-teaser__mask--meta" :title="item.meta">
+              {{ item.meta }}
+            </div>
           </div>
-          <div class="c-teaser__mask--title" :title="item.title">
-            {{ item.title }}
+        </t-poster>
+      </div>
+    </template>
+    <template v-else>
+      <div
+        class="c-teaser__content"
+        v-for="(item, index) in items"
+        :key="index"
+        @click="handleClick(item)"
+      >
+        <t-poster :url="item.background" :width="602" :height="339">
+          <div class="c-teaser__label" v-if="item.label">{{ item.label }}</div>
+          <div class="c-teaser__mask">
+            <div class="c-teaser__mask--genre" :title="item.genre">
+              {{ item.genre }}
+            </div>
+            <div class="c-teaser__mask--title" :title="item.title">
+              {{ item.title }}
+            </div>
+            <div class="c-teaser__mask--meta" :title="item.meta">
+              {{ item.meta }}
+            </div>
           </div>
-          <div class="c-teaser__mask--meta" :title="item.meta">
-            {{ item.meta }}
-          </div>
-        </div>
-      </t-poster>
-    </div>
+        </t-poster>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -31,6 +56,11 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    type: {
+      type: String,
+      default: 'couple',
+      validate: (val) => ['couple', 'single'].includes(val)
     }
   },
   methods: {
@@ -52,7 +82,9 @@ export default {
   margin: 0 auto unit(60);
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   @include e(content) {
+    overflow: hidden;
     @include e(label) {
       position: absolute;
       top: 0;
@@ -67,7 +99,7 @@ export default {
       position: absolute;
       background-image: map_get($mask, 6);
       width: 100%;
-      height: unit(117);
+      height: unit(140);
       z-index: 9;
       bottom: 0;
       @include m(genre) {
@@ -76,7 +108,10 @@ export default {
       }
       @include m(title) {
         @include base;
-        @include text(22)
+        @include text(20);
+        @include when(big-title){
+          width: unit(900);
+        }
       }
       @include m(meta) {
         @include base;
