@@ -23,6 +23,7 @@
           class="c-slide__ul"
           :style="{
             transform: 'translate(' + translateX + 'px,0) translateZ(0)',
+            'padding-left': paddingLeft + 'px'
           }"
         >
           <li
@@ -37,10 +38,7 @@
               :width="size.width"
               :height="size.height"
             ></t-poster>
-            <div
-              class="c-slide__info"
-              :style="{ width: size.width + 'px' }"
-            >
+            <div class="c-slide__info" :style="{ width: size.width + 'px' }">
               <span
                 class="c-slide__info--title"
                 :title="poster.title"
@@ -118,7 +116,8 @@ export default {
     // 屏幕最小尺寸为1220px
     size () {
       return {
-        height: this.getAllMargin4Shown / ADD_COUNT[this.type] / FIXED[this.type],
+        height:
+          this.getAllMargin4Shown / ADD_COUNT[this.type] / FIXED[this.type],
         width: this.getAllMargin4Shown / ADD_COUNT[this.type]
       }
     },
@@ -140,9 +139,13 @@ export default {
       let offsetXNum = this.itemLen - addCount
       let defaultEnterNum = offsetXNum * this.fullSizeW
       return (
-        this.itemLen > addCount &&
-        Math.abs(this.translateX) < defaultEnterNum
+        this.itemLen > addCount && Math.abs(this.translateX) < defaultEnterNum
       )
+    },
+    paddingLeft () {
+      let paddingLeft =
+        (this.initLocation - ADD_COUNT[this.type] * 2) * this.fullSizeW
+      return paddingLeft <= 0 ? 0 : paddingLeft
     }
   },
   mounted () {
@@ -169,10 +172,15 @@ export default {
         } else {
           let diffValue = this.initLocation - addCount
           if (diffValue > 0 && diffValue < addCount) {
-            translateX = this.translateX + diffValue * (this.fullSizeW)
+            translateX = this.translateX + diffValue * this.fullSizeW
             this.initLocation -= diffValue
           }
         }
+        let startCutIndex =
+          this.initLocation - ADD_COUNT[this.type] * 2 <= 0
+            ? 0
+            : this.initLocation - ADD_COUNT[this.type] * 2
+        this.tempList(startCutIndex, this.initLocation + addCount)
         this.translateX = translateX
       }
     },
@@ -186,11 +194,15 @@ export default {
         } else {
           let diffValue = this.itemLen - this.initLocation
           if (diffValue > 0 && diffValue < addCount) {
-            translateX = this.translateX - diffValue * (this.fullSizeW)
+            translateX = this.translateX - diffValue * this.fullSizeW
             this.initLocation += diffValue
           }
         }
-        this.tempList(0, this.initLocation + 2)
+        let startCutIndex =
+          this.initLocation - ADD_COUNT[this.type] * 2 <= 0
+            ? 0
+            : this.initLocation - ADD_COUNT[this.type] * 2
+        this.tempList(startCutIndex, this.initLocation + 2)
         this.translateX = translateX
       }
     }
@@ -279,7 +291,7 @@ export default {
       overflow: hidden;
       @include e(ul) {
         display: flex;
-        transition: all $transition-time ease-in;
+        transition: transform $transition-time ease-in;
         @include e(item) {
           margin-right: unit(15);
           cursor: pointer;
