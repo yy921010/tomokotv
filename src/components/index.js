@@ -11,6 +11,7 @@ import SnackBar from './snack-bar'
 import Poster from './poster'
 import PosterSlide from './poster-slide'
 import Carousel from './carousel'
+import Teaser from './teaser'
 
 const Components = [
   Icon,
@@ -23,7 +24,8 @@ const Components = [
   SnackBar,
   Poster,
   PosterSlide,
-  Carousel
+  Carousel,
+  Teaser
 ]
 
 export default {
