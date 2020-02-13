@@ -12,6 +12,7 @@ import Poster from './poster'
 import PosterSlide from './poster-slide'
 import Carousel from './carousel'
 import Teaser from './teaser'
+import Tab from './tab'
 
 const Components = [
   Icon,
@@ -25,7 +26,8 @@ const Components = [
   Poster,
   PosterSlide,
   Carousel,
-  Teaser
+  Teaser,
+  Tab
 ]
 
 export default {
