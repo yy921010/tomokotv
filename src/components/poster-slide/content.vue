@@ -57,6 +57,7 @@
 </template>
 
 <script>
+// todo: 目前中途切换还有点问题，需要判断裁剪的下标
 const EVER_MARGIN_RIGHT = 15
 export default {
   name: 'Content',
@@ -114,8 +115,6 @@ export default {
       const addCount = this.addCount
       let offsetXNum = this.itemLen - addCount
       let defaultEnterNum = offsetXNum * this.fullSizeW
-      console.log('defaultEnterNum', defaultEnterNum)
-      console.log('Math.abs(this.translateX)', Math.abs(this.translateX))
       return (
         this.itemLen > addCount && Math.abs(this.translateX) < defaultEnterNum
       )
@@ -144,7 +143,7 @@ export default {
       const addCount = this.addCount
       if (Math.abs(this.translateX) > 0) {
         let translateX = 0
-        if (this.initLocation - addCount > addCount) {
+        if (this.initLocation - addCount >= addCount) {
           translateX = this.translateX + addCount * this.fullSizeW
           this.initLocation -= addCount
         } else {
@@ -166,7 +165,7 @@ export default {
       const addCount = this.addCount
       if (this.items && this.itemLen > addCount) {
         let translateX = 0
-        if (this.initLocation + addCount < this.itemLen) {
+        if (this.initLocation + addCount <= this.itemLen) {
           translateX = this.translateX - addCount * this.fullSizeW
           this.initLocation += addCount
         } else {

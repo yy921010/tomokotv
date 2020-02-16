@@ -13,7 +13,7 @@
       :items="items"
       :type="type"
       :theme-background="themeBackground"
-      :add-count="6"
+      :add-count="4"
       @click="handleClick"
     ></p-content>
   </div>
