@@ -57,7 +57,6 @@
 </template>
 
 <script>
-// todo: 目前中途切换还有点问题，需要判断裁剪的下标
 const EVER_MARGIN_RIGHT = 15
 export default {
   name: 'Content',
