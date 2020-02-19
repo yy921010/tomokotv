@@ -191,6 +191,7 @@ export default {
   position: relative;
   width: unit(1220);
   margin: 0 auto;
+  z-index: 1;
   @include e(left) {
     position: absolute;
     left: unit(-32);

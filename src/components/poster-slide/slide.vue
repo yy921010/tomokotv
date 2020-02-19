@@ -1,5 +1,5 @@
 <template>
-  <div class="c-slide">
+  <div class="c-slide" :style="slideStyle">
     <div class="c-slide__top" @click="handleClick('title', link)">
       <div class="c-slide__top--title" :title="title">{{ title }}</div>
       <t-icon
@@ -9,11 +9,19 @@
         type="line"
       ></t-icon>
     </div>
+    <div class="c-slide__background" v-if="themeBackground" :style="backgroundStyle">
+      <div class="c-slide__img" :style="{
+        'background-image': 'url(' + themeBackground + ')'
+      }">
+        <div class="c-slide__mask"></div>
+      </div>
+    </div>
     <p-content
+      :style="pContentStyle"
       :items="items"
       :type="type"
       :theme-background="themeBackground"
-      :add-count="4"
+      :add-count="addCount"
       @click="handleClick"
     ></p-content>
   </div>
@@ -57,7 +65,45 @@ export default {
   },
   computed: {
     addCount () {
+      if (this.themeBackground) {
+        return this.type === 'v' ? 4 : 3
+      }
       return ADD_COUNT[this.type]
+    },
+    slideStyle () {
+      if (this.themeBackground) {
+        let height = this.type === 'v' ? '475px' : '373px'
+        return {
+          height
+        }
+      }
+      return {
+        height: 'auto'
+      }
+    },
+    backgroundStyle () {
+      let height = this.type === 'v' ? '418px' : '317px'
+      return { height }
+    },
+    pContentStyle () {
+      if (!this.themeBackground) {
+        return {
+          width: '1220px',
+          margin: '0 auto'
+        }
+      }
+      if (this.type === 'h') {
+        return {
+          top: '40px',
+          width: '911px',
+          margin: '0px 0 0 339px'
+        }
+      }
+      return {
+        top: '40px',
+        width: '810px',
+        margin: '0px 0 0 441px'
+      }
     }
   },
   methods: {
