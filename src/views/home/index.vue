@@ -5,6 +5,7 @@
       type="v"
       :title="slidePoster2.title"
       :items="slidePoster2.items"
+      :themeBackground ="'http://img5.mtime.cn/mg/2020/02/19/145358.93531775_285X160X4.jpg'"
     ></t-slide>
     <t-slide
       @click="slideClick"
@@ -17,6 +18,7 @@
       type="h"
       :title="slidePoster2.title"
       :items="slidePoster2.items"
+      :themeBackground ="'http://img5.mtime.cn/mg/2020/02/19/145358.93531775_285X160X4.jpg'"
     ></t-slide>
     <t-slide
       @click="slideClick"

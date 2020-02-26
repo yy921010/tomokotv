@@ -24,11 +24,11 @@ export default {
   name: 'TPoster',
   props: {
     width: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     height: {
-      type: Number,
+      type: [Number, String],
       default: 0
     },
     bgIconName: {
@@ -46,10 +46,10 @@ export default {
   },
   computed: {
     getWidth () {
-      return `${this.width}px`
+      return typeof this.width === 'string' ? this.width : `${this.width}px`
     },
     getHeight () {
-      return `${this.height}px`
+      return typeof this.height === 'string' ? this.height : `${this.height}px`
     }
   },
   methods: {

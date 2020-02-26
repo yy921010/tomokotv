@@ -7,6 +7,7 @@ import HOME_MODULE from './modules/Home'
 import MY_MODULE from './modules/My'
 import NOT_FOUND_MODULE from './modules/NotFound'
 import DETAIL_MODULE from './modules/Detail'
+import VOD_MODULE from './modules/Vod'
 
 // to fixed: https://blog.csdn.net/weixin_43202608/article/details/98884620
 const originalPush = VueRouter.prototype.push
@@ -24,7 +25,8 @@ const routes = [
   ...HOME_MODULE,
   ...MY_MODULE,
   ...NOT_FOUND_MODULE,
-  ...DETAIL_MODULE
+  ...DETAIL_MODULE,
+  ...VOD_MODULE
 ]
 
 const router = new VueRouter({
