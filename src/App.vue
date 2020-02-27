@@ -37,7 +37,7 @@ export default {
   },
   data () {
     return {
-      bgUrl: ''
+      bgUrl: 'https://ngiss.t-online.de/iss?client=ngtv&ar=ignore&x=1920&y=1080&src=http://dlart.t-online.de/WUCATHosting01/FlexDocumentReleaseImageHostingVolume_m1/tv_vod_content/download/0000110361/0000110361_img_13749898_637177096481833485.jpg'
     }
   },
   computed: {
@@ -95,13 +95,14 @@ body {
       min-width: unit(1220);
     }
     #frosted {
-      height: unit(2000);
+      height: 100%;
       width: 100%;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
       position: fixed;
       z-index: -1;
-      filter: blur(unit(55)) brightness(20%);
+      background: 0 0 / cover no-repeat;
+      top:0;
+      left: 0;
+      filter: blur(unit(15)) brightness(60%);
     }
   }
 }
