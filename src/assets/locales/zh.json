@@ -91,5 +91,9 @@
     "cancel": "取消",
     "yes": "好",
     "delContent": "是否删除 {user} ?"
+  },
+  "vod": {
+    "play": "播放",
+    "addFavorite": "添加收藏"
   }
 }

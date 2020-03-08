@@ -20,6 +20,21 @@ const menus = Mock.mock({
   }]
 })
 
+const film = Mock.mock({
+  data: {
+    title: '@ctitle',
+    id: '@id',
+    'rating|1': ['3.4'],
+    'ageRating|1': ['pg-1', 'pg-18', '16', '12'],
+    'genres': ['惊悚', '科幻', '喜剧', '美剧'],
+    country: '@region',
+    description: '@cparagraph',
+    casts: [],
+    pictures: []
+
+  }
+})
+
 export default [
   {
     url: '/userInfo',
@@ -150,6 +165,16 @@ export default [
       return {
         code: 0,
         ...menus
+      }
+    }
+  },
+  {
+    url: '/film',
+    type: 'get',
+    response: _ => {
+      return {
+        code: 0,
+        ...film
       }
     }
   }

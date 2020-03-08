@@ -1,40 +1,40 @@
 <template>
   <div class="tmk-vod-detail">
     <div class="tmk-vod-detail__content">
+      <div class="tmk-vod-detail_poster">
+        <t-poster
+          url="http://img5.mtime.cn/mt/2020/01/08/104948.27498713_185X277X4_185X277X4.jpg"
+          :width="314"
+          :height="471"
+        ></t-poster>
+      </div>
       <div class="tmk-vod-detail__info">
-        <div class="tmk-vod-detail__title">{{vodDetail.title}}</div>
+        <div class="tmk-vod-detail__title">{{ vodDetail.title }}</div>
         <div class="tmk-vod-detail__meta">
-          <ratingStart :value="1.2"/>
-          <t-icon name="user" :size="18" class="watch-users"></t-icon>
-          <div class="watch-user-number">watch-user-number</div>
-          <div class="other-info">other-info</div>
+          <ratingStart :value="vodDetail.rating" />
+          <div class="age-level">{{ vodDetail.ageRating }}</div>
+          <div class="genres">{{ vodDetail.genres }}</div>
+          <div class="country">{{ vodDetail.country }}</div>
           <div class="quality">
             <t-icon name="hd" type="fill" :size="18"></t-icon>
           </div>
         </div>
         <div class="tmk-vod-detail__description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet animi
-          cum cupiditate dolor dolore dolorem facere ipsa iusto optio quae rem
-          reprehenderit sed, sit. Atque commodi eos expedita maxime sed! Lorem
-          ipsum dolor sit amet, consectetur adipisicing elit. Amet animi cum
-          cupiditate dolor dolore dolorem facere ipsa iusto optio quae rem
-          reprehenderit sed, sit. Atque commodi eos expedita maxime sed! Lorem
-          ipsum dolor sit amet, consectetur adipisicing elit. Amet animi cum
-          cupiditate dolor dolore dolorem facere ipsa iusto optio quae rem
-          reprehenderit sed, sit. Atque commodi eos expedita maxime sed!
+          {{ vodDetail.description }}
+          <t-icon
+            @click="showMoreText"
+            :name="iconName"
+            :size="18"
+            class="down-icon"
+          ></t-icon>
+        </div>
+        <div class="tmk-vod-detail__button">
+          <t-button icon="play" type="primary">{{$t('vod.play')}}</t-button>
+          <t-button icon="heart">{{$t('vod.addFavorite')}}</t-button>
         </div>
       </div>
-      <div class="tmk-vod-detail_poster">
-        <t-poster
-          url="http://img5.mtime.cn/mt/2020/01/08/104948.27498713_185X277X4_185X277X4.jpg"
-          :width="300"
-          :height="400"
-        ></t-poster>
-      </div>
     </div>
-    <div class="tmk-vod-detail__button">
-      <t-button> play</t-button>
-    </div>
+
     <div class="tmk-vod-detail__explode">
       <div class="title">分级</div>
     </div>
@@ -46,14 +46,15 @@
 
 <script>
 /**
-   * 影片详情包含：
-   * title
-   * subtitle
-   * meta
-   * description
-   * pictures
-   */
+ * 影片详情包含：
+ * title
+ * subtitle
+ * meta
+ * description
+ * pictures
+ */
 import ratingStart from './rating-start'
+import { getFilmDetail } from '@api/vod'
 export default {
   name: 'detail',
   components: {
@@ -62,15 +63,25 @@ export default {
   data () {
     return {
       vodDetail: {
-        title: '测试标题',
-        subtitle: '',
-        meta: '',
-        description: '',
-        ratingId: ''
-      }
+        title: '',
+        rating: '',
+        ageRating: ''
+      },
+      isExpanded: false
     }
   },
-  mounted () {
+  async mounted () {
+    this.vodDetail = await getFilmDetail()
+  },
+  computed: {
+    iconName () {
+      return !this.isExpanded ? 'arrow-down-s' : 'arrow-up-s'
+    }
+  },
+  methods: {
+    showMoreText () {
+      this.isExpanded = !this.isExpanded
+    }
   }
 }
 </script>
@@ -82,9 +93,9 @@ export default {
     width: unit(1220);
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     @include e(info) {
-      width: unit(880);
+      width: unit(580);
       @include e(title) {
         @include text(22);
         margin-top: unit(45);
@@ -94,25 +105,30 @@ export default {
         display: flex;
         align-items: center;
         margin-bottom: unit(20);
-        .rating-number {
-          @include text(27);
+        .age-level {
+          margin-right: unit(20);
+        }
+        .genres {
+          margin-right: unit(20);
+        }
+        .country {
           margin-right: unit(60);
         }
-        .watch-users {
-          color: $C41;
-          margin-right: unit(60);
-        }
-        .watch-user-number {
-          @include text(29);
-          margin-right: unit(60);
-        }
-        .other-info {
-          @include text(29);
-          margin-right: unit(10);
+        .quality {
+          color: $C35;
         }
       }
       @include e(description) {
         @include text(29, $C35);
+        .down-icon {
+          color: $C41;
+          margin-top: unit(4);
+          cursor: pointer;
+          float: right;
+        }
+      }
+      @include e(button){
+        margin-top: unit(45);
       }
     }
     @include e(poster) {
